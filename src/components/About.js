@@ -12,11 +12,11 @@ export default function About(){
                  </p>
                  <p className="mt-3 text-gray-500 sm:mt-5 md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl ">
 
-                 As a Co-Founder and Product Designer in RIVAC HYBRIDS, I’ve designed and developed multiple web and mobile experiences for small businesses and organizations.  
+                 As a Co-Founder and Product Designer in <a href="https://www.rivach.com" className="hover:text-indigo-500 underline">Rivac Hybrids</a>, I’ve designed and developed multiple web and mobile experiences for small businesses and organizations.  
                 </p>
                   <p className="mt-3 text-gray-500 sm:mt-5 md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl ">
 
-                  I believe in a great statement “SPECIALIZATION IS FOR INSECTS”, Other than Web and Mobile design and development, I’ve been into 3D Game Design and Development with UNREAL ENGINE and also into Filmmaking.
+                  I believe in a great statement<span className="hover:text-indigo-500 text-indigo-500"> "Specialization is for insects”</span>, Other than Web and Mobile design and development, I’ve been into 3D Game Design and Development with UNREAL ENGINE and also into Filmmaking.
                   </p>
                      <p className="mt-3 text-gray-500 sm:mt-5  md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl ">
                      I always have a curiosity to get the answers for questions and I like Watching movies which provokes my thoughts.
