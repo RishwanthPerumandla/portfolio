@@ -7,16 +7,19 @@ export default function About(){
                 <h1 className="subheadings mt-3 text-4xl text-indigo-500 sm:mt-5 sm:text-5xl md:text-6xl sm:mx-auto md:mt-5">WHO AM I?</h1>
                 <div className="about-content mt-10 sm:mt-10 md:mt-12">
                 <p className="mt-3 text-gray-500 sm:mt-5 md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl ">
-                  I’m Rishwanth Perumandla, a Product Designer based in Bangalore, India.   
-                    As a Product Designer, I’ve designed multiple web & mobile experiences for small and medium-sized companies. I previously worked for one of India’s largest Ed-Tech startups, Unacademy.
+                I’m Rishwanth Perumandla, Entrepreneur and Computer Science Student based in Hyderabad, India. 
 
                  </p>
+                 <p className="mt-3 text-gray-500 sm:mt-5 md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl ">
+
+                 As a Co-Founder and Product Designer in RIVAC HYBRIDS, I’ve designed and developed multiple web and mobile experiences for small businesses and organizations.  
+                </p>
                   <p className="mt-3 text-gray-500 sm:mt-5 md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl ">
 
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                  I believe in a great statement “SPECIALIZATION IS FOR INSECTS”, Other than Web and Mobile design and development, I’ve been into 3D Game Design and Development with UNREAL ENGINE and also into Filmmaking.
                   </p>
                      <p className="mt-3 text-gray-500 sm:mt-5  md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl ">
-                     It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. 
+                     I always have a curiosity to get the answers for questions and I like Watching movies which provokes my thoughts.
                         </p>
                 </div>
                
