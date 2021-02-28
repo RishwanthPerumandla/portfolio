@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import rishiImg from '../images/rishi.jpg'
 import logo from '../images/logo.svg'
+import { motion } from "framer-motion"
+
 
 
 const Landingpage = () => {
@@ -47,13 +49,13 @@ const Landingpage = () => {
             </div>
           </div>
           <div className={`lg:flex ${  navbarOpen ? "block" : "hidden transition transform origin-top-right " }  md:block md:ml-20 md:pr-4 md:space-x-8`}>
-            <a href="#" className={`${ navbarOpen? "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"font-bold text-xl text-gray-500 hover:text-white"}`}>About</a>
+            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>About</a>
 
-            <a href="#" className={`${ navbarOpen? "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"font-bold text-xl text-gray-500 hover:text-white"}`}>Projects</a>
+            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Projects</a>
 
-            <a href="#" className={`${ navbarOpen? "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"font-bold text-xl text-gray-500 hover:text-white"}`}>SideHustle</a>
+            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>SideHustle</a>
 
-            <a href="#" className={`${ navbarOpen? "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"font-bold text-xl text-gray-500 hover:text-white"}`}>Contact</a>
+            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Contact</a>
           </div>
         </nav>
       </div>
@@ -90,24 +92,29 @@ const Landingpage = () => {
       </div> */}
 
       <main className=" px-8 mt-10 mx-auto sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-        <div className="sm:text-center lg:text-left w-full">
-          <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-7xl lg:text-9xl">
-            <span className="block xl:inline">Code. <span className=" xl:inline text-indigo-300 ">Design. </span> </span>
-            <span className="block text-indigo-700 xl:inline ">Science.</span>
+        <div
+   className="sm:text-center lg:text-left w-full">
+          <h1 className="hero-title text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-7xl lg:text-9xl">
+            <span className="block xl:inline">Code. <span className=" xl:inline text-indigo-400 ">Design. </span> </span>
+            <span className="block text-indigo-600 xl:inline ">Science.</span>
           </h1>
-          <p className="mt-5 lg:mt-8 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+          <p className="about-content mt-5 lg:mt-8 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
            I Design and Develop Full Stack Web and Mobile Applications
           </p>
           <div className="mt-5 lg:mt-8 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
             <div className="rounded-md shadow">
-              <a href="#" className="w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+              <motion.button
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }} href="#" className="buttonui w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                 Get in Touch
-              </a>
+              </motion.button>
             </div>
             <div className="mt-3 sm:mt-0 sm:ml-3">
-              <a href="#" className="w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+              <motion.button
+    whileHover={{ scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}  href="#" className="buttonui w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
                 Know More
-              </a>
+              </motion.button>
             </div>
           </div>
         </div>

@@ -4,9 +4,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap');
 body{
-  background-color: black;
+  background-color:black;
 }
 
 .prose img{
@@ -19,3 +19,51 @@ border-radius: 5px;
   font-size: 150px;
 }
 
+@font-face {
+  font-family: "Long shot";
+  src: local("Long shot"),
+    url("./Long_Shot.ttf") format("truetype");
+  font-weight: normal;
+}
+
+.subheadings{
+  font-family: 'Long shot', 'sans-serif';
+
+}
+.buttonui{
+  font-family: 'Manrope', sans-serif;
+
+  font-size: 1.4rem !important;
+}
+
+.about-content, .navlinks, .sidehustles, .projects, .hero-title{
+  font-family: 'Manrope', sans-serif;
+}
+
+.ico-card{
+  position:absolute;
+  top: 0;
+  left:0;
+  bottom:0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+i{
+  position: relative;
+  right: -50%;
+  top:60%;
+  font-size: 12rem;
+  line-height: 0;
+  opacity: .2;
+  color:rgba(255,255,255,1);
+  z-index: 3;
+ }
+
+/* .card-project{
+  background: #2c3e50;
+background: -webkit-linear-gradient(to right, #3498db, #2c3e50); 
+background: linear-gradient(to right, #3498db, #2c3e50);
+
+} */
