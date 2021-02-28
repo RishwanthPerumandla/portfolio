@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 
 export default function Contact(){
     return(
-        <main data-aos="zoom-in"className="bg-black-100 container px-8 bg-black overflow-hidden max-w-6xl mx-auto min-h-full mt-14 sm:mt-8 sm:px-6 md:mt-12 lg:mt-16 xl:mt-20">
+        <main data-aos="zoom-in" id="contact" className="contact bg-black-100 container px-8 bg-black overflow-hidden max-w-6xl mx-auto min-h-full mt-14 sm:mt-8 sm:px-6 md:mt-12 lg:mt-16 xl:mt-20">
         <section className="container mx-auto lg:px-4 md:px-2">
             <h1 className="subheadings mt-3 text-5xl text-indigo-500 sm:mt-5 sm:text-5xl md:text-6xl sm:mx-auto md:mt-5 mb-5  ">CONTACT</h1>
             <h4 className=" about-content mt-15 text-2xl text-gray-500 sm:mt-5 sm:text-xl md:text-3xl sm:mx-auto md:mt-5">

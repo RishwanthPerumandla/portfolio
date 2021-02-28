@@ -4,11 +4,9 @@ import logo from '../images/logo.svg'
 import { motion } from "framer-motion"
 
 
-
 const Landingpage = () => {
     const [navbarOpen, setNavbarOpen] = useState(false);
 
-  
     function handleClick() {
       setNavbarOpen(!navbarOpen);
     }
@@ -49,13 +47,13 @@ const Landingpage = () => {
             </div>
           </div>
           <div className={`lg:flex ${  navbarOpen ? "block" : "hidden transition transform origin-top-right " }  md:block md:ml-20 md:pr-4 md:space-x-8`}>
-            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>About</a>
+            <a href="#about" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 space-y-1  hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>About</a>
 
-            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Projects</a>
+            <a href="#projects" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 space-y-1 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Projects</a>
 
-            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>SideHustle</a>
+            <a href="#sidehustles" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 space-y-1 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>SideHustle</a>
 
-            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Contact</a>
+            <a href="#contact" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 space-y-1 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Contact</a>
           </div>
         </nav>
       </div>

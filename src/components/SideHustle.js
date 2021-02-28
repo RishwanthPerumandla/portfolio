@@ -23,7 +23,7 @@ export default function SideHustle(){
     }, [])
 
     return(
-               <main data-aos="zoom-in"className="sidehustles bg-black-100 container  md:mb-10 lg:mb-18 xl:mb-20 px-8 bg-black overflow-hidden max-w-6xl mx-auto min-h-full mt-8 sm:mt-8 sm:px-4  md:px-4  md:mt-2 lg:mt-18 xl:mt-20">
+               <main data-aos="zoom-in" id="sidehustles" className="sidehustles bg-black-100 container  md:mb-10 lg:mb-18 xl:mb-20 px-8 bg-black overflow-hidden max-w-6xl mx-auto min-h-full mt-8 sm:mt-8 sm:px-4  md:px-4  md:mt-2 lg:mt-18 xl:mt-20">
             <section className="container mx-auto lg:px-4 md:px-2">
                 <h1 className="subheadings mt-3 text-4xl text-indigo-500 sm:mt-5 sm:text-4xl md:text-6xl sm:mx-auto md:mt-5">SIDEHUSTLE</h1>
               
