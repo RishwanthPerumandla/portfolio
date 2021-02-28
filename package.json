@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.0",
+    "aos": "^2.3.4",
     "autoprefixer": "^9.8.6",
     "framer-motion": "^3.7.0",
     "postcss": "^7.0.35",

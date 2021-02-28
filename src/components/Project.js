@@ -28,7 +28,7 @@ export default function Project(){
     }, [])
 
     return (
-        <main className="projects bg-black-100 container px-8 bg-black overflow-hidden max-w-6xl mx-auto min-h-full mt-8 sm:mt-8 sm:px-4  md:px-4  md:mt-2 lg:mt-18 xl:mt-20">
+        <main data-aos="fade-up" className="projects bg-black-100 container px-8 bg-black overflow-hidden max-w-6xl mx-auto min-h-full mt-8 sm:mt-8 sm:px-4  md:px-4  md:mt-2 lg:mt-18 xl:mt-20">
             <section className="container mx-auto lg:px-4 md:px-2  ">
                 <h1 className="subheadings mt-3 text-5xl text-indigo-500 sm:mt-5 sm:text-2xl md:text-6xl sm:mx-auto md:mt-5">WORK I'M PROUD OF</h1>
                 <h2 className="subheadings text-2xl text-white mb-12">
