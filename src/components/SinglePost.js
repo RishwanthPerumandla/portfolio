@@ -4,6 +4,10 @@ import { useParams } from 'react-router-dom'
 import imageUrlBuilder from '@sanity/image-url'
 import BlockContent from '@sanity/block-content-to-react'
 import logo from '../images/logo.svg'
+import {motion} from 'framer-motion'
+import footerlogo from '../images/footerlogo.svg'
+import footerrock from '../images/footer-rock.png'
+import {NavLink } from 'react-router-dom'
 
 
 const builder = imageUrlBuilder(sanityClient);
@@ -71,27 +75,27 @@ export default function SinglePost(){
             </div>
           </div>
           <div className={`lg:flex ${  navbarOpen ? "block" : "hidden transition transform origin-top-right " }  md:block md:ml-20 md:pr-4 md:space-x-8`}>
-            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>About</a>
+            <NavLink to="/#about" href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>About</NavLink>
 
-            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Projects</a>
+            <NavLink to="/#projects" href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Projects</NavLink>
 
-            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>SideHustle</a>
+            <NavLink to="/#sidehustles" href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>SideHustle</NavLink>
 
-            <a href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Contact</a>
+            <NavLink to="/#contact" href="#" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Contact</NavLink>
           </div>
         </nav>
       </div>
             <article className="container shadow-lg mx-auto bg-white rounded-lg">
                 <header className="relative">
                     <div className="absolute h-full w-full flex items-center justify-center p-8">
-                        <div className="bg-white bg-opacity-75 rounded p-12">
-                            <h1 className="cursive text-3xl lg:text-6xl mb-4">
+                        <div className="bg-white bg-opacity-75 rounded p-6">
+                            <h1 className="text-3xl lg:text-6xl mb-4">
                             {singlePost.title}
                             </h1>
                             <div className="flex justify-center text-gray-800">
                                 <img src={urlFor(singlePost.authorImage).url()} 
                                 alt={singlePost.name}
-                                className="w-10 h-10 rounded-full"
+                                className="w-8 h-8 rounded-full"
                                 />
                             </div>
                             {/* <p className="cursive flex items-center pl-2 text-2xl">
@@ -103,8 +107,25 @@ export default function SinglePost(){
                     <img src={singlePost.mainImage.asset.url} alt={singlePost.title} className="w-full object-cover rounded-t"
                     style={{height:"400px"}} />
                 </header>
-                <div className="px-16 lg:px-48 py-12 lg:py-20 prose lg:prose-xl max-w-full"><BlockContent blocks={singlePost.body} projectId="qrbr5g6o" dataset="production" /> </div>
+                <div className="px-8 lg:px-48 py-12 lg:py-20 prose lg:prose-xl max-w-full"><BlockContent blocks={singlePost.body} projectId="qrbr5g6o" dataset="production" /> </div>
             </article>
+            <div>
+            <img className="mx-auto h-30 w-auto sm:h-10 mt-10 mb-10" alt="footerlogo "src={footerlogo} />
+                <motion.div
+    drag
+    dragConstraints={{
+      top: -50,
+      left: -50,
+      right: 50,
+      bottom: 50,
+    }}>
+                     <img className="mx-auto w-auto sm:h-20 md:h-28 h-28" alt="footerrock "src={footerrock} />
+                </motion.div>
+         
+         
+            
+            <h6 className="flex justify-center text-white mt-3 mb-2">&#169; Rishwanth Perumandla 2021</h6>
+            </div>
         </main>
     )
 }

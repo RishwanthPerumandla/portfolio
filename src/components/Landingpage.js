@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import rishiImg from '../images/rishi.jpg'
+import rishiImg1 from '../images/rishi1.png'
 import logo from '../images/logo.svg'
 import { motion } from "framer-motion"
 
@@ -46,7 +47,10 @@ const Landingpage = () => {
               </div>
             </div>
           </div>
+        
+
           <div className={`lg:flex ${  navbarOpen ? "block" : "hidden transition transform origin-top-right " }  md:block md:ml-20 md:pr-4 md:space-x-8`}>
+       
             <a href="#about" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 space-y-1  hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>About</a>
 
             <a href="#projects" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 space-y-1 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Projects</a>
@@ -55,6 +59,8 @@ const Landingpage = () => {
 
             <a href="#contact" className={`${ navbarOpen? "navlinks block px-3 py-2 rounded-md text-base font-medium text-gray-700 space-y-1 hover:text-gray-900 hover:bg-gray-50" :"navlinks font-bold text-xl text-gray-500 hover:text-white"}`}>Contact</a>
           </div>
+        
+
         </nav>
       </div>
 
@@ -101,18 +107,18 @@ const Landingpage = () => {
           </p>
           <div className="mt-5 lg:mt-8 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
             <div className="rounded-md shadow">
-              <motion.button
+              <motion.a
     whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.9 }} href="#" className="buttonui w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+    whileTap={{ scale: 0.9 }} href="#contact" className="buttonui w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                 Get in Touch
-              </motion.button>
+              </motion.a>
             </div>
             <div className="mt-3 sm:mt-0 sm:ml-3">
-              <motion.button
+              <motion.a
     whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.9 }}  href="#" className="buttonui w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+    whileTap={{ scale: 0.9 }}  href="#about" className="buttonui w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
                 Know More
-              </motion.button>
+              </motion.a>
             </div>
           </div>
         </div>
@@ -120,7 +126,7 @@ const Landingpage = () => {
     </div>
   </div>
   <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-    <img className="h-58 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={rishiImg} alt="" />
+    <img className="h-66 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={rishiImg1} alt="" />
   </div>
 </div>
         </>

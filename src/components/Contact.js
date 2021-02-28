@@ -15,11 +15,11 @@ export default function Contact(){
             Wanna Work with Me or just say Hi!  Send me a Message 
             </h4>
             <div className="rounded-md shadow mt-10 mb-10">
-              <motion.button
+              <motion.a
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.9 }}  href="mailto:rishwanth.perumandla@hotmail.com" className="buttonui w-full flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                Let's get in Touch
-              </motion.button>
+              </motion.a>
             </div>
             <h1 className="about-content text-2xl text-indigo-500 flex justify-center mt-15 sm:mt-20 sm:text-xl md:text-3xl sm:mx-auto md:mt-12">
               Reach out to me through Social Media
