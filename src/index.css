@@ -1,6 +1,13 @@
-@import url('https://unpkg.com/tailwindcss/typography@0.2.x/dist/typography.min.css');
-@import url('https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css');
+/* @import url('https://unpkg.com/tailwindcss/typography@0.2.x/dist/typography.min.css');
+@import url('https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css'); */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  background-color: black;
+}
 
 .prose img{
   margin-left: auto;
@@ -11,3 +18,4 @@ border-radius: 5px;
 .home-name{
   font-size: 150px;
 }
+

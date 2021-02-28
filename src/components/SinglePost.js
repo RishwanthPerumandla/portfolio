@@ -3,6 +3,8 @@ import sanityClient from '../client.js'
 import { useParams } from 'react-router-dom'
 import imageUrlBuilder from '@sanity/image-url'
 import BlockContent from '@sanity/block-content-to-react'
+import logo from '../images/logo.svg'
+
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source){
@@ -13,6 +15,12 @@ export default function SinglePost(){
 
     const [singlePost, setSinglePost]= useState(null);
     const { slug }= useParams();
+    const [navbarOpen, setNavbarOpen] = useState(false);
+
+  
+    function handleClick() {
+      setNavbarOpen(!navbarOpen);
+    }
 
     useEffect(()=>{
         sanityClient.fetch(`*[slug.current == "${slug}"]{
@@ -34,7 +42,45 @@ export default function SinglePost(){
     if(!singlePost) return <div>Loading....</div>
 
     return (
-        <main className="bg-gray-200 min-h-screen p-12">
+        <main className="bg-black min-h-screen">
+              <div className=" max-w-7xl mx-auto relative pt-6 bg-black px-4 sm:px-6 lg:px-8">
+        <nav className="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
+          <div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
+            <div className="flex items-center justify-between w-full md:w-auto">
+              <a href="#">
+                <span className="sr-only">Rishwanth</span>
+                <img className="h-8 w-auto sm:h-10" src={logo} />
+              </a>
+              <div className="-mr-2 flex items-center md:hidden">
+                <button type="button" className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"  onClick={handleClick} aria-expanded="false">
+                  <span className="sr-only">Open main menu</span>
+                  <svg className="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        {navbarOpen && (
+        <path fillRule="evenodd" clipRule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z" />
+        )}
+        {!navbarOpen && (
+        <path fillRule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" />
+        )}
+    </svg>
+
+                  {/* <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg> */}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className={`lg:flex ${  navbarOpen ? "block" : "hidden transition transform origin-top-right " }  md:block md:ml-20 md:pr-4 md:space-x-8`}>
+            <a href="#" className={`${ navbarOpen? "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"font-bold text-xl text-gray-500 hover:text-white"}`}>About</a>
+
+            <a href="#" className={`${ navbarOpen? "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"font-bold text-xl text-gray-500 hover:text-white"}`}>Projects</a>
+
+            <a href="#" className={`${ navbarOpen? "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"font-bold text-xl text-gray-500 hover:text-white"}`}>SideHustle</a>
+
+            <a href="#" className={`${ navbarOpen? "block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" :"font-bold text-xl text-gray-500 hover:text-white"}`}>Contact</a>
+          </div>
+        </nav>
+      </div>
             <article className="container shadow-lg mx-auto bg-green-100 rounded-lg">
                 <header className="relative">
                     <div className="absolute h-full w-full flex items-center justify-center p-8">
@@ -48,13 +94,13 @@ export default function SinglePost(){
                                 className="w-10 h-10 rounded-full"
                                 />
                             </div>
-                            <p className="cursive flex items-center pl-2 text-2xl">
+                            {/* <p className="cursive flex items-center pl-2 text-2xl">
                                 {singlePost.name}
 
-                            </p>
+                            </p> */}
                         </div>
                     </div>
-                    <img src={singlePost.mainImage.asset.url} alt={singlePost.title} className="w-fu;; object-cover rounded-t"
+                    <img src={singlePost.mainImage.asset.url} alt={singlePost.title} className="w-full object-cover rounded-t"
                     style={{height:"400px"}} />
                 </header>
                 <div className="px-16 lg:px-48 py-12 lg:py-20 prose lg:prose-xl max-w-full"><BlockContent blocks={singlePost.body} projectId="qrbr5g6o" dataset="production" /> </div>

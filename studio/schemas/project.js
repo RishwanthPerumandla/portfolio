@@ -26,8 +26,9 @@ export default {
             type:"string",
             options:{
                 list:[
-                    {value:'personal', title:"Personal"},
+                    {value:'personal', title:"PersonalProject"},
                     {value:'client', title:"Client"},
+                    {value:'intern', title:"Intern"},
                     {value:'college', title:"College"},
 
                 ],
@@ -38,6 +39,14 @@ export default {
             type:'url',
 
         },
+        {
+            name: 'mainImage',
+            title: 'Main image',
+            type: 'image',
+            options: {
+              hotspot: true,
+            },
+          },
         {
             name:"tags",
             type:"array",
