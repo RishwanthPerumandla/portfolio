@@ -4,6 +4,7 @@ import About from './components/About'
 import SinglePost from './components/SinglePost'
 import Post from './components/Post'
 import Project from './components/Project'
+import Resume from './components/Resume'
 
 import Error from "./components/Error";
 
@@ -16,6 +17,8 @@ function App() {
       <Route component={SinglePost} path='/post/:slug' />
       <Route component={Post} path='/post' />
       <Route component={Project} path='/project' />
+      <Route component={Resume} path='/resume' />
+
       <Route component={Error} />
 
     </Switch>
