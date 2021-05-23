@@ -9,8 +9,8 @@ import ReactGA from 'react-ga'
 import Error from './components/Error'
 
 function initializeAnalytics() {
-  ReactGA.initialize('UA-191213778-1')
-  ReactGA.pageview('/HomePage')
+  ReactGA.initialize('273298879')
+  ReactGA.pageview('/')
 }
 
 function App() {
