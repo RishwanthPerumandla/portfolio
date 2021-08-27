@@ -13,7 +13,7 @@ export default function About() {
         </h1>
         <div className='about-content mt-10 sm:mt-10 md:mt-12'>
           <p className='mt-3 text-gray-500 sm:mt-5 md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl '>
-            I’m Rishwanth Perumandla, Entrepreneur and Computer Science Student
+            I’m Rishwanth Perumandla, aspiring Entrepreneur and Computer Science Student
             based in Hyderabad, India.
           </p>
           <p className='mt-3 text-gray-500 sm:mt-5 md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl '>
@@ -25,7 +25,7 @@ export default function About() {
               Rivach
             </a>
             , I’ve designed and developed multiple web and mobile experiences
-            for small businesses and organizations.
+            for Entrepreneurs, businesses and organizations.
           </p>
           <p className='mt-3 text-gray-500 sm:mt-5 md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl '>
             I believe in a great statement
