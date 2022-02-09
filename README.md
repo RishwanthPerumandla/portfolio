@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+## Hey <img src="https://github.com/TheDudeThatCode/TheDudeThatCode/blob/master/Assets/Hi.gif" width="29px">, I'm [Rishwanth!](https://www.rishwanth.com/) 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<a href="https://www.linkedin.com/in/RishwanthPerumandla/">
+  <img align="left" width="24px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg"  />
+</a>
+<a href="https://twitter.com/rishwanth1729">
+  <img align="left" width="26px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/twitter.svg" />
+</a>
+<a href="mailto:rishwanth.perumandla@hotmail.com">
+  <img align="left" width="26px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/gmail.svg" />
+</a>
+<a href="https://www.youtube.com/channel/UCnGr3eUbmg5gmbJ_PzX3fGQ">
+  <img align="left" width="26px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/youtube.svg" />
+</a>
+<a href="https://dev.to/rishwanthperumandla">
+  <img align="left" width="26px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/medium.svg" />
+</a>
 
-## Available Scripts
+<br />
 
-In the project directory, you can run:
+### About Me 🚀
+🎓 I’m an aspiring Entrepreneur & a junior pursuing my Bachelors in Computer Science & Engineering. </br>
+👨‍💻  I am passionate about Web Dev, App Dev, Product Design & Development, Game Design & Development, Filmmaking, Project management & I enjoy learning new things. </br>
 
-### `npm start`
+### My Experiences 🙌
+- Co-founder, Lead Product Designer & Developer ([Rivach](https://www.rivach.com/)). Helping Entrepreneurs and Businesses to launch high value products. Designed & Developed multiple web and mobile experiences. Managing multiple design and development teams to build applications for clients.
+- Product Designer ([Centella](https://centella.co.in/)). Designing a highly scalable technology platform to provide end-to-end research solutions to the scientific community.
+- Market Research Intern ([Centella](https://centella.co.in/)). Researched on starting a Market Research business vertical. Performing & generating market research reports on multiple Domains.
+- Frontend Developer Intern ([Exibits](https://exibits.io)). Developed an Mobile and Web Application for a Computer Vision based Application using React and React Native with AWS Amplify.
+- Vice President ([Advanced Academic Center, GRIET](https://www.aacgriet.com)) - Advanced Academic Center (AAC) is an inter-disciplinary research center of GRIET, Hyderabad. AAC is dedicated to excellence in teaching, learning and research, and is continuing to flourish advancements in this modern world.  
+- Student Mentor & Instructor ([Advanced Academic Center, GRIET](https://www.aacgriet.com)) - Mentored 20+ students on web development for building websites & web applications and collaborating with teams to work on projects.
+-  [Kaneko](https://youtu.be/RYD3EqWPZtQ) - A cinematic short film made with the harnessing power of Unreal Engine and real-world scans from Quixel Megascans. Set in the beautiful, fictional-worldly landscapes of Japan, KANEKO is a story of vengeance. Written script and designed 3d Environmental Landscapes in Unreal Engine.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Rishwanth's github stats](https://github-readme-stats.vercel.app/api?username=RishwanthPerumandla&show_icons=true&hide_border=true)
+<br />
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=RishwanthPerumandla.RishwanthPerumandla)
