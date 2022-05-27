@@ -13,11 +13,11 @@ export default function About() {
         </h1>
         <div className='about-content mt-10 sm:mt-10 md:mt-12'>
           <p className='mt-3 text-gray-500 sm:mt-5 md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl '>
-            I’m Rishwanth Perumandla, aspiring Entrepreneur and Computer Science Student
+            I’m Rishwanth Perumandla, aspiring Entrepreneur and Computer Science Graduate
             based in Hyderabad, India.
           </p>
           <p className='mt-3 text-gray-500 sm:mt-5 md:mt-5 sm:mb-10  md:mb-10  sm:text-2xl md:text-4xl '>
-            As a Co-Founder and Product Designer in{' '}
+            As a Co-Founder and Product Designer & Developer in{' '}
             <a
               href='https://www.rivach.com'
               className='hover:text-indigo-500 underline'
