@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import rishiImg from '../images/rishi.jpg'
-import rishiImg1 from '../images/rishi1.png'
+// import rishiImg from '../images/rishi.jpg'
+// import rishiImg1 from '../images/rishi1.png'
+import pseudoImg from '../images/pseudoImage.jpg'
 import logo from '../images/logo.svg'
 import { motion } from "framer-motion"
 
@@ -126,7 +127,7 @@ const Landingpage = () => {
     </div>
   </div>
   <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-    <img className="h-66 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={rishiImg1} alt="" />
+    <img className="h-66 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={pseudoImg} alt="" />
   </div>
 </div>
         </>
