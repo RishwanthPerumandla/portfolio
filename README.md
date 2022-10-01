@@ -19,7 +19,7 @@
 <br />
 
 ### About Me 🚀
-🎓 I’m an aspiring Entrepreneur & a junior pursuing my Bachelors in Computer Science & Engineering. </br>
+🎓 I’m an aspiring Entrepreneur & a Graduate in Computer Science & Engineering. </br>
 👨‍💻  I am passionate about Web Dev, App Dev, Product Design & Development, Game Design & Development, Filmmaking, Project management & I enjoy learning new things. </br>
 
 ### My Experiences 🙌
