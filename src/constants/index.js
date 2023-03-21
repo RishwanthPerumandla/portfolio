@@ -35,6 +35,10 @@ import {
       title: "Work",
     },
     {
+      id: "blog",
+      title: "Blog",
+    },
+    {
       id: "contact",
       title: "Contact",
     },
@@ -42,19 +46,19 @@ import {
   
   const services = [
     {
-      title: "Web Developer",
-      icon: web,
-    },
-    {
-      title: "React Native Developer",
-      icon: mobile,
-    },
-    {
       title: "Backend Developer",
       icon: backend,
     },
     {
-      title: "Content Creator",
+      title: "Product Designer",
+      icon: web,
+    },
+    {
+      title: "Cloud Solution Architect",
+      icon: mobile,
+    },
+    {
+      title: "VFX/CGI Artist",
       icon: creator,
     },
   ];
