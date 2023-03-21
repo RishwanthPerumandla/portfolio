@@ -1,51 +1,30 @@
 {
   "name": "portfolio",
-  "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@craco/craco": "^6.1.1",
-    "@sanity/block-content-to-react": "^2.0.7",
-    "@sanity/client": "^2.2.6",
-    "@sanity/image-url": "^0.140.22",
-    "@tailwindcss/postcss7-compat": "^2.0.3",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.7.0",
-    "aos": "^2.3.4",
-    "autoprefixer": "^9.8.6",
-    "framer-motion": "^3.7.0",
-    "postcss": "^7.0.35",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-ga": "^3.3.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.2",
-    "react-social-icons": "^4.1.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3",
-    "web-vitals": "^1.1.0"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "@emailjs/browser": "^3.10.0",
+    "@react-three/drei": "^9.58.0",
+    "@react-three/fiber": "^8.12.0",
+    "framer-motion": "^10.6.1",
+    "maath": "^0.5.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.9.0",
+    "react-tilt": "^0.1.4",
+    "react-vertical-timeline-component": "^3.6.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^3.1.0",
+    "tailwindcss": "^3.2.7",
+    "vite": "^4.2.0"
   }
 }
