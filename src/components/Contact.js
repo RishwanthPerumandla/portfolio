@@ -25,11 +25,11 @@ export default function Contact() {
           Reach out to me through Social Media
         </h1>
         <div className="flex justify-center py-4 px-5 mt-10" >
-          <SocialIcon url="https://www.github.com/rishwanthperumandla/" className="mr-4" fgColor="#fff" target="_blank" style={{ height: 50, width: 50 }} />
           <SocialIcon url="https://www.linkedin.com/in/rishwanthperumandla/" className="mr-4" fgColor="#fff" target="_blank" style={{ height: 50, width: 50 }} />
-          <SocialIcon url="https://twitter.com/RishwanthPerum2" className="mr-4" fgColor="#fff" target="_blank" style={{ height: 50, width: 50 }} />
+          <SocialIcon url="https://www.github.com/rishwanthperumandla/" className="mr-4" fgColor="#fff" target="_blank" style={{ height: 50, width: 50 }} />
+          <SocialIcon url="https://twitter.com/rishwanth1729" className="mr-4" fgColor="#fff" target="_blank" style={{ height: 50, width: 50 }} />
           <SocialIcon url="https://www.instagram.com/rishwanthperumandla/" className="mr-4" fgColor="#fff" target="_blank" style={{ height: 50, width: 50 }} />
-          <SocialIcon url="https://www.youtube.com/channel/UCnGr3eUbmg5gmbJ_PzX3fGQ" className="mr-4" fgColor="#fff" target="_blank" style={{ height: 50, width: 50 }} />
+          <SocialIcon url="https://www.youtube.com/@ripe6096" className="mr-4" fgColor="#fff" target="_blank" style={{ height: 50, width: 50 }} />
         </div>
         <h1 className="about-content text-2xl text-white flex justify-center mt-15 sm:mt-20 sm:text-xl md:text-3xl sm:mx-auto md:mt-12">
           If you like my work, you can &nbsp; <a
