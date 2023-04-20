@@ -124,7 +124,7 @@ export default function SinglePost(){
          
          
             
-            <h6 className="flex justify-center text-white mt-3 mb-2">&#169; Rishwanth Perumandla 2021</h6>
+            <h6 className="flex justify-center text-white mt-3 mb-2">&#169; Rishwanth Perumandla 2023</h6>
             </div>
         </main>
     )
