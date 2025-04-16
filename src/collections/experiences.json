@@ -1,24 +1,24 @@
 [
 	{
-	  "dates": "Jul 2021 · Jul 2023",
+	  "dates": "Jul 2021 · Present",
 	  "role": "Co-founder, Solutions Architect & Full Stack Developer",
 	  "company": "Rivach LLP",
 	  "description": "Led architecture and development of scalable cloud-based platforms for startups. Built Brekrr, a professional networking platform, and LandManager, a property management app, using AWS, React Native, and serverless architecture.",
-	  "logo": "/assets/images/experiences/fta.ico"
+	  "logo": "/assets/images/experiences/fa.png"
 	},
 	{
 	  "dates": "Jun 2022 · Present",
 	  "role": "Consulting Solutions Architect & Engineer",
 	  "company": "Centella Scientific",
 	  "description": "Architected an AI-driven drug discovery platform on Azure Cloud. Implemented MLOps using Kubernetes, MLflow, Docker, and REINVENT for scalable molecular design and lifecycle management.",
-	  "logo": "/assets/images/experiences/wulian.ico"
+	  "logo": "/assets/images/experiences/centellalogo.svg"
 	},
 	{
-	  "dates": "Feb 2021 · Present",
+	  "dates": "Feb 2021 - July 2023",
 	  "role": "Co-founder & Creative Technologist",
 	  "company": "20ms Studios",
 	  "description": "Explored storytelling through short films and immersive 3D environments. Worked on cinematic projects using Unreal Engine, scripting, worldbuilding, and narrative design under the RIPE identity.",
-	  "logo": "/assets/images/experiences/yoho.ico"
+	  "logo": "/assets/images/experiences/20ms.jpg"
 	}
   ]
   
