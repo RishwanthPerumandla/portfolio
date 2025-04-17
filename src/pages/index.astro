@@ -23,11 +23,15 @@ import Layout from "../layouts/main.astro";
 
 <p class="mb-6 text-lg text-neutral-600 dark:text-neutral-400">
   AWS Certified Cloud Solutions Architect & Full Stack Engineer with 4+ years of experience designing scalable cloud-native systems and AI platforms across AWS, Azure, and GCP.  
-  I also explore storytelling, filmmaking, and immersive 3D environments through my alter ego, 
-  <a href="https://www.youtube.com/@ripe6096" target="_blank" rel="noopener noreferrer" class="underline font-semibold hover:text-black dark:hover:text-white">
-    RIPE
-  </a>.
+  I also explore storytelling, filmmaking, and forward-thinking tech concepts through my alter ego, 
+  <a class="ripe text-2xl underline font-semibold hover:text-black dark:hover:text-white" href="https://www.youtube.com/@ripe6096" target="_blank" rel="noopener noreferrer">RIPE</a>.
 </p>
+
+<p class="mb-6 italic text-sm text-neutral-500 dark:text-neutral-400">
+  “Specialization is for insects.” — that belief drives me to explore ideas across systems, stories, and everything in between.
+</p>
+
+
 
 <p class="mb-2 font-semibold text-neutral-800 dark:text-neutral-200">
   I work at the intersection of:
@@ -38,7 +42,7 @@ import Layout from "../layouts/main.astro";
   <li>Full Stack Web & Mobile App Development</li>
   <li>DevOps, CI/CD & MLOps Engineering</li>
   <li>AI-driven Research Platforms & ML Infrastructure</li>
-  <li>Cinematic Storytelling, Unreal Engine & <a href="https://www.youtube.com/@ripe6096" target="_blank" class="underline font-semibold hover:text-black dark:hover:text-white">RIPE</a></li>
+  <li>Cinematic Storytelling, Unreal Engine & <a class="ripe text-2xl underline font-semibold hover:text-black dark:hover:text-white" href="https://www.youtube.com/@ripe6096" target="_blank" class="underline font-semibold hover:text-black dark:hover:text-white">RIPE</a> </li>
 </ul>
 
 <a
@@ -51,9 +55,12 @@ import Layout from "../layouts/main.astro";
 
 </div>
 
-      <div
-        class="relative justify-end hidden w-full mt-10 md:flex md:pl-10 md:w-1/2 md:mt-0 md:translate-y-4 xl:translate-y-0"
-      >
+    <a
+  href="mailto:rishwanth.perumandla@hotmail.com"
+  class="relative justify-end hidden w-full mt-10 md:flex md:pl-10 md:w-1/2 md:mt-0 md:translate-y-4 xl:translate-y-0 group"
+  title="Say hi!"
+>
+
         <div class="relative z-50 w-full">
           <div
             class="absolute bottom-0 z-40 w-16 h-16 -translate-x-6 -translate-y-1/2 lg:top-auto top-0 lg:-translate-y-[330px] rounded-full"
@@ -61,10 +68,12 @@ import Layout from "../layouts/main.astro";
             <span
               class="relative z-20 flex items-center justify-center w-full h-full text-2xl border-8 border-white rounded-full dark:border-neutral-950 bg-neutral-100 dark:bg-neutral-900"
             >
-              <span
-                class="flex items-center justify-center w-full h-full bg-white border border-dashed rounded-full dark:bg-neutral-950 border-neutral-300 dark:border-neutral-700"
-                >👋</span
-              >
+             <span
+  class="flex items-center justify-center w-full h-full bg-white border border-dashed rounded-full dark:bg-neutral-950 border-neutral-300 dark:border-neutral-700 group-hover:animate-wave"
+  style="transform-origin: 75% 75%;"
+>👋</span>
+
+
             </span>
           </div>
           <div class="relative z-30 px-10">
@@ -82,7 +91,7 @@ import Layout from "../layouts/main.astro";
         </div>
       </div>
     </div>
-  </div>
+  </a>
 
   <Separator text="Check out my projects" />
   <Projects />
