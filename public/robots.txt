@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://rishwanth.com/sitemap-index.xml
