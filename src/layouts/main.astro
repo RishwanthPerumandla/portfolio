@@ -2,7 +2,8 @@
 import Footer from "../components/footer.astro";
 import Header from "../components/header.astro";
 import SquareLines from "../components/square-lines.astro";
-const { title } = Astro.props;
+
+const { title, description = "Cloud Solutions Architect and Full Stack Engineer", ogImage = "/og-image.png", canonicalUrl = "https://rishwanth.com" } = Astro.props;
 ---
 
 <!doctype html>
@@ -10,9 +11,27 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <title>{title}</title>
+    <meta name="description" content={description} />
 
-    <!-- Used to add dark mode right away, adding here prevents any flicker -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Dark mode immediately -->
     <script is:inline>
       if (typeof Storage !== 'undefined') {
         if (
@@ -29,10 +48,36 @@ const { title } = Astro.props;
         border-radius: 20px;
       }
     </style>
+
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
     <script src="../assets/css/main.css"></script>
     <Fragment set:html={import.meta.env.HEADER_INJECT} />
+
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Rishwanth Perumandla",
+        "url": "https://rishwanth.com",
+        "sameAs": [
+          "https://www.linkedin.com/in/rishwanthperumandla",
+          "https://x.com/rishwanth1729",
+          "https://www.youtube.com/@ripe6096"
+        ],
+        "jobTitle": "Cloud Solutions Architect",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Rivach LLP"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Purdue University"
+        }
+      }
+      </script>
+      
   </head>
+
   <body class="antialiased bg-white dark:bg-neutral-950">
     <SquareLines />
     <Header />

@@ -3,29 +3,31 @@ import experiences from "../collections/experiences.json";
 import AboutExperience from "../components/about-experience.astro";
 import PageHeading from "../components/page-heading.astro";
 import Layout from "../layouts/main.astro";
+
+// SEO Props
+const title = "About Me | Rishwanth Perumandla";
+const description = "Learn about Rishwanth Perumandla, a Cloud Solutions Architect and Full Stack Engineer with 4+ years of experience building scalable systems across AWS, GCP, Azure, and Azure Cloud. Bridging technology and storytelling through RIPE.";
+const canonicalUrl = "https://rishwanth.com/about";
+const ogImage = "/assets/images/og-image.png"; // Optional - same Open Graph image
 ---
 
-<Layout title="About Me | Rishwanth Perumandla">
+<Layout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage}>
   <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
-<PageHeading
-  title="About Me"
-  description='Cloud Architect. Engineer. Creator. <span ><a class="ripe text-2xl" href="https://www.youtube.com/@ripe6096" target="_blank" class="underline font-semibold hover:text-black dark:hover:text-white">RIPE</a></span> is my alter ego — my creative lab for content, storytelling, and self-expression.'
-/>
-
-
+    <PageHeading
+      title="About Me"
+      description='Cloud Architect. Engineer. Creator. <span><a class="ripe text-2xl" href="https://www.youtube.com/@ripe6096" target="_blank" class="underline font-semibold hover:text-black dark:hover:text-white">RIPE</a></span> is my alter ego — my creative lab for content, storytelling, and self-expression.'
+    />
 
     <img src="/assets/images/ripe.png" alt="Rishwanth's photo" class="relative z-30 w-full my-10 rounded-xl" />
 
-   <h2 class="mb-2 text-2xl font-bold dark:text-neutral-200">Short Bio</h2>
-<p class="text-sm leading-6 text-gray-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg">
-  I'm Rishwanth Perumandla — a Cloud Solutions Architect and Full Stack Engineer with 4+ years of experience designing scalable systems across AWS, GCP, Azure, and Oracle Cloud. I’m a Computer Science graduate from <strong>Purdue University, USA</strong>. where I specialized in Cloud Architecture, Machine Learning, and Scalable Infrastructure Systems.<br /><br />
+    <h2 class="mb-2 text-2xl font-bold dark:text-neutral-200">Short Bio</h2>
+    <p class="text-sm leading-6 text-gray-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg">
+      I'm Rishwanth Perumandla — a Cloud Solutions Architect and Full Stack Engineer with 4+ years of experience designing scalable systems across AWS, GCP, Azure, and Oracle Cloud. I’m a Computer Science graduate from <strong>Purdue University, USA</strong>, where I specialized in Cloud Architecture, Machine Learning, and Scalable Infrastructure Systems.<br /><br />
 
-  As Co-founder and Solutions Architect at <strong><a href="https://www.rivach.com" class="underline hover:text-black dark:hover:text-white" target="_blank">Rivach</a></strong>, I’ve led the development of high-impact products and platforms for startups and growing businesses. At <strong><a href="https://centella.co.in" class="underline hover:text-black dark:hover:text-white" target="_blank">Centella</a></strong>, I architected an AI-driven drug discovery platform on Azure Cloud, integrating ML infrastructure and MLOps pipelines for scientific innovation. Through <strong><a href="https://www.20msstudios.com" class="underline hover:text-black dark:hover:text-white" target="_blank">20ms Studios</a></strong>, I dive into screenwriting, virtual cinematography, and worldbuilding using Unreal Engine.<br /><br />
+      As Co-founder and Solutions Architect at <strong><a href="https://www.rivach.com" class="underline hover:text-black dark:hover:text-white" target="_blank">Rivach</a></strong>, I’ve led the development of high-impact products and platforms for startups and growing businesses. At <strong><a href="https://centella.co.in" class="underline hover:text-black dark:hover:text-white" target="_blank">Centella</a></strong>, I architected an AI-driven drug discovery platform on Azure Cloud, integrating ML infrastructure and MLOps pipelines for scientific innovation. Through <strong><a href="https://www.20msstudios.com" class="underline hover:text-black dark:hover:text-white" target="_blank">20ms Studios</a></strong>, I dive into screenwriting, virtual cinematography, and worldbuilding using Unreal Engine.<br /><br />
 
-  All of these identities — builder, storyteller, and systems thinker — come together under my alter ego <a class="ripe text-3xl" href="https://www.youtube.com/@ripe6096" class="underline font-semibold hover:text-black dark:hover:text-white" target="_blank">RIPE</a>, where I explore the intersection of technology and emotion. Whether through scalable cloud platforms or immersive visual experiences, I’m driven by the urge to create things that resonate.
-</p>
-
-
+      All of these identities — builder, storyteller, and systems thinker — come together under my alter ego <a class="ripe text-3xl" href="https://www.youtube.com/@ripe6096" class="underline font-semibold hover:text-black dark:hover:text-white" target="_blank">RIPE</a>, where I explore the intersection of technology and emotion. Whether through scalable cloud platforms or immersive visual experiences, I’m driven by the urge to create things that resonate.
+    </p>
 
     <h2 class="mt-5 mb-2 text-2xl font-bold lg:mt-10 sm:mt-6 dark:text-neutral-200">Experience</h2>
     <div class="px-5 py-10">

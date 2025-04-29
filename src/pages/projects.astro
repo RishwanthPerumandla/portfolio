@@ -3,18 +3,22 @@ import projects from "../collections/projects.json";
 import PageHeading from "../components/page-heading.astro";
 import Project from "../components/project.astro";
 import Layout from "../layouts/main.astro";
+
+// SEO Props
+const title = "My Projects | Rishwanth Perumandla";
+const description = "Explore Rishwanth Perumandla’s portfolio of projects — scalable cloud platforms, AI-driven systems, and creative technology solutions at the intersection of engineering and storytelling.";
+const canonicalUrl = "https://rishwanth.com/projects";
+const ogImage = "/assets/images/og-image.png"; // Optional Open Graph image
 ---
 
-<Layout title="My Projects">
+<Layout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage}>
   <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
     <PageHeading
       title="My Projects"
       description="Here are some of the current projects I've been working on. I really enjoy creating new projects and coming up with new ideas. I'm always working on something new, so check back often!"
     />
 
-    <div
-      class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7 sm:gap-5 sm:grid-cols-2"
-    >
+    <div class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7 sm:gap-5 sm:grid-cols-2">
       {
         projects.map((project) => {
           return (
