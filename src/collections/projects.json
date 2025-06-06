@@ -2,13 +2,19 @@
 	{
 		"name": "Brekrr",
 		"description": "Hyperlocal Gig marketplace",
-		"image": "/assets/images/projects/tempmail.best.png",
+		"image": "/assets/images/Brekrr.png",
 		"url": "https://brekrr.com"
+	},
+	{
+		"name": "Static Website Architecture",
+		"description": "Cloud Solutions Architecture",
+		"image": "/assets/images/posts/Beanstalk.png",
+		"url": "https://www.rishwanth.com/post/static-website-architecture"
 	},
 	{
 		"name": "SciCom",
 		"description": "Research Collaboration Platform",
-		"image": "/assets/images/projects/dns.surf.png",
+		"image": "/assets/images/experiences/centellalogo.svg",
 		"url": "https://dns.surf"
 	},
 	{
