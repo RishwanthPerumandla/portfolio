@@ -8,7 +8,7 @@ dateFormatted: June 5, 2025
 cover: /assets/blog/static-site-cover.webp
 ------------------------------------------
 
-> "Anyone can build a website. But designing one that scales, remains cost-efficient, and supports evolving business needs — that’s real architecture."
+> "This is not just a how-to guide. It’s a real-world case study of how I, as a Solutions Architect, handled the seemingly simple task of building a website — and transformed it into a strategic decision-making exercise that touched cost, performance, scalability, and long-term business goals."
 
 This is a professional case study on how I — as a Solutions Architect — approach building a modern website from scratch for a small-to-mid scale business.
 
@@ -17,6 +17,22 @@ This is a professional case study on how I — as a Solutions Architect — appr
 ## Introduction
 
 A business approaches with a requirement to build a professional website. As a Solutions Architect, my role is not just to develop it, but to understand the problem from a business and technical perspective. The goal is to design a cost-efficient, scalable, and maintainable solution aligned with user expectations and operational constraints. This document represents my approach in handling such a requirement — from discovery to architecture decisions and cost estimation.
+
+It started with a casual request: “We need a basic business website.”
+
+Simple? Not quite. The client was a bootstrapped creative agency planning a brand relaunch. Their site had to support:
+
+Showcasing services
+
+Client lead capture
+
+Content updates via blog
+
+SEO campaigns
+
+They had less than $100 for setup and wanted to keep infra under $10/month. And no technical team.
+
+This wasn’t just about choosing a hosting provider. This was about making every dollar count — while making room for growth.
 
 ---
 

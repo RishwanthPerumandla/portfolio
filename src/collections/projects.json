@@ -12,22 +12,16 @@
 		"url": "https://www.rishwanth.com/post/static-website-architecture"
 	},
 	{
-		"name": "SciCom",
-		"description": "Research Collaboration Platform",
-		"image": "/assets/images/experiences/centellalogo.svg",
-		"url": "https://dns.surf"
-	},
-	{
 		"name": "Centella Scientific",
-		"description": "Web Toolbox.",
-		"image": "/assets/images/projects/html.zone.png",
-		"url": "https://html.zone"
+		"description": "Reinvent Model integration",
+		"image": "/assets/images/experiences/centellalogo.svg",
+		"url": "https://centella.co.in"
 	},
 	{
 		"name": "Landmanager",
-		"description": "A Simple / Speedy / Secure Link Shortener with Analytics.",
-		"image": "/assets/images/projects/sink.cool.png",
-		"url": "https://sink.cool"
+		"description": "Property Management Platform.",
+		"image": "/assets/images/favicon.ico",
+		"url": "https://landmanager-app.netlify.app/"
 	},
 	{
 		"name": "Freelance Platform",
@@ -36,9 +30,9 @@
 		"url": "https://github.com/ccbikai/BroadcastChannel"
 	},
 	{
-		"name": "L(O*62).ONG",
-		"description": "Make your URL looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooonger",
-		"image": "/assets/images/projects/long.png",
-		"url": "https://loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo.ong"
+		"name": "Hybrid Recommendations System",
+		"description": "A Social Media posts recommendation system built with Hybrid Filtering algorithms",
+		"image": "/assets/images/projects/HRS.png",
+		"url": "https://github.com/RishwanthPerumandla/hybrid-recommendation-system"
 	}
 ]
