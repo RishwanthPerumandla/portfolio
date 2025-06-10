@@ -23,12 +23,7 @@
 		"image": "/assets/images/favicon.ico",
 		"url": "https://landmanager-app.netlify.app/"
 	},
-	{
-		"name": "Freelance Platform",
-		"description": "Turn your Telegram Channel into a MicroBlog.",
-		"image": "/assets/images/projects/broadcast-channel.png",
-		"url": "https://github.com/ccbikai/BroadcastChannel"
-	},
+
 	{
 		"name": "Hybrid Recommendations System",
 		"description": "A Social Media posts recommendation system built with Hybrid Filtering algorithms",
