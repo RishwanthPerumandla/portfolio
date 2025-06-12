@@ -1,4 +1,11 @@
 [
+	
+	{
+		"name": "Hybrid Recommendations System",
+		"description": "A Social Media posts recommendation system built with Hybrid Filtering algorithms",
+		"image": "/assets/images/projects/HRS.png",
+		"url": "https://github.com/RishwanthPerumandla/hybrid-recommendation-system"
+	},
 	{
 		"name": "Brekrr",
 		"description": "Hyperlocal Gig marketplace",
@@ -22,12 +29,6 @@
 		"description": "Property Management Platform.",
 		"image": "/assets/images/favicon.ico",
 		"url": "https://landmanager-app.netlify.app/"
-	},
-
-	{
-		"name": "Hybrid Recommendations System",
-		"description": "A Social Media posts recommendation system built with Hybrid Filtering algorithms",
-		"image": "/assets/images/projects/HRS.png",
-		"url": "https://github.com/RishwanthPerumandla/hybrid-recommendation-system"
 	}
+
 ]
