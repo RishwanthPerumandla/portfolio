@@ -5,7 +5,7 @@ title: Hybrid Recommendation System
 description: A real-world case study of designing and deploying a hybrid content + collaborative recommendation system
 slug: hybrid-recommendation-system
 dateFormatted: June 11, 2025
-cover: /assets/blog/hybrid-recommender-cover.webp
+cover: /assets/images/projects/hrs2.png
 math: true
 ----------
 
