@@ -30,7 +30,15 @@ const { title, description = "Cloud Solutions Architect and Full Stack Engineer"
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="canonical" href={canonicalUrl} />
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-K4QSSK6SNE"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
+      gtag('config', 'G-K4QSSK6SNE');
+    </script>
     <!-- Dark mode immediately -->
     <script is:inline>
       if (typeof Storage !== 'undefined') {
@@ -50,7 +58,7 @@ const { title, description = "Cloud Solutions Architect and Full Stack Engineer"
     </style>
 
     <link rel="icon" type="image/x-icon" href="../assets/images/favicon.png" />
-    <script src="../assets/css/main.css"></script>
+<link rel="stylesheet" href="/assets/css/main.css" />
     <Fragment set:html={import.meta.env.HEADER_INJECT} />
 
     <script type="application/ld+json" is:inline>
