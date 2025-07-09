@@ -10,13 +10,13 @@ cover: /assets/blog/static-site-cover.webp
 
 > "This is not just a how-to guide. It’s a real-world case study of how I, as a Solutions Architect, handled the seemingly simple task of building a website — and transformed it into a strategic decision-making exercise that touched cost, performance, scalability, and long-term business goals."
 
-This is a professional case study on how I — as a Solutions Architect — approach building a modern website from scratch for a small-to-mid scale business.
+This is a professional case study on how I, as a Solutions Architect approach building a modern website from scratch for a small-to-mid scale business.
 
 ---
 
 ## Introduction
 
-A business approaches with a requirement to build a professional website. As a Solutions Architect, my role is not just to develop it, but to understand the problem from a business and technical perspective. The goal is to design a cost-efficient, scalable, and maintainable solution aligned with user expectations and operational constraints. This document represents my approach in handling such a requirement — from discovery to architecture decisions and cost estimation.
+A business approaches with a requirement to build a professional website. As a Solutions Architect, my role is not just to develop it, but to understand the problem from a business and technical perspective. The goal is to design a cost-efficient, scalable, and maintainable solution aligned with user expectations and operational constraints. This document represents my approach in handling such a requirement from discovery to architecture decisions and cost estimation.
 
 It started with a casual request: “We need a basic business website.”
 
@@ -30,9 +30,9 @@ Content updates via blog
 
 SEO campaigns
 
-They had less than $100 for setup and wanted to keep infra under $10/month. And no technical team.
+They had less than **$100** for setup and wanted to keep infra under **$10**/month. And no technical team.
 
-This wasn’t just about choosing a hosting provider. This was about making every dollar count — while making room for growth.
+This wasn’t just about choosing a hosting provider. This was about making every dollar count while making room for growth.
 
 ---
 
@@ -80,7 +80,7 @@ Let’s assume the following requirement:
 * < 100 users/day
 * Limited budget
 
-This type of project seems simple — but my job is to ensure it’s resilient, fast, and future-ready.
+This type of project seems simple but my job is to ensure it’s resilient, fast, and future-ready.
 
 ---
 
@@ -113,7 +113,7 @@ This is where we consider AWS.
 
 ## ☁️ Re-Architecting the Website with AWS
 
-Instead of just “hosting” the site, the aim is to design for scalability, availability, and cost-efficiency — backed by AWS cloud services. The choice of services depends on technical complexity, required uptime, expected traffic, and budget.
+Instead of just “hosting” the site, the aim is to design for scalability, availability, and cost-efficiency backed by AWS cloud services. The choice of services depends on technical complexity, required uptime, expected traffic, and budget.
 
 ---
 
@@ -258,7 +258,7 @@ Instead of just “hosting” the site, the aim is to design for scalability, av
 
 ## Final Thoughts
 
-This wasn’t just about publishing a few static pages. This was a rigorous evaluation and execution exercise — where I combined cost analysis, scalability planning, and system resilience principles to propose a future-proof solution. Each decision here reflects tradeoff reasoning, not just technology selection.
+This wasn’t just about publishing a few static pages. This was a rigorous evaluation and execution exercise where I combined cost analysis, scalability planning, and system resilience principles to propose a future-proof solution. Each decision here reflects tradeoff reasoning, not just technology selection.
 
 ---
 
