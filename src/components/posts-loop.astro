@@ -23,7 +23,7 @@ const sortedPosts = allPosts
 
 const postsLoop = sortedPosts.slice(0, count).map((post) => {
   const data = post.data || {};
-  const preview = data.excerpt || data.description || "";
+  const preview = data.description || "";
   return {
     ...data,
     preview: truncate(preview, 160), // adjust length here
