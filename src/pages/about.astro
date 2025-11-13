@@ -6,30 +6,39 @@ import Layout from "../layouts/main.astro";
 
 // SEO Props
 const title = "About Me | Rishwanth Perumandla";
-const description = "Learn about Rishwanth Perumandla, a Cloud & Data Engineer with 4+ years of experience designing AI-ready systems, scalable data platforms, and MLOps pipelines across AWS, Azure, and GCP. Bridging technology, analytics, and storytelling through RIPE.";
+const description =
+  "Learn about Rishwanth Perumandla, a Software Engineer with experience across cloud infrastructure, backend systems, data platforms, and applied AI and ML. Human centered engineering meets storytelling through RIPE.";
 const canonicalUrl = "https://rishwanth.com/about";
 const ogImage = "/assets/images/og-image.png";
 ---
 
 <Layout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage}>
   <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
+
     <PageHeading
       title="About Me"
-      description='Cloud & Data Engineer. Architect. Creator. <span><a class="ripe text-2xl" href="https://www.youtube.com/@ripe6096" target="_blank" class="underline font-semibold hover:text-black dark:hover:text-white">RIPE</a></span> is my alter ego — my creative lab for storytelling, filmmaking, and exploring the human side of technology.'
+      description={`Cloud Engineer. Full Stack Developer. Applied AI and ML Builder. 
+      <span><a class="ripe text-2xl" href="https://www.youtube.com/@ripe6096" target="_blank">RIPE</a></span> is the place where my creative side lives. It is where I explore storytelling, filmmaking, and the emotional side of technology through visuals, ideas, and narrative thinking.`}
     />
 
     <img src="/assets/images/ripe.png" alt="Rishwanth's photo" class="relative z-30 w-full my-10 rounded-xl" />
 
-    <h2 class="mb-2 text-2xl font-bold dark:text-neutral-200">Short Bio</h2>
+    <h2 class="mb-2 text-2xl font-bold dark:text-neutral-200">Who I Am?</h2>
     <p class="text-sm leading-6 text-gray-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg">
-      I'm Rishwanth Perumandla — a <strong>Cloud & Data Engineer</strong> with 4+ years of experience building <strong>data-driven systems, AI-ready architectures, and analytics platforms</strong> across <strong>AWS, Azure, and GCP</strong>. 
-      I hold a Master’s degree in Computer Science from <strong>Purdue University, USA</strong>, specializing in <strong>Cloud Architecture, Data Engineering, and Machine Learning Systems</strong>.<br /><br />
 
-      At <strong><a href="https://www.centella.co.in" class="underline hover:text-black dark:hover:text-white" target="_blank">Centella Scientific</a></strong>, I engineered cloud-native ML workflows for drug discovery on Azure — integrating the REINVENT framework, MLOps automation, and real-time analytics dashboards that accelerated research experimentation.  
-      At <strong><a href="https://www.rivach.com" class="underline hover:text-black dark:hover:text-white" target="_blank">Rivach</a></strong>, I led end-to-end development of data-powered SaaS platforms — architecting backend APIs, building Power BI dashboards, and automating deployments with AWS, Docker, and Kubernetes to scale products for 2K+ monthly users.  
-      Through <strong><a href="https://www.20msstudios.com" class="underline hover:text-black dark:hover:text-white" target="_blank">20ms Studios</a></strong>, I explore storytelling, cinematic design, and immersive worldbuilding with Unreal Engine.<br /><br />
+      I am <strong>Rishwanth Perumandla</strong>, a Software Engineer with more than four years of experience working across cloud infrastructure, backend systems, data platforms, and applied machine learning. I hold a Master of Science in Computer Science from <strong>Purdue University</strong>, where I focused on cloud architecture, data systems, and building ML driven applications that work reliably in the real world.<br /><br />
 
-      These experiences converge under my alter ego, <a class="ripe text-3xl" href="https://www.youtube.com/@ripe6096" class="underline font-semibold hover:text-black dark:hover:text-white" target="_blank">RIPE</a> — where I bridge <strong>technology, data, and emotion</strong> to craft systems and stories that resonate. Whether through analytics, AI systems, or visual narratives, I’m driven by the pursuit of clarity, scalability, and impact.
+      My professional journey began at <strong><a href="https://www.rivach.com" class="underline hover:text-black dark:hover:text-white" target="_blank">Rivach LLP</a></strong>, where I learned how to build entire products from the ground up. I worked on everything from frontend development to backend architecture, while also managing deployments, database design, and cloud infrastructure. I enjoyed moving between design discussions, engineering problems, and product decisions, which helped me understand how technology becomes meaningful for real users.<br /><br />
+
+      Later, at <strong><a href="https://www.centella.ai" class="underline hover:text-black dark:hover:text-white" target="_blank">Centella Scientific</a></strong>, I worked on CASCADE, an AI powered drug discovery platform for oncology research. This role brought me closer to the intersection of engineering and scientific research. I built backend systems for molecular design using REINVENT, supported large scale virtual screening workloads, and deployed ML pipelines across Azure and Google Cloud. I also worked on ADMET prediction systems, improved inference performance for GNN models, and helped create an infrastructure that scientists could rely on for fast and repeatable experimentation.<br /><br />
+
+      During my time at Purdue, I worked on projects that strengthened my understanding of data engineering, applied ML, and backend development. One of my favorite projects was a hybrid recommendation system that combined text embeddings, computer vision models, and collaborative filtering. I also built LandManager, a multi role SaaS platform that included analytics dashboards, secure APIs, and optimized Postgres pipelines.<br /><br />
+
+      Across everything I do, what matters most to me is clarity, structure, and impact. I enjoy designing systems that feel reliable and predictable, and I value writing code that is clean, thoughtful, and built to evolve.<br /><br />
+
+      Outside engineering, I explore storytelling and filmmaking through my creative identity, <a class="ripe text-3xl" href="https://www.youtube.com/@ripe6096" target="_blank">RIPE</a>. I love writing stories, experimenting with CGI in Unreal Engine, and building small fictional worlds. These creative interests give me a different way to think about technology. Storytelling teaches rhythm and emotion. Engineering teaches structure and precision. I try to bring both into everything I create.<br /><br />
+
+      I believe that good technology should feel simple, honest, and human. And that is what I enjoy building the most.
     </p>
 
     <h2 class="mt-5 mb-2 text-2xl font-bold lg:mt-10 sm:mt-6 dark:text-neutral-200">Experience</h2>
@@ -53,11 +62,14 @@ const ogImage = "/assets/images/og-image.png";
 
     <h2 class="mt-5 mb-2 text-2xl font-bold lg:mt-10 sm:mt-6 dark:text-neutral-200">Let's Connect</h2>
     <p class="text-sm leading-6 text-gray-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg">
-      Want to collaborate, discuss data systems, or talk about storytelling in tech? You can always 
-      <a href="mailto:rishwanth.perumandla@hotmail.com" class="text-indigo-600 underline">email me</a>, or find me on 
+      If you would like to collaborate, discuss systems, or even chat about storytelling in technology, I would love to connect.  
+      You can reach me anytime at 
+      <a href="mailto:rishwanthperumandla28@gmail.com" class="text-indigo-600 underline">rishwanthperumandla28@gmail.com</a>.  
+      You can also find me on 
       <a href="https://x.com/rishwanth1729" class="text-indigo-600 underline" target="_blank">Twitter</a> and 
-      <a href="https://www.linkedin.com/in/rishwanthperumandla/" class="text-indigo-600 underline" target="_blank">LinkedIn</a>. 
-      I'm always open to thoughtful conversations and creative collaborations.
+      <a href="https://www.linkedin.com/in/rishwanthperumandla/" class="text-indigo-600 underline" target="_blank">LinkedIn</a>.  
+      I am always open to meaningful conversations and thoughtful collaborations.
     </p>
+
   </section>
 </Layout>
