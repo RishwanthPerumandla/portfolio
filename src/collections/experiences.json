@@ -1,24 +1,23 @@
 [
-	{
-	  "dates": "Jul 2021 · Present",
-	  "role": "Co-founder, Solutions Architect & Full Stack Developer",
-	  "company": "Rivach LLP",
-	  "description": "Led architecture and development of scalable cloud-based platforms for startups. Built Brekrr, a professional networking platform, and LandManager, a property management app, using AWS, React Native, and serverless architecture.",
-	  "logo": "/assets/images/experiences/fa.png"
-	},
-	{
-	  "dates": "Jun 2022 · Present",
-	  "role": "Consulting Solutions Architect & Engineer",
-	  "company": "Centella Scientific",
-	  "description": "Architected an AI-driven drug discovery platform on Azure Cloud. Implemented MLOps using Kubernetes, MLflow, Docker, and REINVENT for scalable molecular design and lifecycle management.",
-	  "logo": "/assets/images/experiences/centellalogo.svg"
-	},
-	{
-	  "dates": "Feb 2021 - July 2023",
-	  "role": "Co-founder & Creative Technologist",
-	  "company": "20ms Studios",
-	  "description": "Explored storytelling through short films and immersive 3D environments. Worked on cinematic projects using Unreal Engine, scripting, worldbuilding, and narrative design under the RIPE identity.",
-	  "logo": "/assets/images/experiences/20ms.jpg"
-	}
-  ]
-  
+{
+  "dates": "Jul 2021 · Present",
+  "role": "Co-founder, Solutions Architect and Software Engineer",
+  "company": "Rivach LLP",
+  "description": "As a Co-founder at Rivach, I lead the design and engineering of platforms that serve real businesses and users. My work spans system architecture, backend development, and full lifecycle execution of SaaS products. I helped shape products such as Brekrr, a service and business enablement platform, and LandManager, an operations and property management system used by on-ground teams and administrators. Beyond engineering, I contributed to product direction, user workflows, infrastructure decisions, and the overall technical strategy of the company. Rivach has been where I learned to translate ideas into dependable systems, balancing clarity, structure, and long-term scalability in every part of the product.",
+  "logo": "/assets/images/experiences/fa.png"
+},
+{
+  "dates": "Jun 2022 · Present",
+  "role": "Cloud Software Engineer",
+  "company": "Centella Scientific",
+  "description": "At Centella Scientific, I work on CASCADE, an AI-powered drug discovery platform designed for oncology research teams. My role centers on building the backend and cloud foundation that supports molecular design workflows, large-scale virtual screening, and scientific experimentation. I developed core components for molecular generation, established reliable compute pipelines for GPU-accelerated research, and contributed to the infrastructure that manages model lifecycles and experimentation at scale. I also collaborated closely with scientists to improve prediction workflows and ensure the system could support fast, repeatable, and meaningful research outcomes. This role has shaped my understanding of applied AI in life sciences, bridging engineering precision with scientific problem solving.",
+  "logo": "/assets/images/experiences/centellalogo.svg"
+},
+  {
+    "dates": "Feb 2021 · Jul 2023",
+    "role": "Co-founder and Creative Technologist",
+    "company": "20ms Studios",
+    "description": "Co-founded 20ms Studios to explore storytelling through film, narrative design, and experimental worldbuilding. Created short cinematic projects using Unreal Engine, real-time 3D environments, and hybrid filmmaking techniques. Developed scripts, visual language, and immersive scenes that blend emotional storytelling with technical craft. This is where my creative identity, RIPE, took shape — a place where filmmaking, writing, design, and technology come together as a single artistic expression.",
+    "logo": "/assets/images/experiences/20ms.jpg"
+  }
+]
