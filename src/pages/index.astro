@@ -1,105 +1,189 @@
 ---
-// import Button from "../components/button.astro";
-import Projects from "../components/home/projects.astro";
-import Separator from "../components/home/separator.astro";
-import Writings from "../components/home/writings.astro";
 import Layout from "../layouts/main.astro";
+import Header from "../components/header"; 
+import Pomodoro from "../components/pomodoro"; 
+import GithubActivity from "../components/github-activity"; 
+import Stack from "../components/stack.astro";
 
-// SEO Props
-const title = "Rishwanth Perumandla | Cloud Software Engineer";
-const description = "I'm Rishwanth, an AWS Certified Cloud Solutions Architect and Software Engineer. I design scalable cloud-native systems across AWS, Azure, and GCP, and explore storytelling through RIPE.";
-const canonicalUrl = "https://rishwanth.com/";
-const ogImage = "/assets/images/og-image.png"; // You can create a social sharing image if not already done.
+// SEO
+const title = "Rishwanth Perumandla | Senior Backend Engineer";
+const description = "Rishwanth Perumandla: Senior Backend Engineer & AI Infrastructure Architect.";
+
+// Projects Data
+const projects = [
+  {
+    id: "01",
+    name: "VoixAI",
+    role: "AI Infrastructure",
+    desc: "Voice ordering engine with <500ms latency using OpenAI Whisper.",
+    link: "#"
+  },
+  {
+    id: "02",
+    name: "Brekrr",
+    role: "Distributed Systems",
+    desc: "Microservices platform matching startups with top-tier talent.",
+    link: "#"
+  },
+  {
+    id: "03",
+    name: "Rivach Cloud",
+    role: "Cloud Engineering",
+    desc: "Optimized AWS architecture reducing monthly spend by 40%.",
+    link: "#"
+  }
+];
 ---
 
-<Layout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage}>
-  <div
-    class="relative z-20 w-full max-w-4xl mx-auto mt-16 px-7 md:mt-24 lg:mt-32 xl:px-0"
-  >
-    <div class="flex flex-col items-center md:flex-row">
-      <!-- Hero Text Column -->
-      <div class="relative w-full mt-10 md:mt-0 md:w-1/2 md:pr-8">
-      <div class="mb-2 text-xl font-medium text-neutral-500 dark:text-neutral-400">
-  Hello, I'm
-</div>
+<Layout title={title} description={description}>
 
-<h1 class="mb-4 text-5xl font-extrabold leading-tight tracking-tight text-black md:text-6xl lg:text-7xl dark:text-white">
-  Rishwanth
-</h1>
+  <Header client:load />
 
-<p class="mb-6 text-lg text-neutral-600 dark:text-neutral-400">
-  Software Engineer with more than four years of experience building <strong>cloud-native systems, backend platforms, and applied AI/ML workflows</strong>.  
-  I design and develop reliable, scalable systems across <strong>AWS, Azure, and GCP</strong>, and I enjoy working where engineering, design, and long-term thinking meet.  
-  I also explore storytelling, filmmaking, and creative technology through my alter ego, 
-  <a class="ripe text-2xl font-semibold underline hover:text-black dark:hover:text-white" href="https://www.youtube.com/@ripe6096" target="_blank">RIPE</a>.
-</p>
+  <main class="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 xl:px-0 pt-28 pb-40">
 
-<p class="italic text-sm text-neutral-500 dark:text-neutral-400 mb-6">
-  “Specialization is for insects.” — I like living at the intersection of engineering and imagination.
-</p>
-
-<p class="mt-6 text-base text-neutral-600 dark:text-neutral-400">
-  I collaborate with founders, researchers, and creative teams to build systems that are clear, scalable, and grounded in long-term value.  
-  If you're building something meaningful or exploring something new, I’d love to connect.
-</p>
-
-<div class="flex flex-wrap gap-3 mt-4">
-  <a
-    href="mailto:rishwanthperumandla28@gmail.com"
-    class="inline-block px-6 py-2 font-semibold text-white bg-black rounded-full hover:bg-neutral-800"
-  >
-    Let’s Work Together
-  </a>
-  <a
-    href="https://www.linkedin.com/in/rishwanthperumandla/"
-    class="inline-block px-6 py-2 font-semibold text-black border border-black rounded-full hover:bg-neutral-100 dark:text-white dark:border-white dark:hover:bg-neutral-900"
-  >
-    Connect on LinkedIn
-  </a>
-</div>
-
-
-      </div>
-
-      <a
-        href="mailto:rishwanthperumandla28@gmail.com"
-        class="relative justify-end hidden w-full mt-10 md:flex md:pl-10 md:w-1/2 md:mt-0 md:translate-y-4 xl:translate-y-0 group"
-        title="Say hi!"
-      >
-        <div class="relative z-50 w-full">
-          <div
-            class="absolute bottom-0 z-40 w-16 h-16 -translate-x-6 -translate-y-1/2 lg:top-auto top-0 lg:-translate-y-[330px] rounded-full"
-          >
-            <span
-              class="relative z-20 flex items-center justify-center w-full h-full text-2xl border-8 border-white rounded-full dark:border-neutral-950 bg-neutral-100 dark:bg-neutral-900"
-            >
-              <span
-                class="flex items-center justify-center w-full h-full bg-white border border-dashed rounded-full dark:bg-neutral-950 border-neutral-300 dark:border-neutral-700 group-hover:animate-wave"
-                style="transform-origin: 75% 75%;"
-              >
-                👋
-              </span>
-            </span>
-          </div>
-          <div class="relative z-30 px-10">
-            <img
-              src="/assets/images/photo.png"
-              loading="eager"
-              decoding="auto"
-              class="relative z-30 w-full aspect-[790/1189] md:max-w-md mx-auto dark:-translate-y-0.5"
-            />
-          </div>
-          <div
-            class="absolute bottom-0 right-0 z-20 w-full h-full lg:h-[420px] translate-x-0 -translate-y-px border border-dashed rounded-2xl bg-gradient-to-r dark:from-neutral-950 dark:via-black dark:to-neutral-950 from-white via-neutral-50 to-white border-neutral-300 dark:border-neutral-700"
-          >
-          </div>
+    <section class="mb-24 relative">
+        <div class="flex flex-col gap-2 mb-6">
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter text-neutral-900 leading-tight">
+              Rishwanth
+            </h1>
+            <div class="flex items-center gap-3 text-neutral-400 font-mono text-sm">
+              <span>/rɪʃ-wʌnθ/</span>
+              <span class="w-1 h-1 bg-neutral-300 rounded-full"></span>
+              <span class="italic font-serif text-neutral-500">noun</span>
+            </div>
         </div>
-      </a>
-    </div>
-  </div>
 
-  <Separator text="Check out my projects" />
-  <Projects />
-  <Separator text="Some of my writing" />
-  <Writings />
+        <div class="space-y-6 max-w-2xl">
+            <p class="text-xl md:text-2xl leading-relaxed font-medium text-neutral-800">
+                A <strong>Senior Backend & AI Engineer</strong> building high-performance distributed systems and production-grade AI infrastructure.
+            </p>
+            <p class="text-xl md:text-2xl leading-relaxed font-medium text-neutral-800 text-neutral-500">
+I engineer the systems that make intelligence possible. From designing efficient databases to scaling AI inference, I build high-performance backends that run fast and stay up.
+
+            </p>
+        </div>
+    </section>
+
+<section class="mb-24 p-8 bg-white/60 backdrop-blur-sm border border-neutral-200 rounded-xl relative overflow-hidden shadow-sm">
+        
+    <div class="absolute top-0 right-0 p-4 opacity-10">
+        <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-neutral-900"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+    </div>
+    
+    <h3 class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4">The Thing About Me</h3>
+    
+    <div class="prose prose-neutral max-w-none">
+        <p class="text-lg leading-relaxed text-neutral-700">
+            It is one thing to run a model in a notebook, but making it reliable for the real world is where the <strong>actual engineering</strong> happens.
+        </p>
+        <p class="text-lg leading-relaxed text-neutral-700 mt-4">
+            My work focuses on the intersection of <strong>backend engineering</strong> and <strong>AI</strong>. I take pre-trained models and build the solid infrastructure they need to actually function at scale. I care about how the system handles pressure and how it serves the user. I build the kind of quiet, reliable systems that let teams focus on the future instead of fixing the past.
+        </p>
+        
+        <div class="mt-8 pt-6 border-t border-dashed border-neutral-200">
+            <a href="/about" class="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors">
+                <span class="border-b border-neutral-900 group-hover:border-neutral-600">Read my full journey & timeline</span>
+                <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+    <Stack />
+
+    <section id="work" class="mb-32">
+        <div class="flex items-end justify-between mb-8">
+            <h2 class="text-2xl font-bold text-neutral-900">Engineering Logs</h2>
+            <span class="font-mono text-xs text-neutral-400">SELECT_WORK_2026</span>
+        </div>
+        
+        <div class="flex flex-col border-t border-neutral-200">
+            {projects.map((project) => (
+                <a href={project.link} class="group py-6 border-b border-dashed border-neutral-200 hover:bg-white/50 transition-all">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-baseline gap-4 md:w-1/3">
+                            <span class="font-mono text-xs text-neutral-400">#{project.id}</span>
+                            <span class="font-bold text-lg text-neutral-900 group-hover:underline decoration-1 underline-offset-4">{project.name}</span>
+                        </div>
+                        <div class="md:w-1/4">
+                            <span class="font-mono text-[10px] uppercase tracking-wider text-neutral-500 bg-neutral-100 px-2 py-1 rounded border border-neutral-200">
+                                {project.role}
+                            </span>
+                        </div>
+                        <div class="md:w-1/3">
+                            <span class="text-sm text-neutral-600">{project.desc}</span>
+                        </div>
+                        <div class="hidden md:block text-neutral-300 group-hover:text-neutral-900 transition-colors">&nearr;</div>
+                    </div>
+                </a>
+            ))}
+        </div>
+
+        <div class="mt-8 flex justify-center">
+            <a href="/projects" class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors">
+                View All Projects &rarr;
+            </a>
+        </div>
+    </section>
+
+    <section class="mb-32">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold text-neutral-900">Commit History</h2>
+            <span class="font-mono text-xs text-neutral-400">ACTIVE_CONTRIBUTOR</span>
+        </div>
+        <div class="w-full p-8 border border-neutral-200 rounded-xl bg-white/80 shadow-sm">
+             <GithubActivity client:visible />
+        </div>
+    </section>
+
+<section class="mb-32">
+    <div class="flex items-end justify-between mb-8">
+        <h2 class="text-2xl font-bold text-neutral-900">Thoughts & Notes</h2>
+        <span class="font-mono text-xs text-neutral-400">BRAIN_DUMP</span>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 grid-rows-2 h-auto md:h-96">
+        
+        <a href="/blog/hybrid-recommendation-system" class="md:col-span-2 md:row-span-2 bg-neutral-900 text-white p-8 rounded-xl flex flex-col justify-between group hover:scale-[1.01] transition-all shadow-lg relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-neutral-800 to-black z-0 opacity-50"></div>
+            <div class="flex justify-between items-start z-10">
+                <span class="font-mono text-[10px] tracking-widest text-neutral-400 bg-white/10 px-2 py-1 rounded">CASE_STUDY</span>
+                <span class="text-2xl group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+            <div class="z-10">
+                <h3 class="text-3xl font-bold mb-3">Building a Hybrid Recommendation Engine</h3>
+                <p class="text-neutral-400 max-w-md leading-relaxed">
+                    A deep dive into blending content-based filtering with collaborative signals to replicate production-grade social media relevance.
+                </p>
+            </div>
+        </a>
+        
+        <a href="/blog/static-website-architecture" class="bg-white/60 backdrop-blur-sm border border-neutral-200 p-6 rounded-xl flex flex-col justify-between group hover:border-neutral-400 transition-all shadow-sm">
+             <div class="flex justify-between items-start">
+                <span class="font-mono text-[10px] text-neutral-400 uppercase tracking-tighter">Architecture</span>
+                <span class="text-neutral-300 group-hover:text-neutral-900 transition-colors">&nearr;</span>
+             </div>
+             <h3 class="text-lg font-bold leading-tight">Stop Paying for Simplicity: The $1/Month Tech Stack</h3>
+        </a>
+
+        <a href="/blog/why-astro-tailwind" class="bg-neutral-100/80 p-6 rounded-xl flex flex-col justify-between group hover:bg-neutral-200 transition-all">
+             <div class="flex justify-between items-start">
+                <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-tighter">Stack Selection</span>
+                <span class="text-neutral-300 group-hover:text-neutral-900 transition-colors">&nearr;</span>
+             </div>
+             <h3 class="text-lg font-bold leading-tight">Why I Chose Astro & Tailwind for rishwanth.com</h3>
+        </a>
+        <div class="mt-8 flex justify-center">
+            <a href="/blog" class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors">
+                Read All Briefs &rarr;
+            </a>
+        </div>
+    </div>
+</section>  
+
+    <section class="mb-40">
+        <Pomodoro client:visible />
+    </section>
+
+  </main>
 </Layout>
