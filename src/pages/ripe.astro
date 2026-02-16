@@ -1,0 +1,203 @@
+---
+import Layout from "../layouts/main.astro";
+import Header from "../components/header";
+import "../assets/css/main.css";
+
+// SEO
+const title = "RIPE | Creative Hub & Storytelling";
+const description = "RIPE is where creative storytelling meets visual experimentation. A space for filmmaking, narrative design, and worldbuilding by Rishwanth Perumandla.";
+
+const creativeWorks = [
+  {
+    title: "Cinematic Storytelling",
+    category: "Film & Narrative",
+    description: "Exploring emotional arcs through visual language and experimental filmmaking techniques.",
+    status: "In Production"
+  },
+  {
+    title: "Worldbuilding in Unreal Engine",
+    category: "3D & Environment",
+    description: "Creating immersive fictional worlds using real-time rendering and hybrid CGI workflows.",
+    status: "Active"
+  },
+  {
+    title: "Written Narratives",
+    category: "Writing",
+    description: "Short stories, scripts, and narrative experiments that blend emotion with structure.",
+    status: "Ongoing"
+  },
+  {
+    title: "Visual Language Studies",
+    category: "Design",
+    description: "Exploring how color, composition, and rhythm create meaning in visual media.",
+    status: "Research"
+  }
+];
+
+const philosophyPoints = [
+  {
+    title: "Rhythm & Emotion",
+    desc: "Storytelling teaches the cadence of human experience — the rise and fall of tension, the pause between beats."
+  },
+  {
+    title: "Structure & Precision",
+    desc: "Engineering teaches that great outcomes require deliberate architecture and thoughtful constraints."
+  },
+  {
+    title: "The Intersection",
+    desc: "RIPE exists where these two worlds meet — creative vision guided by technical craft."
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <Header client:load />
+
+  <main class="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-8 pt-28 md:pt-32 pb-20">
+    
+    {/* Back Button */}
+    <a 
+      href="/" 
+      class="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-6 group"
+    >
+      <svg 
+        class="w-4 h-4 group-hover:-translate-x-1 transition-transform" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+      </svg>
+      <span>Back to Home</span>
+    </a>
+
+    {/* Hero */}
+    <section class="mb-20 min-h-[50vh] flex flex-col justify-center">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-2 h-2 bg-rose-500 rounded-full animate-pulse" />
+        <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Creative Hub</span>
+      </div>
+      
+      <h1 class="text-7xl md:text-9xl font-bold tracking-tighter mb-6 flex items-center gap-4 md:gap-6">
+        <span class="text-5xl md:text-7xl text-neutral-900">&#10022;</span>
+        <span class="ripe bg-gradient-to-r from-rose-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-gradient">RIPE</span>
+        <span class="text-5xl md:text-7xl text-neutral-900">&#10022;</span>
+      </h1>
+      
+      <p class="text-xl md:text-2xl text-neutral-500 max-w-xl leading-relaxed mb-8">
+        Where storytelling meets visual experimentation. A space for filmmaking, narrative design, and worldbuilding.
+      </p>
+      
+      <div class="flex flex-wrap gap-4">
+        <a 
+          href="https://www.youtube.com/@ripe6096" 
+          target="_blank"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors"
+        >
+          Watch on YouTube
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L15 9M15 9V17M15 9H7"/></svg>
+        </a>
+        <a 
+          href="/posts" 
+          class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-200 rounded-lg font-mono text-xs hover:border-neutral-400 transition-colors"
+        >
+          Read Writings
+        </a>
+      </div>
+    </section>
+
+    {/* Creative Works Grid */}
+    <section class="mb-32">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="text-2xl font-bold text-neutral-900">Creative Works</h2>
+        <span class="font-mono text-xs text-neutral-400">EXPERIMENTS_2026</span>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {creativeWorks.map((work) => (
+          <div class="group p-6 border border-neutral-200 rounded-xl bg-white hover:border-neutral-400 transition-all duration-300">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-neutral-400 bg-neutral-100 px-2 py-1 rounded">
+                {work.category}
+              </span>
+              <span class={`text-[10px] font-mono uppercase tracking-wider px-2 py-1 rounded ${
+                work.status === "Active" ? "bg-green-100 text-green-700" :
+                work.status === "In Production" ? "bg-amber-100 text-amber-700" :
+                work.status === "Ongoing" ? "bg-blue-100 text-blue-700" :
+                "bg-neutral-100 text-neutral-600"
+              }`}>
+                {work.status}
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-neutral-900 mb-2 group-hover:text-neutral-700 transition-colors">
+              {work.title}
+            </h3>
+            <p class="text-sm text-neutral-600 leading-relaxed">
+              {work.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Philosophy */}
+    <section class="mb-32 p-8 md:p-12 bg-neutral-50 border border-neutral-200 rounded-2xl relative overflow-hidden">
+      <div class="absolute top-0 right-0 p-8 opacity-5">
+        <svg width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" class="text-neutral-900">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      
+      <h2 class="text-2xl font-bold text-neutral-900 mb-8 relative z-10">The Philosophy</h2>
+      
+      <div class="space-y-8 relative z-10">
+        {philosophyPoints.map((point, index) => (
+          <div class="flex gap-4">
+            <span class="font-mono text-sm text-neutral-400">0{index + 1}</span>
+            <div>
+              <h3 class="font-bold text-lg text-neutral-900 mb-1">{point.title}</h3>
+              <p class="text-neutral-600 leading-relaxed">{point.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Connect */}
+    <section class="p-8 bg-neutral-50 border border-neutral-200 rounded-2xl text-center">
+      <h2 class="text-2xl font-bold text-neutral-900 mb-4">Follow the Journey</h2>
+      <p class="text-neutral-600 mb-8 max-w-md mx-auto">
+        RIPE is an evolving exploration of creativity. Follow along for updates on new projects, writings, and visual experiments.
+      </p>
+      
+      <div class="flex flex-wrap justify-center gap-4">
+        <a 
+          href="https://www.youtube.com/@ripe6096" 
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-neutral-200 rounded-lg font-mono text-xs hover:border-neutral-900 hover:bg-neutral-900 hover:text-white transition-all"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
+        <a 
+          href="https://instagram.com/rishwanthperumandla" 
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-neutral-200 rounded-lg font-mono text-xs hover:border-neutral-900 hover:bg-neutral-900 hover:text-white transition-all"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Instagram
+        </a>
+        <a 
+          href="/posts"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-neutral-200 rounded-lg font-mono text-xs hover:border-neutral-900 hover:bg-neutral-900 hover:text-white transition-all"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+          Blog
+        </a>
+      </div>
+    </section>
+
+  </main>
+</Layout>

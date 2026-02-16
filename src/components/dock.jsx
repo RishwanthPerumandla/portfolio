@@ -1,6 +1,7 @@
 import React from "react";
 import { 
   Home, 
+  User,
   Linkedin, 
   Github, 
   Twitter, 
@@ -18,7 +19,16 @@ export default function Dock() {
 
       <Separator />
 
-      {/* 2. RIPE LOGO LINK (Creative Hub) */}
+      {/* 2. ABOUT */}
+      <DockItem href="/about" icon={<User size={18} />} label="About" />
+
+      <Separator />
+
+      {/* 4. PROJECTS */}
+      <DockItem href="/projects" icon={<FolderGit2 size={18} />} label="Projects" />
+
+      <Separator />
+      {/* 3. RIPE LOGO LINK (Creative Hub) */}
       <a 
         href="/ripe" 
         className="group relative flex items-center justify-center px-3 py-1 hover:bg-neutral-100 rounded-full transition-all"
@@ -31,12 +41,8 @@ export default function Dock() {
 
       <Separator />
 
-      {/* 3. PROJECTS */}
-      <DockItem href="/projects" icon={<FolderGit2 size={18} />} label="Projects" />
 
-      <Separator />
-
-      {/* 4. SOCIALS */}
+      {/* 5. SOCIALS */}
       <DockItem href="https://github.com/RishwanthPerumandla" icon={<Github size={18} />} label="GitHub" external />
       <DockItem href="https://linkedin.com/in/rishwanthperumandla" icon={<Linkedin size={18} />} label="LinkedIn" external />
       <DockItem href="https://x.com/rishwanth1729" icon={<Twitter size={18} />} label="Twitter" external />

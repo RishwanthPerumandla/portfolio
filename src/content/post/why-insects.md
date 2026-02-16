@@ -1,10 +1,9 @@
 ---
-
-layout: ../../layouts/post.astro
 title: Why Specialization Is for Insects
 description: Embracing generalism across cloud, design, and storytelling has shaped how I think and build.
 dateFormatted: May 4, 2025
---------------------------
+category: Personal
+---
 
 There’s a quote that has stayed with me for years:
 

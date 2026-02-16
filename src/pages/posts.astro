@@ -1,24 +1,213 @@
 ---
-import PageHeading from "../components/page-heading.astro";
-import PostsLoop from "../components/posts-loop.astro";
+import { getCollection } from "astro:content";
 import Layout from "../layouts/main.astro";
+import Header from "../components/header";
 
-// SEO Props
-const title = "My Writing | Rishwanth Perumandla";
-const description = "Explore Rishwanth Perumandla’s thoughts on cloud architecture, full stack development, systems thinking, and creative storytelling. A journey blending introspection and innovation.";
-const canonicalUrl = "https://rishwanth.com/writing";
-const ogImage = "/assets/images/og-image.png"; // Optional Open Graph image
+// SEO
+const title = "Posts | Rishwanth Perumandla";
+const description = "Technical writings on distributed systems, AI infrastructure, cloud architecture, and the craft of backend engineering.";
+
+// Get all posts
+const allPosts = await getCollection("post");
+
+function parseDate(dateStr: string) {
+  const [month, day, year] = dateStr.split(" ");
+  return new Date(`${month} ${parseInt(day)}, ${year}`);
+}
+
+const sortedPosts = allPosts
+  .map((post) => ({ ...post, date: parseDate(post.data.dateFormatted) }))
+  .sort((a, b) => b.date.getTime() - a.date.getTime());
+
+const posts = sortedPosts.map((post) => ({
+  title: post.data.title,
+  description: post.data.description,
+  date: post.data.dateFormatted,
+  slug: post.slug,
+  category: post.data.category || "Engineering",
+  readTime: Math.ceil((post.body?.length || 0) / 1500) + " min read",
+  cover: post.data.cover,
+}));
+
+const categories = ["All", "Architecture", "AI/ML", "Systems", "Personal", "Engineering"];
 ---
 
-<Layout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage}>
-  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
-    <PageHeading
-      title="My Writing"
-      description="Dive into my musings on life and tech in my latest posts; a blend of introspection and innovation. Keep an eye out for fresh insights and updates!"
-    />
+<Layout title={title} description={description}>
+  <Header client:load />
 
-    <div class="z-50 flex flex-col items-stretch w-full gap-5 my-8">
-      <PostsLoop count="999999999" />
+  <main class="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-8 pt-28 md:pt-32 pb-20">
+    
+    <!-- Back Button -->
+    <a 
+      href="/" 
+      class="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-6 group"
+    >
+      <svg 
+        class="w-4 h-4 group-hover:-translate-x-1 transition-transform" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+      </svg>
+      <span>Back to Home</span>
+    </a>
+
+    <!-- Header -->
+    <div class="mb-10">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+        <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Writing</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 mb-4">
+        Posts
+      </h1>
+      <p class="text-lg text-neutral-600 max-w-2xl leading-relaxed">
+        Technical writings on distributed systems, AI infrastructure, and backend engineering.
+      </p>
     </div>
-  </section>
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap gap-2 mb-10" id="category-filters">
+      {categories.map((cat, index) => (
+        <button 
+          data-category={cat}
+          class={`filter-btn px-4 py-2 text-xs font-mono rounded-full border transition-all ${
+            index === 0 
+              ? "bg-neutral-900 text-white border-neutral-900 active" 
+              : "bg-white text-neutral-600 border-neutral-200 hover:border-neutral-400"
+          }`}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Posts Grid -->
+    <div class="grid grid-cols-1 gap-6" id="posts-grid">
+      
+      {posts.map((post, index) => (
+        <a 
+          href={`/post/${post.slug}`}
+          data-post-category={post.category}
+          class={`post-card group block bg-white border border-neutral-200 rounded-2xl overflow-hidden hover:border-neutral-400 hover:shadow-lg transition-all ${index === 0 ? 'featured' : ''}`}
+        >
+          <div class="flex flex-col md:flex-row">
+            {/* Image Section */}
+            {post.cover && (
+              <div class="w-full md:w-2/5 h-48 md:h-auto md:min-h-[280px] overflow-hidden">
+                <img 
+                  src={post.cover} 
+                  alt={post.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading={index > 1 ? "lazy" : "eager"}
+                />
+              </div>
+            )}
+            
+            {/* Content Section */}
+            <div class="flex-1 p-6 md:p-8 flex flex-col justify-center">
+              <div class="flex items-center gap-3 mb-3 text-sm">
+                <span class="font-mono text-xs text-neutral-500 bg-neutral-100 px-2 py-1 rounded">
+                  {post.category}
+                </span>
+                <span class="text-neutral-300">/</span>
+                <span class="text-neutral-400">{post.date}</span>
+              </div>
+              
+              <h2 class="text-xl md:text-2xl font-bold text-neutral-900 mb-3 group-hover:text-neutral-700 transition-colors line-clamp-2">
+                {post.title}
+              </h2>
+              
+              <p class="text-neutral-600 leading-relaxed mb-4 line-clamp-3">
+                {post.description}
+              </p>
+              
+              <div class="flex items-center gap-2 text-sm text-neutral-500 mt-auto">
+                <span class="font-mono">{post.readTime}</span>
+                <span>·</span>
+                <span class="group-hover:text-neutral-900 transition-colors flex items-center gap-1">
+                  Read article 
+                  <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Empty State (hidden by default) -->
+    <div id="empty-state" class="hidden py-20 text-center">
+      <p class="text-neutral-400">No posts found in this category.</p>
+    </div>
+
+    <!-- Footer Section -->
+    <section class="mt-16 p-6 md:p-8 bg-neutral-50 border border-neutral-200 rounded-xl">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h3 class="font-bold text-neutral-900 mb-1">Stay Updated</h3>
+          <p class="text-sm text-neutral-600">
+            Follow me on Twitter for more frequent thoughts on systems and engineering.
+          </p>
+        </div>
+        <a 
+          href="https://x.com/rishwanth1729"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors whitespace-nowrap"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          Follow @rishwanth1729
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  {/* Client-side filter script */}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const postCards = document.querySelectorAll('.post-card');
+      const emptyState = document.getElementById('empty-state');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const category = btn.dataset.category;
+          
+          // Update active button
+          filterBtns.forEach(b => {
+            b.classList.remove('bg-neutral-900', 'text-white', 'border-neutral-900', 'active');
+            b.classList.add('bg-white', 'text-neutral-600', 'border-neutral-200');
+          });
+          btn.classList.remove('bg-white', 'text-neutral-600', 'border-neutral-200');
+          btn.classList.add('bg-neutral-900', 'text-white', 'border-neutral-900', 'active');
+          
+          // Filter posts
+          let visibleCount = 0;
+          postCards.forEach(card => {
+            const postCategory = card.dataset.postCategory;
+            if (category === 'All' || postCategory === category) {
+              card.classList.remove('hidden');
+              visibleCount++;
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+          
+          // Show/hide empty state
+          if (visibleCount === 0) {
+            emptyState.classList.remove('hidden');
+          } else {
+            emptyState.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
 </Layout>

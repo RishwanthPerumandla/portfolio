@@ -1,58 +1,107 @@
 ---
 import Layout from "./main.astro";
+import Header from "../components/header";
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
-  <main
-    class="relative z-30 max-w-4xl pb-1 mx-auto mt-10 bg-white dark:bg-neutral-950 md:rounded-t-md text-neutral-900"
-  >
-    <div
-      class="relative flex flex-col px-5 pt-6 border-t border-b-0 md:border-r md:border-l md:pt-20 lg:px-0 justify-stretch md:rounded-t-2xl border-neutral-200 dark:border-neutral-800"
-    >
-      <div
-        class="absolute top-0 left-0 hidden w-px h-full mt-1 -translate-x-px md:block bg-gradient-to-b from-transparent to-white dark:to-neutral-950"
-      ></div>
-      <div
-        class="absolute top-0 right-0 hidden w-px h-full mt-1 translate-x-px md:block bg-gradient-to-b from-transparent to-white dark:to-neutral-950"
-      ></div>
-<h1
-  class="no-math w-full max-w-2xl mx-auto text-3xl font-bold leading-tight tracking-tighter text-left md:mb-12 md:text-4xl dark:text-neutral-100 lg:text-5xl md:leading-none"
->
-  {frontmatter.title}
-</h1>
+<Layout title={frontmatter.title} description={frontmatter.description}>
+  <Header client:load />
+  
+  <!-- Main content area with proper padding for header -->
+  <main class="relative z-10 w-full min-h-screen pt-24 md:pt-28 pb-20">
+    
+    <div class="max-w-[1000px] mx-auto px-6 md:px-12">
+      
+      <!-- Back Button (outside card) -->
+      <a 
+        href="/posts" 
+        class="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-6 group"
+      >
+        <svg 
+          class="w-4 h-4 group-hover:-translate-x-1 transition-transform" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span>Back to Posts</span>
+      </a>
 
-<article
-  class="no-math w-full max-w-2xl mx-auto mb-20 prose-sm prose px-7 lg:px-0 lg:prose-lg dark:prose-invert"
->
-  <slot />
-</article>
+      <!-- Card Container -->
+      <article class="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-hidden">
+        
+        <!-- Article Header -->
+        <header class="px-8 md:px-12 pt-10 pb-8">
+          
+          <div class="flex items-center gap-3 mb-4 text-sm">
+            <span class="font-mono text-xs text-neutral-500 bg-neutral-100 px-2 py-1 rounded">
+              {frontmatter.category || "Article"}
+            </span>
+            <span class="text-neutral-300">/</span>
+            <span class="text-neutral-400">{frontmatter.dateFormatted}</span>
+          </div>
+          
+          <h1 class="text-3xl md:text-4xl lg:text-[2.5rem] font-bold text-neutral-900 leading-[1.2] tracking-tight">
+            {frontmatter.title}
+          </h1>
+          
+          {frontmatter.description && (
+            <p class="text-lg text-neutral-600 leading-relaxed mt-4 max-w-2xl">
+              {frontmatter.description}
+            </p>
+          )}
+        </header>
+
+        <!-- Cover Image -->
+        {frontmatter.cover && (
+          <div class="w-full">
+            <img 
+              src={frontmatter.cover} 
+              alt={frontmatter.title}
+              class="w-full h-64 md:h-80 object-cover"
+            />
+          </div>
+        )}
+
+        <!-- Article Content -->
+        <div class="px-8 md:px-12 py-10">
+          <div class="prose prose-lg prose-neutral max-w-none">
+            <slot />
+          </div>
+        </div>
+
+        <!-- Article Footer -->
+        <footer class="px-8 md:px-12 py-6 bg-neutral-50 border-t border-neutral-100">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <p class="text-sm text-neutral-500">
+              Thanks for reading!
+            </p>
+            <a 
+              href="/posts"
+              class="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors"
+            >
+              Read more posts
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </footer>
+      </article>
     </div>
-
   </main>
 
-  <!-- KaTeX (kept) -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
-  />
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
-<script
-  defer
-  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
-  onload="
-    document.querySelectorAll('.math-enabled').forEach((el) => {
-      renderMathInElement(el, {
-        delimiters: [
-          { left: '\\[', right: '\\]', display: true },
-          { left: '\\(', right: '\\)', display: false }
-        ],
-        throwOnError: false,
-        ignoredTags: ['script','noscript','style','textarea','pre','code'],
-        ignoredClasses: ['no-math']
-      });
-    });
-  "
-></script>
-
+  <!-- KaTeX for math rendering -->
+  {frontmatter.math && (
+    <>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" />
+      <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+      <script
+        defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"
+      ></script>
+    </>
+  )}
 </Layout>

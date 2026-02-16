@@ -1,0 +1,165 @@
+---
+---
+<link href="https://fonts.googleapis.com/css2?family=Kenia&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<div id="preloader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-[#fafafa] pointer-events-auto transition-opacity duration-700">
+  
+  <div class="relative flex flex-col items-center justify-center">
+    
+    <h1 id="brand-text" class="relative flex items-center justify-center text-5xl md:text-8xl font-bold tracking-tighter">
+      
+      <span class="gradient-text-wrapper">
+        
+        <span class="word-group">
+          <span class="initials">RI</span>
+          <span class="expander">
+            <span class="full-text">SHWANTH</span>
+          </span>
+        </span>
+
+        <span class="word-group ml-1"> <span class="initials">PE</span>
+          <span class="expander">
+            <span class="full-text">RUMANDLA</span>
+          </span>
+        </span>
+
+      </span>
+      
+    </h1>
+  </div>
+</div>
+
+<style>
+  /* --- 1. The Gradient Text Fix --- */
+  .gradient-text-wrapper {
+    /* Apply gradient specifically to this wrapper */
+    background: linear-gradient(90deg, #C33764 0%, #1D2671 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Make text transparent so background shows */
+    
+    display: flex; /* Keep children inline */
+    align-items: center;
+  }
+
+  /* --- 2. Font & Layout --- */
+  #brand-text {
+    /* Start with Kenia font */
+    font-family: 'Kenia', cursive;
+    /* Smooth font transition */
+    transition: font-family 0.3s ease, letter-spacing 0.5s ease;
+  }
+
+  .word-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .initials {
+    /* Ensure initials are always visible */
+    opacity: 1; 
+  }
+
+  /* --- 3. The Expansion Animation --- */
+  .expander {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 0fr; /* Start width: 0 */
+    overflow: hidden;
+    transition: grid-template-columns 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .full-text {
+    min-height: 0;
+    opacity: 0;
+    padding-left: 2px;
+    white-space: nowrap;
+    /* Font specifically for the expanded name */
+    font-family: 'DM Sans', sans-serif; 
+    font-weight: 600;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease 0.2s, transform 1s ease 0.2s;
+  }
+
+  /* --- 4. Animation States (Controlled by JS) --- */
+
+  /* State: Morphing (The moment of switch) */
+  .morphing #brand-text {
+    filter: blur(5px);
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  /* State: Revealed (Final Look) */
+  .revealed #brand-text {
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: -0.02em;
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .revealed .expander {
+    grid-template-columns: 1fr; /* Open width */
+  }
+
+  .revealed .full-text {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Fade out the whole screen */
+  .fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  // force-clear storage for testing if you want:
+  // sessionStorage.removeItem('ripe-intro-shown');
+
+  const preloader = document.getElementById('preloader');
+  
+  // 1. Setup Developer Mode Check
+  // This ensures that if you are on localhost, you ALWAYS see the animation
+  const isDev = window.location.hostname.includes('localhost') || window.location.hostname.includes('127.0.0.1');
+  const hasSeen = sessionStorage.getItem('ripe-intro-shown');
+
+  // 2. Initial Logic: Should we show it?
+  if (hasSeen && !isDev) {
+    // If not dev and already seen, hide instantly
+    preloader.style.display = 'none';
+  } else {
+    
+    // 3. Start Animation Sequence on Load
+    window.addEventListener('load', () => {
+      
+      // Delay start slightly to ensure fonts are rendered
+      setTimeout(() => {
+        
+        // A. Add class to start blur/morph
+        preloader.classList.add('morphing');
+
+        setTimeout(() => {
+          // B. Switch font and expand
+          preloader.classList.remove('morphing');
+          preloader.classList.add('revealed');
+        }, 300); // 300ms blur time
+
+        // C. Wait for user to read it, then fade out
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+          
+          // D. Remove from DOM completely
+          setTimeout(() => {
+            preloader.style.display = 'none';
+            sessionStorage.setItem('ripe-intro-shown', 'true');
+          }, 700); // Wait for CSS transition (0.7s)
+
+        }, 3000); // Total display time
+
+      }, 500); // Initial delay
+    });
+  }
+</script>

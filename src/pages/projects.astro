@@ -1,36 +1,298 @@
 ---
 import projects from "../collections/projects.json";
-import PageHeading from "../components/page-heading.astro";
-import Project from "../components/project.astro";
 import Layout from "../layouts/main.astro";
+import Header from "../components/header";
 
-// SEO Props
-const title = "My Projects | Rishwanth Perumandla";
-const description = "Explore Rishwanth Perumandla’s portfolio of projects — scalable cloud platforms, AI-driven systems, and creative technology solutions at the intersection of engineering and storytelling.";
-const canonicalUrl = "https://rishwanth.com/projects";
-const ogImage = "/assets/images/og-image.png"; // Optional Open Graph image
+// SEO
+const title = "Projects | Rishwanth Perumandla";
+const description = "Production systems and architectural deep dives. Distributed systems, AI infrastructure, and cloud-native platforms built for scale.";
+
+// Extended project data with technical details
+const projectsExtended = [
+  {
+    ...projects[0],
+    id: "01",
+    role: "AI Infrastructure",
+    tech: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker"],
+    metrics: { latency: "<500ms", uptime: "99.9%" },
+    status: "Production"
+  },
+  {
+    ...projects[1],
+    id: "02", 
+    role: "Distributed Systems",
+    tech: ["Node.js", "MongoDB", "AWS", "Kubernetes", "Kafka"],
+    metrics: { users: "10K+", requests: "1M/day" },
+    status: "Production"
+  },
+  {
+    ...projects[2],
+    id: "03",
+    role: "Cloud Engineering",
+    tech: ["Terraform", "AWS", "CloudFront", "S3", "Lambda"],
+    metrics: { cost: "-40%", load: "<100ms" },
+    status: "Deployed"
+  },
+  {
+    ...projects[3],
+    id: "04",
+    role: "AI/ML Platform",
+    tech: ["Python", "PyTorch", "Azure", "Kubernetes", "Redis"],
+    metrics: { molecules: "1M+", inference: "GPU" },
+    status: "Research"
+  },
+  {
+    ...projects[4],
+    id: "05",
+    role: "Full Stack SaaS",
+    tech: ["React", "Node.js", "PostgreSQL", "Docker"],
+    metrics: { tenants: "50+", uptime: "99.5%" },
+    status: "Production"
+  },
+];
+
+const categories = ["All", "AI Infrastructure", "Distributed Systems", "Cloud Engineering", "Full Stack"];
 ---
 
-<Layout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage}>
-  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
-    <PageHeading
-      title="My Projects"
-      description="Here are some of the current projects I've been working on. I really enjoy creating new projects and coming up with new ideas. I'm always working on something new, so check back often!"
-    />
+<Layout title={title} description={description}>
+  <Header client:load />
 
-    <div class="z-50 grid items-stretch w-full grid-cols-1 my-8 gap-7 sm:gap-5 sm:grid-cols-2">
-      {
-        projects.map((project) => {
-          return (
-            <Project
-              name={project.name}
-              description={project.description}
-              image={project.image}
-              url={project.url}
-            />
-          )
-        })
-      }
+  <main class="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-8 pt-28 md:pt-32 pb-20">
+    
+    {/* Back Button */}
+    <a 
+      href="/" 
+      class="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-6 group"
+    >
+      <svg 
+        class="w-4 h-4 group-hover:-translate-x-1 transition-transform" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+      </svg>
+      <span>Back to Home</span>
+    </a>
+
+    {/* Header */}
+    <div class="mb-10">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+        <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Portfolio</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 mb-4">
+        Projects
+      </h1>
+      <p class="text-lg text-neutral-600 max-w-2xl leading-relaxed">
+        Production systems and architectural deep dives. Each project represents a unique challenge in scalability, reliability, or AI infrastructure.
+      </p>
     </div>
-  </section>
+
+    {/* Filters */}
+    <div class="flex flex-wrap gap-2 mb-8" id="category-filters">
+      {categories.map((cat, index) => (
+        <button 
+          data-category={cat}
+          class={`filter-btn px-4 py-2 text-xs font-mono rounded-full border transition-all ${
+            index === 0 
+              ? "bg-neutral-900 text-white border-neutral-900 active" 
+              : "bg-white text-neutral-600 border-neutral-200 hover:border-neutral-400"
+          }`}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    {/* Projects Grid - List View */}
+    <section class="mb-16">
+      <div class="flex flex-col border-t border-neutral-200" id="projects-list">
+        {projectsExtended.map((project) => (
+          <a 
+            href={project.url}
+            data-project-role={project.role}
+            class="project-card group py-6 border-b border-dashed border-neutral-200 hover:bg-white/50 transition-all"
+          >
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              {/* Left: ID & Name */}
+              <div class="flex items-baseline gap-4 md:w-1/3">
+                <span class="font-mono text-xs text-neutral-400">#{project.id}</span>
+                <span class="font-bold text-lg text-neutral-900 group-hover:text-neutral-700 transition-colors">
+                  {project.name}
+                </span>
+              </div>
+              
+              {/* Role Badge */}
+              <div class="md:w-1/4">
+                <span class="font-mono text-[10px] uppercase tracking-wider text-neutral-500 bg-neutral-100 px-2 py-1 rounded border border-neutral-200">
+                  {project.role}
+                </span>
+              </div>
+              
+              {/* Description */}
+              <div class="md:w-1/3">
+                <span class="text-sm text-neutral-600">{project.description}</span>
+              </div>
+              
+              {/* Arrow */}
+              <div class="hidden md:block text-neutral-300 group-hover:text-neutral-900 transition-colors">
+                <svg class="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </div>
+            </div>
+            
+            {/* Tech Stack & Metrics - Visible on hover */}
+            <div class="mt-4 pt-4 border-t border-neutral-100 hidden group-hover:flex flex-wrap items-center gap-4">
+              <div class="flex gap-2">
+                {project.tech.map((t) => (
+                  <span class="text-[10px] font-mono text-neutral-400 bg-neutral-50 px-2 py-1 rounded">
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <div class="flex gap-4 ml-auto">
+                {Object.entries(project.metrics).map(([key, value]) => (
+                  <span class="text-[10px] font-mono text-neutral-500">
+                    {key}: <span class="text-green-600">{value}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+      
+      {/* Empty State */}
+      <div id="empty-state" class="hidden py-20 text-center">
+        <p class="text-neutral-400">No projects found in this category.</p>
+      </div>
+    </section>
+
+    {/* Featured Project Cards */}
+    <section class="mb-16">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="text-2xl font-bold text-neutral-900">Case Studies</h2>
+        <span class="font-mono text-xs text-neutral-400">DEEP_DIVES</span>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Case Study 1 */}
+        <a 
+          href="/post/hybrid-recommendation-system"
+          class="group p-6 bg-neutral-900 text-white rounded-xl hover:bg-neutral-800 transition-colors"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <span class="font-mono text-[10px] tracking-widest text-neutral-400 bg-white/10 px-2 py-1 rounded">
+              CASE_STUDY
+            </span>
+            <svg class="w-5 h-5 text-neutral-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Hybrid Recommendation Engine</h3>
+          <p class="text-neutral-400 text-sm leading-relaxed">
+            Deep dive into blending content-based filtering with collaborative signals to replicate production-grade social media relevance.
+          </p>
+          <div class="mt-4 flex gap-2">
+            <span class="text-[10px] font-mono text-neutral-500">Python</span>
+            <span class="text-[10px] font-mono text-neutral-500">PyTorch</span>
+            <span class="text-[10px] font-mono text-neutral-500">Redis</span>
+          </div>
+        </a>
+
+        {/* Case Study 2 */}
+        <a 
+          href="/post/static-website-architecture"
+          class="group p-6 border border-neutral-200 rounded-xl hover:border-neutral-400 transition-colors bg-white"
+        >
+          <div class="flex justify-between items-start mb-4">
+            <span class="font-mono text-[10px] tracking-widest text-neutral-400 bg-neutral-100 px-2 py-1 rounded">
+              ARCHITECTURE
+            </span>
+            <svg class="w-5 h-5 text-neutral-300 group-hover:text-neutral-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-neutral-900 mb-2">$1/Month Static Stack</h3>
+          <p class="text-neutral-600 text-sm leading-relaxed">
+            How to architect a global static site with CDN, CI/CD, and custom domain for less than a dollar per month.
+          </p>
+          <div class="mt-4 flex gap-2">
+            <span class="text-[10px] font-mono text-neutral-400">AWS</span>
+            <span class="text-[10px] font-mono text-neutral-400">Terraform</span>
+            <span class="text-[10px] font-mono text-neutral-400">CloudFront</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    {/* CTA */}
+    <section class="p-8 bg-neutral-50 border border-neutral-200 rounded-xl text-center">
+      <h2 class="text-xl font-bold text-neutral-900 mb-2">Have a project in mind?</h2>
+      <p class="text-neutral-600 mb-6">
+        I'm always interested in discussing system architecture, AI infrastructure, and engineering challenges.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a 
+          href="mailto:rishwanthperumandla28@gmail.com"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors"
+        >
+          Start a Conversation
+        </a>
+        <a 
+          href="https://github.com/RishwanthPerumandla"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-200 rounded-lg font-mono text-xs hover:border-neutral-400 transition-colors"
+        >
+          View GitHub
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  {/* Client-side filter script */}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+      const emptyState = document.getElementById('empty-state');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const category = btn.dataset.category;
+          
+          // Update active button
+          filterBtns.forEach(b => {
+            b.classList.remove('bg-neutral-900', 'text-white', 'border-neutral-900', 'active');
+            b.classList.add('bg-white', 'text-neutral-600', 'border-neutral-200');
+          });
+          btn.classList.remove('bg-white', 'text-neutral-600', 'border-neutral-200');
+          btn.classList.add('bg-neutral-900', 'text-white', 'border-neutral-900', 'active');
+          
+          // Filter projects
+          let visibleCount = 0;
+          projectCards.forEach(card => {
+            const projectRole = card.dataset.projectRole;
+            if (category === 'All' || projectRole === category) {
+              card.classList.remove('hidden');
+              visibleCount++;
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+          
+          // Show/hide empty state
+          if (visibleCount === 0) {
+            emptyState.classList.remove('hidden');
+          } else {
+            emptyState.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
 </Layout>

@@ -1,13 +1,31 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/main.astro";
 import Header from "../components/header"; 
 import Pomodoro from "../components/pomodoro"; 
 import GithubActivity from "../components/github-activity"; 
-import Stack from "../components/stack.astro";
+import Stack from "../components/stack";
+import ProjectList from "../components/micro/ProjectList";
+import HeroSection from "../components/micro/HeroSection";
 
 // SEO
 const title = "Rishwanth Perumandla | Senior Backend Engineer";
 const description = "Rishwanth Perumandla: Senior Backend Engineer & AI Infrastructure Architect.";
+
+// Get posts from content collection
+const allPosts = await getCollection("post");
+
+function parseDate(dateStr: string) {
+  const [month, day, year] = dateStr.split(" ");
+  return new Date(`${month} ${parseInt(day)}, ${year}`);
+}
+
+const sortedPosts = allPosts
+  .map((post) => ({ ...post, date: parseDate(post.data.dateFormatted) }))
+  .sort((a, b) => b.date.getTime() - a.date.getTime());
+
+// Take top 3 posts for display
+const featuredPosts = sortedPosts.slice(0, 3);
 
 // Projects Data
 const projects = [
@@ -39,89 +57,55 @@ const projects = [
 
   <Header client:load />
 
-  <main class="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 xl:px-0 pt-28 pb-40">
+  <main class="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 xl:px-0 pt-32 md:pt-36 pb-40">
 
-    <section class="mb-24 relative">
-        <div class="flex flex-col gap-2 mb-6">
-            <h1 class="text-5xl md:text-7xl font-bold tracking-tighter text-neutral-900 leading-tight">
-              Rishwanth
-            </h1>
-            <div class="flex items-center gap-3 text-neutral-400 font-mono text-sm">
-              <span>/rɪʃ-wʌnθ/</span>
-              <span class="w-1 h-1 bg-neutral-300 rounded-full"></span>
-              <span class="italic font-serif text-neutral-500">noun</span>
-            </div>
-        </div>
+    <HeroSection client:load />
 
-        <div class="space-y-6 max-w-2xl">
-            <p class="text-xl md:text-2xl leading-relaxed font-medium text-neutral-800">
-                A <strong>Senior Backend & AI Engineer</strong> building high-performance distributed systems and production-grade AI infrastructure.
-            </p>
-            <p class="text-xl md:text-2xl leading-relaxed font-medium text-neutral-800 text-neutral-500">
-I engineer the systems that make intelligence possible. From designing efficient databases to scaling AI inference, I build high-performance backends that run fast and stay up.
-
-            </p>
-        </div>
+    <section class="mb-24 p-8 bg-white/60 backdrop-blur-sm border border-neutral-200 rounded-xl relative overflow-hidden shadow-sm">
+        
+      <div class="absolute top-0 right-0 p-4 opacity-10">
+          <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-neutral-900"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      
+      <h3 class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4">The Thing About Me</h3>
+      
+      <div class="prose prose-neutral max-w-none">
+          <p class="text-lg leading-relaxed text-neutral-700">
+              It is one thing to run a model in a notebook, but making it reliable for the real world is where the <strong>actual engineering</strong> happens.
+          </p>
+          <p class="text-lg leading-relaxed text-neutral-700 mt-4">
+              My work focuses on the intersection of <strong>backend engineering</strong> and <strong>AI</strong>. I take pre-trained models and build the solid infrastructure they need to actually function at scale. I care about how the system handles pressure and how it serves the user. I build the kind of quiet, reliable systems that let teams focus on the future instead of fixing the past.
+          </p>
+          
+          <div class="mt-8 pt-6 border-t border-dashed border-neutral-200">
+              <a href="/about" class="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors">
+                  <span class="border-b border-neutral-900 group-hover:border-neutral-600">Read my full journey & timeline</span>
+                  <span class="group-hover:translate-x-1 transition-transform">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                  </span>
+              </a>
+          </div>
+      </div>
     </section>
 
-<section class="mb-24 p-8 bg-white/60 backdrop-blur-sm border border-neutral-200 rounded-xl relative overflow-hidden shadow-sm">
-        
-    <div class="absolute top-0 right-0 p-4 opacity-10">
-        <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-neutral-900"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-    </div>
-    
-    <h3 class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4">The Thing About Me</h3>
-    
-    <div class="prose prose-neutral max-w-none">
-        <p class="text-lg leading-relaxed text-neutral-700">
-            It is one thing to run a model in a notebook, but making it reliable for the real world is where the <strong>actual engineering</strong> happens.
-        </p>
-        <p class="text-lg leading-relaxed text-neutral-700 mt-4">
-            My work focuses on the intersection of <strong>backend engineering</strong> and <strong>AI</strong>. I take pre-trained models and build the solid infrastructure they need to actually function at scale. I care about how the system handles pressure and how it serves the user. I build the kind of quiet, reliable systems that let teams focus on the future instead of fixing the past.
-        </p>
-        
-        <div class="mt-8 pt-6 border-t border-dashed border-neutral-200">
-            <a href="/about" class="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors">
-                <span class="border-b border-neutral-900 group-hover:border-neutral-600">Read my full journey & timeline</span>
-                <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </a>
-        </div>
-    </div>
-</section>
-
-    <Stack />
+    <Stack client:visible />
 
     <section id="work" class="mb-32">
         <div class="flex items-end justify-between mb-8">
-            <h2 class="text-2xl font-bold text-neutral-900">Engineering Logs</h2>
+            <h2 class="text-2xl font-bold text-neutral-900">Featured Projects</h2>
             <span class="font-mono text-xs text-neutral-400">SELECT_WORK_2026</span>
         </div>
         
-        <div class="flex flex-col border-t border-neutral-200">
-            {projects.map((project) => (
-                <a href={project.link} class="group py-6 border-b border-dashed border-neutral-200 hover:bg-white/50 transition-all">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div class="flex items-baseline gap-4 md:w-1/3">
-                            <span class="font-mono text-xs text-neutral-400">#{project.id}</span>
-                            <span class="font-bold text-lg text-neutral-900 group-hover:underline decoration-1 underline-offset-4">{project.name}</span>
-                        </div>
-                        <div class="md:w-1/4">
-                            <span class="font-mono text-[10px] uppercase tracking-wider text-neutral-500 bg-neutral-100 px-2 py-1 rounded border border-neutral-200">
-                                {project.role}
-                            </span>
-                        </div>
-                        <div class="md:w-1/3">
-                            <span class="text-sm text-neutral-600">{project.desc}</span>
-                        </div>
-                        <div class="hidden md:block text-neutral-300 group-hover:text-neutral-900 transition-colors">&nearr;</div>
-                    </div>
-                </a>
-            ))}
-        </div>
+        <ProjectList projects={projects} client:visible />
 
         <div class="mt-8 flex justify-center">
             <a href="/projects" class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors">
-                View All Projects &rarr;
+                View All Projects
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
             </a>
         </div>
     </section>
@@ -136,50 +120,71 @@ I engineer the systems that make intelligence possible. From designing efficient
         </div>
     </section>
 
-<section class="mb-32">
-    <div class="flex items-end justify-between mb-8">
-        <h2 class="text-2xl font-bold text-neutral-900">Thoughts & Notes</h2>
-        <span class="font-mono text-xs text-neutral-400">BRAIN_DUMP</span>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 grid-rows-2 h-auto md:h-96">
+    <section class="mb-32">
+        <div class="flex items-end justify-between mb-8">
+            <h2 class="text-2xl font-bold text-neutral-900">Thoughts & Notes</h2>
+            <span class="font-mono text-xs text-neutral-400">BRAIN_DUMP</span>
+        </div>
         
-        <a href="/blog/hybrid-recommendation-system" class="md:col-span-2 md:row-span-2 bg-neutral-900 text-white p-8 rounded-xl flex flex-col justify-between group hover:scale-[1.01] transition-all shadow-lg relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-neutral-800 to-black z-0 opacity-50"></div>
-            <div class="flex justify-between items-start z-10">
-                <span class="font-mono text-[10px] tracking-widest text-neutral-400 bg-white/10 px-2 py-1 rounded">CASE_STUDY</span>
-                <span class="text-2xl group-hover:translate-x-1 transition-transform">&rarr;</span>
-            </div>
-            <div class="z-10">
-                <h3 class="text-3xl font-bold mb-3">Building a Hybrid Recommendation Engine</h3>
-                <p class="text-neutral-400 max-w-md leading-relaxed">
-                    A deep dive into blending content-based filtering with collaborative signals to replicate production-grade social media relevance.
-                </p>
-            </div>
-        </a>
-        
-        <a href="/blog/static-website-architecture" class="bg-white/60 backdrop-blur-sm border border-neutral-200 p-6 rounded-xl flex flex-col justify-between group hover:border-neutral-400 transition-all shadow-sm">
-             <div class="flex justify-between items-start">
-                <span class="font-mono text-[10px] text-neutral-400 uppercase tracking-tighter">Architecture</span>
-                <span class="text-neutral-300 group-hover:text-neutral-900 transition-colors">&nearr;</span>
-             </div>
-             <h3 class="text-lg font-bold leading-tight">Stop Paying for Simplicity: The $1/Month Tech Stack</h3>
-        </a>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 grid-rows-2 h-auto md:h-96">
+            
+            {featuredPosts[0] && (
+              <a href={`/post/${featuredPosts[0].slug}`} class="md:col-span-2 md:row-span-2 bg-white border border-neutral-200 text-neutral-900 p-8 rounded-xl flex flex-col justify-between group hover:border-neutral-400 hover:shadow-lg transition-all relative overflow-hidden">
+                  <div class="flex justify-between items-start">
+                      <span class="font-mono text-[10px] tracking-widest text-neutral-500 bg-neutral-100 px-2 py-1 rounded">
+                        {featuredPosts[0].data.category || "ARTICLE"}
+                      </span>
+                      <svg class="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                  </div>
+                  <div>
+                      <h3 class="text-3xl font-bold mb-3">{featuredPosts[0].data.title}</h3>
+                      <p class="text-neutral-600 max-w-md leading-relaxed">
+                          {featuredPosts[0].data.description}
+                      </p>
+                  </div>
+              </a>
+            )}
+            
+            {featuredPosts[1] && (
+              <a href={`/post/${featuredPosts[1].slug}`} class="bg-white border border-neutral-200 p-6 rounded-xl flex flex-col justify-between group hover:border-neutral-400 hover:shadow-md transition-all">
+                   <div class="flex justify-between items-start">
+                      <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-tighter">
+                        {featuredPosts[1].data.category || "ARTICLE"}
+                      </span>
+                      <svg class="w-4 h-4 text-neutral-300 group-hover:text-neutral-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17"/>
+                      </svg>
+                   </div>
+                   <h3 class="text-lg font-bold leading-tight text-neutral-900">{featuredPosts[1].data.title}</h3>
+              </a>
+            )}
 
-        <a href="/blog/why-astro-tailwind" class="bg-neutral-100/80 p-6 rounded-xl flex flex-col justify-between group hover:bg-neutral-200 transition-all">
-             <div class="flex justify-between items-start">
-                <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-tighter">Stack Selection</span>
-                <span class="text-neutral-300 group-hover:text-neutral-900 transition-colors">&nearr;</span>
-             </div>
-             <h3 class="text-lg font-bold leading-tight">Why I Chose Astro & Tailwind for rishwanth.com</h3>
-        </a>
+            {featuredPosts[2] && (
+              <a href={`/post/${featuredPosts[2].slug}`} class="bg-white border border-neutral-200 p-6 rounded-xl flex flex-col justify-between group hover:border-neutral-400 hover:shadow-md transition-all">
+                   <div class="flex justify-between items-start">
+                      <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-tighter">
+                        {featuredPosts[2].data.category || "ARTICLE"}
+                      </span>
+                      <svg class="w-4 h-4 text-neutral-300 group-hover:text-neutral-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17"/>
+                      </svg>
+                   </div>
+                   <h3 class="text-lg font-bold leading-tight text-neutral-900">{featuredPosts[2].data.title}</h3>
+              </a>
+            )}
+        </div>
+        
         <div class="mt-8 flex justify-center">
-            <a href="/blog" class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors">
-                Read All Briefs &rarr;
+            <a href="/posts" class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors">
+                Read All Posts
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
             </a>
         </div>
-    </div>
-</section>  
+    </section>  
 
     <section class="mb-40">
         <Pomodoro client:visible />

@@ -1,12 +1,11 @@
 ---
-
-layout: ../../layouts/post.astro
 title: Why I Built My Website with Astro & Tailwind
 description: A deep dive into the architecture decisions behind rishwanth.com
 slug: why-astro-tailwind
 cover: /assets/blog/why-astro-cover.webp
 dateFormatted: May 4, 2025
---------------------------
+category: Engineering
+---
 
 > “Fast, flexible, future-ready.” That’s how I envisioned rishwanth.dev — not just as a portfolio, but as an evolving personal platform. After experimenting with React, Next.js, WordPress, and headless CMS options, I decided to rebuild my entire website with **Astro**, **Tailwind CSS**, and **markdown-based content**.
 
