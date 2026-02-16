@@ -52,7 +52,21 @@ const { title, description } = Astro.props;
       }
 
       .font-mono { font-family: var(--font-mono); } 
-      
+      @keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+.will-change-transform {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
     </style>
   </head>
   

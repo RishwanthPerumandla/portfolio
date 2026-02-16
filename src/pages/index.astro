@@ -7,6 +7,7 @@ import GithubActivity from "../components/github-activity";
 import Stack from "../components/stack";
 import ProjectList from "../components/micro/ProjectList";
 import HeroSection from "../components/micro/HeroSection";
+import LoadingScreen from "../components/LoadingScreen";
 
 // SEO
 const title = "Rishwanth Perumandla | Senior Backend Engineer";
@@ -34,14 +35,14 @@ const projects = [
     name: "VoixAI",
     role: "AI Infrastructure",
     desc: "Voice ordering engine with <500ms latency using OpenAI Whisper.",
-    link: "#"
+    link: "https://github.com/RishwanthPerumandla/VoixAI"
   },
   {
     id: "02",
     name: "Brekrr",
     role: "Distributed Systems",
     desc: "Microservices platform matching startups with top-tier talent.",
-    link: "#"
+    link: "https://www.brekrr.com"
   },
   {
     id: "03",
@@ -54,6 +55,7 @@ const projects = [
 ---
 
 <Layout title={title} description={description}>
+<LoadingScreen client:only="react" />
 
   <Header client:load />
 
