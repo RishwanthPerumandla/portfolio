@@ -1,13 +1,12 @@
 ---
-
-layout: ../../layouts/post.astro
 title: Hybrid Recommendation System
 description: A real-world case study of designing and deploying a hybrid content + collaborative recommendation system
 slug: hybrid-recommendation-system
 dateFormatted: June 11, 2025
 cover: /assets/images/projects/hrs2.png
 math: true
-----------
+category: Case Study
+---
 
 > "This project wasn't just about building a recommender. It was about making user engagement meaningful — blending machine learning, scalable architecture, and real-time analytics to surface what truly matters."
 

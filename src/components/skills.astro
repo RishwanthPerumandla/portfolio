@@ -1,0 +1,74 @@
+---
+// src/components/skills.astro
+const skills = [
+  {
+    category: "Architecture",
+    description: "Core Backend & Systems",
+    items: [
+      { name: "Python", meta: "FastAPI / Django" },
+      { name: "Go", meta: "High Concurrency" },
+      { name: "Java", meta: "Spring Boot" },
+      { name: "PostgreSQL", meta: "Complex Queries" },
+      { name: "Redis", meta: "Caching / Streams" },
+      { name: "Kafka", meta: "Event Driven" },
+    ],
+  },
+  {
+    category: "Infrastructure",
+    description: "Cloud & DevOps",
+    items: [
+      { name: "AWS", meta: "EKS / Lambda / S3" },
+      { name: "Kubernetes", meta: "Orchestration" },
+      { name: "Terraform", meta: "IaC" },
+      { name: "Docker", meta: "Containerization" },
+      { name: "GCP", meta: "Cloud Functions" },
+      { name: "CI/CD", meta: "GitHub Actions" },
+    ],
+  },
+  {
+    category: "Intelligence",
+    description: "AI Engineering & Data",
+    items: [
+      { name: "RAG Pipelines", meta: "LangChain" },
+      { name: "Vector DBs", meta: "Pinecone / Weaviate" },
+      { name: "LLM Inference", meta: "vLLM / TorchServe" },
+      { name: "PyTorch", meta: "Model Tuning" },
+      { name: "Apache Airflow", meta: "ETL Pipelines" },
+      { name: "OpenAI API", meta: "Integration" },
+    ],
+  },
+];
+---
+
+<section class="relative z-20 w-full max-w-4xl mx-auto my-24 px-6 md:px-0">
+  
+  <div class="flex items-end justify-between mb-10 border-b border-neutral-200 pb-4">
+    <h2 class="text-3xl font-bold tracking-tight text-neutral-900">Technical Arsenal</h2>
+    <span class="font-mono text-xs text-neutral-400">SYS_CAPABILITIES_V2</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {skills.map((domain) => (
+      <div class="flex flex-col">
+        <div class="mb-4">
+          <h3 class="font-bold text-lg text-neutral-900">{domain.category}</h3>
+          <p class="text-xs font-mono text-neutral-400 uppercase tracking-wider">{domain.description}</p>
+        </div>
+
+        <ul class="space-y-3">
+          {domain.items.map((skill) => (
+            <li class="flex items-center justify-between group cursor-default">
+              <span class="text-sm font-medium text-neutral-700 group-hover:text-black transition-colors">
+                {skill.name}
+              </span>
+              <span class="text-[10px] font-mono text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                {skill.meta}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+</section>

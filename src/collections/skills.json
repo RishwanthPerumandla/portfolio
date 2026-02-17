@@ -1,0 +1,18 @@
+[
+  {
+    "category": "Languages",
+    "items": ["Python", "Go", "Java", "Node.js", "SQL", "Bash"]
+  },
+  {
+    "category": "Cloud & DevOps",
+    "items": ["AWS", "GCP", "Azure", "Kubernetes", "Docker", "Terraform", "CI/CD"]
+  },
+  {
+    "category": "Backend Architecture",
+    "items": ["Microservices", "Event Driven", "gRPC", "GraphQL", "Kafka", "Redis"]
+  },
+  {
+    "category": "Data & AI Engineering",
+    "items": ["PostgreSQL", "DynamoDB", "RAG Pipelines", "LangChain", "PyTorch", "Apache Airflow"]
+  }
+]

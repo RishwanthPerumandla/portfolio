@@ -1,75 +1,386 @@
 ---
-import experiences from "../collections/experiences.json";
-import AboutExperience from "../components/about-experience.astro";
-import PageHeading from "../components/page-heading.astro";
 import Layout from "../layouts/main.astro";
+import Header from "../components/header";
+import PageHeader from "../components/micro/PageHeader";
+import ExperienceCard from "../components/micro/ExperienceCard";
 
-// SEO Props
-const title = "About Me | Rishwanth Perumandla";
-const description =
-  "Learn about Rishwanth Perumandla, a Software Engineer with experience across cloud infrastructure, backend systems, data platforms, and applied AI and ML. Human centered engineering meets storytelling through RIPE.";
-const canonicalUrl = "https://rishwanth.com/about";
-const ogImage = "/assets/images/og-image.png";
+// SEO
+const title = "Rishwanth Perumandla | Backend Engineer & AI Infrastructure";
+const description = "Senior Backend & AI Engineer with 5+ years architecting production systems, distributed microservices, and terabyte-scale ETL pipelines. MS Computer Science from Purdue University.";
+
+const languages = [
+  { name: "Python", level: "Expert", focus: "FastAPI, Django, Flask" },
+  { name: "Go", level: "Expert", focus: "Gin, Microservices" },
+  { name: "Node.js", level: "Expert", focus: "Express, TypeScript" },
+  { name: "Java", level: "Proficient", focus: "Spring Boot" },
+  { name: "SQL", level: "Expert", focus: "PostgreSQL, MySQL" },
+  { name: "Bash/Shell", level: "Proficient", focus: "Automation" },
+];
+
+const expertise = [
+  { category: "Architecture", skills: ["Distributed Systems", "Microservices", "Event-Driven", "CQRS/Event Sourcing"] },
+  { category: "AI/ML Infrastructure", skills: ["Model Serving", "Vector DBs", "RAG Pipelines", "GPU Orchestration"] },
+  { category: "Cloud & DevOps", skills: ["Kubernetes", "Terraform", "AWS/GCP/Azure", "CI/CD Pipelines"] },
+  { category: "Data Systems", skills: ["PostgreSQL", "Kafka", "Redis", "ElasticSearch", "Airflow"] },
+];
+
+// Experience timeline with updated logos
+const resumeExperiences = [
+  {
+    dates: "Aug 2023 - May 2025",
+    role: "MS Computer Science",
+    company: "Purdue University",
+    description: "Pursued Master's in Computer Science with focus on distributed systems, cloud architecture, and AI/ML infrastructure. Coursework included Advanced Database Systems, Distributed Systems, Machine Learning Systems, and Cloud Computing. Gained deep theoretical and practical knowledge in building scalable, reliable systems while contributing to research projects in data processing and system optimization.",
+    logo: "https://www.pfw.edu/sites/default/files/styles/wysiwyg_image/public/inline-images-2022/06/PFW_Vertical_2C_Black_Gold_CMYK.jpg?h=601189d8&itok=8t7MMoCC"
+  },
+  {
+    dates: "Jul 2022 - Jul 2023",
+    role: "Software Engineer",
+    company: "Centella Scientific",
+    description: "Orchestrated terabyte-scale ETL pipelines processing 10M+ molecular records daily using Apache Airflow, Pandas, and PySpark. Engineered low-latency model serving infrastructure for GNN-based predictions using FastAPI and TorchServe, delivering 50ms p99 inference latency for 49 pharmacokinetic descriptors across 7M+ compounds. Provisioned multi-cloud Kubernetes infrastructure (AKS/GKE) using Terraform and Helm, deploying Apache Kafka for event streaming and Redis Streams for queue management.",
+    logo: "/assets/images/experiences/centellalogo.svg"
+  },
+  {
+    dates: "Jul 2021 - Jul 2022",
+    role: "Software Engineer",
+    company: "Rivach LLP",
+    description: "Scaled backend services to support 2,000+ monthly active users by architecting Node.js/Express, Python (FastAPI, Flask) and Go (Gin) microservices with RESTful APIs on AWS. Reduced authentication failures by 40% by engineering secure server-side modules using OAuth2/JWT protocols and RBAC authorization. Cut release cycles by 50% by implementing CI/CD pipelines (GitHub Actions) and Infrastructure-as-Code (Terraform) for automated deployments.",
+    logo: "https://rivach.com/rivach-logo1.png"
+  },
+  {
+    dates: "Jul 2019 - Jul 2021",
+    role: "Software Engineer",
+    company: "Ubiqlogix Pvt Ltd",
+    description: "Processed 100K+ daily requests with 99.5% uptime by architecting scalable microservices using Python (FastAPI, Django), Go (Gin), and Node.js. Reduced operational overhead by 60% by developing automated backend tooling and admin console APIs, replacing manual processes with self-service platform management. Achieved 3x improvement in query throughput by optimizing PostgreSQL, MySQL, and MongoDB schemas.",
+    logo: "https://media.licdn.com/dms/image/v2/C4E0BAQECwTGWgWFrCQ/company-logo_200_200/company-logo_200_200/0/1630688997658?e=1772668800&v=beta&t=XPTCIfRER-QOgp5BeGgFCSp9zFNLI7tQp9m74cSMsug"
+  }
+];
+
+const corePillars = [
+  { 
+    title: "Reliability", 
+    desc: "Systems that stay up. I design for fault tolerance, graceful degradation, and self-healing infrastructure.",
+    icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+  },
+  { 
+    title: "Performance", 
+    desc: "Sub-100ms latency at scale. From query optimization to caching strategies, speed is a feature.",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z"
+  },
+  { 
+    title: "Scalability", 
+    desc: "Built to grow. Event-driven architectures and horizontal scaling patterns that handle 10x traffic spikes.",
+    icon: "M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
+  },
+  { 
+    title: "Craft", 
+    desc: "Clean code, thoughtful abstractions, and infrastructure as code. Engineering is an artisanal practice.",
+    icon: "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+  },
+];
 ---
 
-<Layout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage}>
-  <section class="relative z-20 max-w-2xl mx-auto my-12 px-7 lg:px-0">
+<Layout title={title} description={description}>
+  <Header client:load />
 
-    <PageHeading
-      title="About Me"
-      description={`Cloud Engineer. Full Stack Developer. Applied AI and ML Builder. 
-      <span><a class="ripe text-2xl" href="https://www.youtube.com/@ripe6096" target="_blank">RIPE</a></span> is the place where my creative side lives. It is where I explore storytelling, filmmaking, and the emotional side of technology through visuals, ideas, and narrative thinking.`}
+  <main class="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 xl:px-0 pt-32 md:pt-36 pb-40">
+    
+    {/* Header */}
+    <PageHeader 
+      client:load
+      title="Rishwanth Perumandla"
+      subtitle="Backend Engineer & AI Infrastructure Architect"
+      description="I engineer production systems that process millions of requests with sub-100ms latency. Specializing in distributed systems, cloud-native architectures, and AI infrastructure that scales."
+      label="Operational"
+      variant="terminal"
     />
 
-    <img src="/assets/images/ripe.png" alt="Rishwanth's photo" class="relative z-30 w-full my-10 rounded-xl" />
-
-    <h2 class="mb-2 text-2xl font-bold dark:text-neutral-200">Who I Am?</h2>
-    <p class="text-sm leading-6 text-gray-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg">
-
-      I am <strong>Rishwanth Perumandla</strong>, a Software Engineer with more than four years of experience working across cloud infrastructure, backend systems, data platforms, and applied machine learning. I hold a Master of Science in Computer Science from <strong>Purdue University</strong>, where I focused on cloud architecture, data systems, and building ML driven applications that work reliably in the real world.<br /><br />
-
-      My professional journey began at <strong><a href="https://www.rivach.com" class="underline hover:text-black dark:hover:text-white" target="_blank">Rivach LLP</a></strong>, where I learned how to build entire products from the ground up. I worked on everything from frontend development to backend architecture, while also managing deployments, database design, and cloud infrastructure. I enjoyed moving between design discussions, engineering problems, and product decisions, which helped me understand how technology becomes meaningful for real users.<br /><br />
-
-      Later, at <strong><a href="https://www.centella.ai" class="underline hover:text-black dark:hover:text-white" target="_blank">Centella Scientific</a></strong>, I worked on CASCADE, an AI powered drug discovery platform for oncology research. This role brought me closer to the intersection of engineering and scientific research. I built backend systems for molecular design using REINVENT, supported large scale virtual screening workloads, and deployed ML pipelines across Azure and Google Cloud. I also worked on ADMET prediction systems, improved inference performance for GNN models, and helped create an infrastructure that scientists could rely on for fast and repeatable experimentation.<br /><br />
-
-      During my time at Purdue, I worked on projects that strengthened my understanding of data engineering, applied ML, and backend development. One of my favorite projects was a hybrid recommendation system that combined text embeddings, computer vision models, and collaborative filtering. I also built LandManager, a multi role SaaS platform that included analytics dashboards, secure APIs, and optimized Postgres pipelines.<br /><br />
-
-      Across everything I do, what matters most to me is clarity, structure, and impact. I enjoy designing systems that feel reliable and predictable, and I value writing code that is clean, thoughtful, and built to evolve.<br /><br />
-
-      Outside engineering, I explore storytelling and filmmaking through my creative identity, <a class="ripe text-3xl" href="https://www.youtube.com/@ripe6096" target="_blank">RIPE</a>. I love writing stories, experimenting with CGI in Unreal Engine, and building small fictional worlds. These creative interests give me a different way to think about technology. Storytelling teaches rhythm and emotion. Engineering teaches structure and precision. I try to bring both into everything I create.<br /><br />
-
-      I believe that good technology should feel simple, honest, and human. And that is what I enjoy building the most.
-    </p>
-
-    <h2 class="mt-5 mb-2 text-2xl font-bold lg:mt-10 sm:mt-6 dark:text-neutral-200">Experience</h2>
-    <div class="px-5 py-10">
-      {
-        experiences.map((experience) => {
-          return (
-            <div class="pb-10 border-l border-gray-200 last:border-l-0 dark:border-neutral-700">
-              <AboutExperience
-                dates={experience.dates}
-                role={experience.role}
-                company={experience.company}
-                description={experience.description}
-                logo={experience.logo}
-              />
+    {/* Core Pillars Grid - Replaces Stats */}
+    <section class="mb-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {corePillars.map((pillar, index) => (
+          <div class="p-6 bg-white border border-neutral-200 rounded-xl hover:border-neutral-300 transition-colors group">
+            <div class="flex items-start gap-4">
+              <div class="p-2 bg-neutral-100 rounded-lg group-hover:bg-neutral-200 transition-colors">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-neutral-700">
+                  <path d={pillar.icon} stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-neutral-900 mb-1">{pillar.title}</h3>
+                <p class="text-sm text-neutral-600 leading-relaxed">{pillar.desc}</p>
+              </div>
             </div>
-          )
-        })
-      }
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Main Content Grid */}
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+      
+      {/* Left Column - Bio */}
+      <div class="lg:col-span-2 space-y-8">
+        <section>
+          <h2 class="text-lg font-bold text-neutral-900 mb-4 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-blue-500 rounded-full" />
+            Professional Summary
+          </h2>
+          <div class="prose prose-neutral max-w-none">
+            <p class="text-neutral-600 leading-relaxed">
+              I am a Software Engineer with 5+ years architecting production backend systems, distributed microservices, and terabyte-scale ETL pipelines across AWS, GCP, and Azure. I hold an MS in Computer Science from <strong>Purdue University</strong>.
+            </p>
+            <p class="text-neutral-600 leading-relaxed mt-4">
+              Expert in <strong>Python, Go, Node.js, and Java</strong>, specializing in high-throughput API design, database optimization, and AI-native application development. Proven track record of achieving <strong>99.9% uptime SLAs</strong>, reducing cloud infrastructure costs by <strong>40%</strong>, and delivering secure platforms processing <strong>100K+ daily requests</strong>.
+            </p>
+            <p class="text-neutral-600 leading-relaxed mt-4">
+              Deep expertise in infrastructure-as-code, container orchestration, and scalable data architecture. I engineer systems that make intelligence possible from GPU cluster orchestration for AI inference to event-driven microservices handling millions of events.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-bold text-neutral-900 mb-4 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-purple-500 rounded-full" />
+            Core Philosophy
+          </h2>
+          <div class="prose prose-neutral max-w-none">
+            <p class="text-neutral-600 leading-relaxed">
+              My engineering philosophy centers on <strong>clarity, reliability, and systematic optimization</strong>. I design backends that handle millions of requests with sub-100ms latency, orchestrate GPU clusters for AI inference, and build data pipelines that process terabytes without breaking a sweat.
+            </p>
+            <p class="text-neutral-600 leading-relaxed mt-4">
+              Outside engineering, I explore storytelling through <a href="/ripe" class="ripe text-xl">RIPE</a> — my creative identity where filmmaking, writing, and visual design converge. Storytelling teaches rhythm and emotion; engineering teaches structure and precision. I bring both into everything I create.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      {/* Right Column - Image & System Specs */}
+      <div class="space-y-6">
+        <div class="relative">
+          <img 
+            src="/assets/images/ripe.png" 
+            alt="Rishwanth Perumandla" 
+            class="w-full rounded-xl border border-neutral-200"
+          />
+          <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent rounded-b-xl">
+            <p class="text-white text-sm font-mono">US-CENTRAL1 // AVAILABLE</p>
+          </div>
+        </div>
+
+        <div class="p-4 bg-neutral-50 rounded-xl border border-neutral-200">
+          <h3 class="font-mono text-xs uppercase tracking-wider text-neutral-400 mb-3">System Specs</h3>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-neutral-500">Location</span>
+              <span class="text-neutral-900">Dallas, TX</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-neutral-500">Education</span>
+              <span class="text-neutral-900">MS CS, Purdue</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-neutral-500">Certification</span>
+              <span class="text-neutral-900">AWS SAA</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-neutral-500">Status</span>
+              <span class="text-green-600 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                Available
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <h2 class="mt-5 mb-2 text-2xl font-bold lg:mt-10 sm:mt-6 dark:text-neutral-200">Let's Connect</h2>
-    <p class="text-sm leading-6 text-gray-600 dark:text-neutral-400 sm:leading-7 lg:leading-8 sm:text-base lg:text-lg">
-      If you would like to collaborate, discuss systems, or even chat about storytelling in technology, I would love to connect.  
-      You can reach me anytime at 
-      <a href="mailto:rishwanthperumandla28@gmail.com" class="text-indigo-600 underline">rishwanthperumandla28@gmail.com</a>.  
-      You can also find me on 
-      <a href="https://x.com/rishwanth1729" class="text-indigo-600 underline" target="_blank">Twitter</a> and 
-      <a href="https://www.linkedin.com/in/rishwanthperumandla/" class="text-indigo-600 underline" target="_blank">LinkedIn</a>.  
-      I am always open to meaningful conversations and thoughtful collaborations.
-    </p>
+    {/* Languages Matrix */}
+    <section class="mb-16">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="text-2xl font-bold text-neutral-900">Languages</h2>
+        <span class="font-mono text-xs text-neutral-400">PRIMARY_RUNTIMES</span>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {languages.map((lang) => (
+          <div class="p-5 border border-neutral-200 rounded-xl bg-white hover:border-neutral-300 transition-colors group">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-bold text-neutral-900">{lang.name}</h3>
+              <span class={`text-[10px] font-mono px-2 py-1 rounded ${
+                lang.level === "Expert" 
+                  ? "bg-green-100 text-green-700" 
+                  : "bg-blue-100 text-blue-700"
+              }`}>
+                {lang.level}
+              </span>
+            </div>
+            <p class="text-xs text-neutral-500 font-mono">{lang.focus}</p>
+          </div>
+        ))}
+      </div>
+    </section>
 
-  </section>
+    {/* Expertise Matrix */}
+    <section class="mb-16">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="text-2xl font-bold text-neutral-900">Expertise Matrix</h2>
+        <span class="font-mono text-xs text-neutral-400">CAPABILITIES_V2.0</span>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {expertise.map((area) => (
+          <div class="p-6 border border-neutral-200 rounded-xl bg-white hover:border-neutral-300 transition-colors">
+            <h3 class="font-mono text-xs font-bold uppercase tracking-widest text-neutral-400 mb-4">
+              {area.category}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {area.skills.map((skill) => (
+                <span class="px-3 py-1 bg-neutral-100 text-neutral-700 text-sm rounded-full">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Experience Timeline */}
+    <section class="mb-16">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="text-2xl font-bold text-neutral-900">Experience</h2>
+        <span class="font-mono text-xs text-neutral-400">DEPLOYMENT_HISTORY</span>
+      </div>
+      
+      <div class="bg-white border border-neutral-200 rounded-xl p-6 md:p-8">
+        {resumeExperiences.map((exp, index) => (
+          <ExperienceCard
+            client:visible
+            dates={exp.dates}
+            role={exp.role}
+            company={exp.company}
+            description={exp.description}
+            logo={exp.logo}
+            index={index}
+          />
+        ))}
+      </div>
+    </section>
+
+    {/* Certifications */}
+    <section class="mb-16">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="text-2xl font-bold text-neutral-900">Certifications</h2>
+        <span class="font-mono text-xs text-neutral-400">CREDENTIALS</span>
+      </div>
+      
+      <div class="p-6 border border-neutral-200 rounded-xl bg-white">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-bold text-lg text-neutral-900">AWS Certified Solutions Architect – Associate</h3>
+            <p class="text-neutral-600">Amazon Web Services</p>
+          </div>
+          <span class="text-[10px] font-mono px-3 py-1 bg-orange-100 text-orange-700 rounded-full">
+            CERTIFIED
+          </span>
+        </div>
+      </div>
+    </section>
+
+    {/* Creative Engine - Light Mode */}
+    <section class="mb-16 p-8 bg-neutral-50 border border-neutral-200 rounded-2xl relative overflow-hidden">
+      <div class="absolute top-0 right-0 p-6 opacity-5">
+        <span class="ripe text-9xl text-neutral-900">RIPE</span>
+      </div>
+      
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-8">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-2 h-2 bg-rose-500 rounded-full" />
+            <span class="font-mono text-xs text-neutral-400 uppercase tracking-widest">Creative Identity</span>
+          </div>
+          <h2 class="text-2xl font-bold text-neutral-900 mb-3">The Creative Engine</h2>
+          <p class="text-neutral-600 leading-relaxed mb-4">
+            Outside engineering, I explore storytelling through <a href="/ripe" class="ripe text-xl">RIPE</a> — my creative identity where filmmaking, writing, and visual design converge. Storytelling teaches rhythm and emotion; engineering teaches structure and precision.
+          </p>
+          <a 
+            href="/ripe" 
+            class="inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors"
+          >
+            <span>Explore RIPE</span>
+            <span class="group-hover:translate-x-1 transition-transform">&rarr;</span>
+          </a>
+        </div>
+        
+        <div class="flex gap-3">
+          <a 
+            href="https://www.youtube.com/@ripe6096"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-3 bg-white border border-neutral-200 rounded-full hover:border-neutral-400 transition-colors"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-neutral-700">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <a 
+            href="https://instagram.com/rishwanthperumandla"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-3 bg-white border border-neutral-200 rounded-full hover:border-neutral-400 transition-colors"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-neutral-700">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* Contact */}
+    <section>
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="text-2xl font-bold text-neutral-900">Get In Touch</h2>
+        <span class="font-mono text-xs text-neutral-400">CONTACT_ENDPOINT</span>
+      </div>
+      
+      <div class="p-6 bg-white border border-neutral-200 rounded-xl">
+        <p class="text-neutral-600 mb-6">
+          Interested in collaborating on distributed systems, AI infrastructure, or technical architecture discussions? I'm always open to meaningful engineering conversations.
+        </p>
+        
+        <div class="flex flex-wrap gap-4">
+          <a 
+            href="mailto:rishwanthperumandla28@gmail.com"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            rishwanthperumandla28@gmail.com
+          </a>
+          <a 
+            href="https://linkedin.com/in/rishwanthperumandla"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-200 rounded-lg font-mono text-xs hover:border-neutral-400 transition-colors"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+          <a 
+            href="https://github.com/RishwanthPerumandla"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-200 rounded-lg font-mono text-xs hover:border-neutral-400 transition-colors"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
 </Layout>

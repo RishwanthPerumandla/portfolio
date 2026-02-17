@@ -1,105 +1,146 @@
 ---
-// import Button from "../components/button.astro";
-import Projects from "../components/home/projects.astro";
-import Separator from "../components/home/separator.astro";
-import Writings from "../components/home/writings.astro";
+import { getCollection } from "astro:content";
 import Layout from "../layouts/main.astro";
+import Header from "../components/header"; 
+import Pomodoro from "../components/pomodoro"; 
+import GithubActivity from "../components/github-activity"; 
+import Stack from "../components/stack";
+import ProjectList from "../components/micro/ProjectList";
+import HeroSection from "../components/micro/HeroSection";
+import BentoPosts from "../components/BentoPosts";
 
-// SEO Props
-const title = "Rishwanth Perumandla | Cloud Software Engineer";
-const description = "I'm Rishwanth, an AWS Certified Cloud Solutions Architect and Software Engineer. I design scalable cloud-native systems across AWS, Azure, and GCP, and explore storytelling through RIPE.";
-const canonicalUrl = "https://rishwanth.com/";
-const ogImage = "/assets/images/og-image.png"; // You can create a social sharing image if not already done.
+// SEO
+const title = "Rishwanth Perumandla | Senior Backend Engineer";
+const description = "Rishwanth Perumandla: Senior Backend Engineer & AI Infrastructure Architect.";
+
+// Get posts from content collection
+const allPosts = await getCollection("post");
+
+function parseDate(dateStr: string) {
+  const [month, day, year] = dateStr.split(" ");
+  return new Date(`${month} ${parseInt(day)}, ${year}`);
+}
+
+const sortedPosts = allPosts
+  .map((post) => ({ ...post, date: parseDate(post.data.dateFormatted) }))
+  .sort((a, b) => b.date.getTime() - a.date.getTime());
+
+// Take top 3 posts for display
+const featuredPosts = sortedPosts.slice(0, 3);
+
+// Projects Data
+const projects = [
+  {
+    id: "01",
+    name: "VoixAI",
+    role: "AI Infrastructure",
+    desc: "Voice ordering engine with <500ms latency using OpenAI Whisper.",
+    link: "https://github.com/RishwanthPerumandla/VoixAI"
+  },
+  {
+    id: "02",
+    name: "Brekrr",
+    role: "Distributed Systems",
+    desc: "Microservices platform matching startups with top-tier talent.",
+    link: "https://www.brekrr.com"
+  },
+  {
+    id: "03",
+    name: "Rivach Cloud",
+    role: "Cloud Engineering",
+    desc: "Optimized AWS architecture reducing monthly spend by 40%.",
+    link: "#"
+  }
+];
 ---
 
-<Layout title={title} description={description} canonicalUrl={canonicalUrl} ogImage={ogImage}>
-  <div
-    class="relative z-20 w-full max-w-4xl mx-auto mt-16 px-7 md:mt-24 lg:mt-32 xl:px-0"
-  >
-    <div class="flex flex-col items-center md:flex-row">
-      <!-- Hero Text Column -->
-      <div class="relative w-full mt-10 md:mt-0 md:w-1/2 md:pr-8">
-      <div class="mb-2 text-xl font-medium text-neutral-500 dark:text-neutral-400">
-  Hello, I'm
-</div>
+<Layout title={title} description={description}>
+  <Header client:load />
 
-<h1 class="mb-4 text-5xl font-extrabold leading-tight tracking-tight text-black md:text-6xl lg:text-7xl dark:text-white">
-  Rishwanth
-</h1>
+  <main class="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 xl:px-0 pt-32 md:pt-36 pb-40">
 
-<p class="mb-6 text-lg text-neutral-600 dark:text-neutral-400">
-  Software Engineer with more than four years of experience building <strong>cloud-native systems, backend platforms, and applied AI/ML workflows</strong>.  
-  I design and develop reliable, scalable systems across <strong>AWS, Azure, and GCP</strong>, and I enjoy working where engineering, design, and long-term thinking meet.  
-  I also explore storytelling, filmmaking, and creative technology through my alter ego, 
-  <a class="ripe text-2xl font-semibold underline hover:text-black dark:hover:text-white" href="https://www.youtube.com/@ripe6096" target="_blank">RIPE</a>.
-</p>
+    <HeroSection client:load />
 
-<p class="italic text-sm text-neutral-500 dark:text-neutral-400 mb-6">
-  “Specialization is for insects.” — I like living at the intersection of engineering and imagination.
-</p>
-
-<p class="mt-6 text-base text-neutral-600 dark:text-neutral-400">
-  I collaborate with founders, researchers, and creative teams to build systems that are clear, scalable, and grounded in long-term value.  
-  If you're building something meaningful or exploring something new, I’d love to connect.
-</p>
-
-<div class="flex flex-wrap gap-3 mt-4">
-  <a
-    href="mailto:rishwanthperumandla28@gmail.com"
-    class="inline-block px-6 py-2 font-semibold text-white bg-black rounded-full hover:bg-neutral-800"
-  >
-    Let’s Work Together
-  </a>
-  <a
-    href="https://www.linkedin.com/in/rishwanthperumandla/"
-    class="inline-block px-6 py-2 font-semibold text-black border border-black rounded-full hover:bg-neutral-100 dark:text-white dark:border-white dark:hover:bg-neutral-900"
-  >
-    Connect on LinkedIn
-  </a>
-</div>
-
-
+    <section class="mb-24 p-8 bg-white/60 backdrop-blur-sm border border-neutral-200 rounded-xl relative overflow-hidden shadow-sm">
+        
+      <div class="absolute top-0 right-0 p-4 opacity-10">
+          <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-neutral-900"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
       </div>
+      
+      <h3 class="font-mono text-xs uppercase tracking-widest text-neutral-500 mb-4">The Thing About Me</h3>
+      
+      <div class="prose prose-neutral max-w-none">
+          <p class="text-lg leading-relaxed text-neutral-700">
+              It is one thing to run a model in a notebook, but making it reliable for the real world is where the <strong>actual engineering</strong> happens.
+          </p>
+          <p class="text-lg leading-relaxed text-neutral-700 mt-4">
+              My work focuses on the intersection of <strong>backend engineering</strong> and <strong>AI</strong>. I take pre-trained models and build the solid infrastructure they need to actually function at scale. I care about how the system handles pressure and how it serves the user. I build the kind of quiet, reliable systems that let teams focus on the future instead of fixing the past.
+          </p>
+          
+          <div class="mt-8 pt-6 border-t border-dashed border-neutral-200">
+              <a href="/about" class="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors">
+                  <span class="border-b border-neutral-900 group-hover:border-neutral-600">Read my full journey & timeline</span>
+                  <span class="group-hover:translate-x-1 transition-transform">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                  </span>
+              </a>
+          </div>
+      </div>
+    </section>
 
-      <a
-        href="mailto:rishwanthperumandla28@gmail.com"
-        class="relative justify-end hidden w-full mt-10 md:flex md:pl-10 md:w-1/2 md:mt-0 md:translate-y-4 xl:translate-y-0 group"
-        title="Say hi!"
-      >
-        <div class="relative z-50 w-full">
-          <div
-            class="absolute bottom-0 z-40 w-16 h-16 -translate-x-6 -translate-y-1/2 lg:top-auto top-0 lg:-translate-y-[330px] rounded-full"
-          >
-            <span
-              class="relative z-20 flex items-center justify-center w-full h-full text-2xl border-8 border-white rounded-full dark:border-neutral-950 bg-neutral-100 dark:bg-neutral-900"
-            >
-              <span
-                class="flex items-center justify-center w-full h-full bg-white border border-dashed rounded-full dark:bg-neutral-950 border-neutral-300 dark:border-neutral-700 group-hover:animate-wave"
-                style="transform-origin: 75% 75%;"
-              >
-                👋
-              </span>
-            </span>
-          </div>
-          <div class="relative z-30 px-10">
-            <img
-              src="/assets/images/photo.png"
-              loading="eager"
-              decoding="auto"
-              class="relative z-30 w-full aspect-[790/1189] md:max-w-md mx-auto dark:-translate-y-0.5"
-            />
-          </div>
-          <div
-            class="absolute bottom-0 right-0 z-20 w-full h-full lg:h-[420px] translate-x-0 -translate-y-px border border-dashed rounded-2xl bg-gradient-to-r dark:from-neutral-950 dark:via-black dark:to-neutral-950 from-white via-neutral-50 to-white border-neutral-300 dark:border-neutral-700"
-          >
-          </div>
+    <Stack client:visible />
+
+    <section id="work" class="mb-32">
+        <div class="flex items-end justify-between mb-8">
+            <h2 class="text-2xl font-bold text-neutral-900">Featured Projects</h2>
+            <span class="font-mono text-xs text-neutral-400">SELECT_WORK_2026</span>
         </div>
-      </a>
-    </div>
-  </div>
+        
+        <ProjectList projects={projects} client:visible />
 
-  <Separator text="Check out my projects" />
-  <Projects />
-  <Separator text="Some of my writing" />
-  <Writings />
+        <div class="mt-8 flex justify-center">
+            <a href="/projects" class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors">
+                View All Projects
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <section class="mb-32">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold text-neutral-900">Commit History</h2>
+            <span class="font-mono text-xs text-neutral-400">ACTIVE_CONTRIBUTOR</span>
+        </div>
+        <div class="w-full p-8 border border-neutral-200 rounded-xl bg-white/80 shadow-sm">
+             <GithubActivity client:visible />
+        </div>
+    </section>
+
+    <section class="mb-32">
+        <div class="flex items-end justify-between mb-8">
+            <h2 class="text-2xl font-bold text-neutral-900">Thoughts & Notes</h2>
+            <span class="font-mono text-xs text-neutral-400">BRAIN_DUMP</span>
+        </div>
+        
+        <BentoPosts posts={featuredPosts} client:visible />
+        
+        <div class="mt-8 flex justify-center">
+            <a href="/posts" class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors">
+                Read All Posts
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+    </section>  
+
+    <section class="mb-40">
+        <Pomodoro client:visible />
+    </section>
+
+  </main>
 </Layout>
