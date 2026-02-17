@@ -41,6 +41,17 @@ const { title, description } = Astro.props;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500&family=Kenia&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
+    {/* Inline script to prevent flash of content */}
+    <script is:inline>
+      (function() {
+        const hasVisited = sessionStorage.getItem('hasVisited');
+        if (!hasVisited) {
+          // Add class to hide content until loading screen finishes
+          document.documentElement.style.overflow = 'hidden';
+        }
+      })();
+    </script>
+
     <style is:global>
       :root {
         --font-sans: 'DM Sans', sans-serif;
@@ -98,6 +109,11 @@ const { title, description } = Astro.props;
     const scrolled = (winScroll / height) * 100;
     progressBar.style.width = scrolled + "%";
   });
+
+  // Re-enable scrolling after loading screen finishes (1700ms)
+  setTimeout(() => {
+    document.documentElement.style.overflow = '';
+  }, 1700);
 </script>
   </body>
 </html>
