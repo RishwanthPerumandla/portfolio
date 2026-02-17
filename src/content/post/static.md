@@ -3,7 +3,7 @@ title: "Stop Paying for Simplicity: How Businesses Waste Thousands on No-Code To
 description: "Most small businesses and creators rely on no-code platforms because they're easy, but that convenience comes at a heavy, recurring cost. In this post, I break down how businesses unknowingly overpay for bandwidth, subscriptions, and design tools, and how adopting an architect's mindset (without being one) can help you build a faster, scalable website for under $1/month and finally take control of your tech stack."
 slug: static-website-architecture
 dateFormatted: June 5, 2025
-cover: /assets/blog/static-site-cover.webp
+cover: /assets/images/posts/StaticWebsiteAWS.png
 category: Architecture
 ---
 

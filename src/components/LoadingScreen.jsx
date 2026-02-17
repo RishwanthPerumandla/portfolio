@@ -2,46 +2,73 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function LoadingScreen() {
+  const [shouldShow, setShouldShow] = useState(false);
   const [stage, setStage] = useState(0);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setStage(1), 600);
-    const t2 = setTimeout(() => setStage(2), 1000);
-    const t3 = setTimeout(() => setStage(3), 1400);
-    return () => [t1, t2, t3].forEach(clearTimeout);
+    const hasVisited = sessionStorage.getItem('hasVisited');
+    
+    if (!hasVisited) {
+      setShouldShow(true);
+      sessionStorage.setItem('hasVisited', 'true');
+      
+      const t1 = setTimeout(() => setStage(1), 600);
+      const t2 = setTimeout(() => setStage(2), 900);
+      const t3 = setTimeout(() => setStage(3), 1600);
+      
+      return () => [t1, t2, t3].forEach(clearTimeout);
+    }
   }, []);
 
-  if (stage === 3) return null;
+  if (!shouldShow || stage === 3) return null;
 
   const fullName = "Rishwanth Perumandla";
   const ripeIndices = new Set([0, 1, 10, 11]);
 
+  const starVariants = {
+    left: {
+      initial: { x: -200, opacity: 0, rotate: -180 },
+      animate: { 
+        x: 0, 
+        opacity: 1, 
+        rotate: 0,
+        transition: {
+          type: "spring",
+          stiffness: 150,
+          damping: 12,
+          mass: 0.8
+        }
+      }
+    },
+    right: {
+      initial: { x: 200, opacity: 0, rotate: 180 },
+      animate: { 
+        x: 0, 
+        opacity: 1, 
+        rotate: 0,
+        transition: {
+          type: "spring",
+          stiffness: 150,
+          damping: 12,
+          mass: 0.8
+        }
+      }
+    }
+  };
+
   return (
     <div className={`fixed inset-0 z-[100] bg-[#fafafa] flex items-center justify-center transition-opacity duration-300 ${stage === 3 ? 'opacity-0' : 'opacity-100'}`}>
       
-      {/* SVG Filter for noise texture */}
-      <svg className="absolute w-0 h-0">
-        <defs>
-          <filter id="noiseFilter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.15 0"/>
-            <feComposite operator="in" in2="SourceGraphic" result="monoNoise"/>
-            <feBlend in="SourceGraphic" in2="monoNoise" mode="overlay"/>
-          </filter>
-        </defs>
-      </svg>
-
       <div className="relative flex items-center justify-center w-full max-w-4xl h-32">
         <AnimatePresence mode="sync">
           
-          {/* Full Name */}
           {stage < 2 && (
             <motion.div
               key="fullname"
               initial={{ opacity: 0 }}
               animate={{ opacity: stage === 0 ? 1 : 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              transition={{ duration: 0.3 }}
               className="absolute inset-0 flex items-center justify-center"
             >
               <span className="text-3xl md:text-5xl font-bold tracking-tight whitespace-nowrap" style={{ fontFamily: "'DM Sans', sans-serif" }}>
@@ -54,22 +81,29 @@ export default function LoadingScreen() {
             </motion.div>
           )}
 
-          {/* RIPE Logo - Textured, No Shadows */}
-          {stage >= 1 && (
+          {stage >= 2 && (
             <motion.div
               key="logo"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="absolute inset-0 flex items-center justify-center gap-4 md:gap-6"
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 flex items-center justify-center"
             >
-              {/* Left Star */}
-              <span className="text-3xl md:text-5xl text-neutral-900">&#10022;</span>
+              <motion.span
+                variants={starVariants.left}
+                initial="initial"
+                animate="animate"
+                className="text-3xl md:text-5xl text-neutral-900 inline-block origin-center"
+              >
+                &#10022;
+              </motion.span>
               
-              {/* RIPE - Textured Gradient */}
-              <span 
-                className="text-8xl md:text-9xl font-bold tracking-tighter"
+              <motion.span 
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
+                className="text-8xl md:text-9xl font-bold tracking-tighter mx-4 md:mx-6"
                 style={{
                   fontFamily: "'Kenia', cursive",
                   backgroundImage: 'linear-gradient(90deg, #C33764, #1D2671, #C33764)',
@@ -77,21 +111,25 @@ export default function LoadingScreen() {
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
-                  filter: 'url(#noiseFilter)',
                   animation: 'ripeShine 3s linear infinite'
                 }}
               >
                 RIPE
-              </span>
+              </motion.span>
               
-              {/* Right Star */}
-              <span className="text-3xl md:text-5xl text-neutral-900">&#10022;</span>
+              <motion.span
+                variants={starVariants.right}
+                initial="initial"
+                animate="animate"
+                className="text-3xl md:text-5xl text-neutral-900 inline-block origin-center"
+              >
+                &#10022;
+              </motion.span>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* Progress line */}
       <motion.div 
         className="absolute bottom-0 left-0 h-[2px] origin-left"
         style={{ 
@@ -99,7 +137,7 @@ export default function LoadingScreen() {
           width: '100%' 
         }}
         initial={{ scaleX: 0 }}
-        animate={{ scaleX: stage === 0 ? 0.3 : stage === 1 ? 0.7 : 1 }}
+        animate={{ scaleX: stage >= 2 ? 1 : stage === 1 ? 0.7 : 0.3 }}
         transition={{ duration: 0.3 }}
       />
 

@@ -2,7 +2,7 @@
 title: Why I Built My Website with Astro & Tailwind
 description: A deep dive into the architecture decisions behind rishwanth.com
 slug: why-astro-tailwind
-cover: /assets/blog/why-astro-cover.webp
+cover: https://astro.build/assets/press/astro-logo-dark.png
 dateFormatted: May 4, 2025
 category: Engineering
 ---
