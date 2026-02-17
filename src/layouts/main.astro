@@ -31,8 +31,13 @@ const { title, description } = Astro.props;
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K4QSSK6SNE"></script>
     <script>
+      declare global {
+        interface Window {
+          dataLayer: unknown[];
+        }
+      }
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(...args: unknown[]){window.dataLayer.push(args);}
       gtag('js', new Date());
       gtag('config', 'G-K4QSSK6SNE');
     </script>
@@ -102,7 +107,7 @@ const { title, description } = Astro.props;
 <div class="fixed top-0 left-0 h-[2px] bg-neutral-900 z-[60] progress-bar" style="width: 0%"></div>
 
 <script>
-  const progressBar = document.querySelector('.progress-bar');
+  const progressBar = document.querySelector('.progress-bar') as HTMLElement;
   window.addEventListener('scroll', () => {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;

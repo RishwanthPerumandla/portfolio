@@ -178,7 +178,7 @@ const categories = ["All", "Architecture", "AI/ML", "Systems", "Personal", "Engi
 
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          const category = btn.dataset.category;
+          const category = (btn as HTMLElement).dataset.category;
           
           // Update active button
           filterBtns.forEach(b => {
@@ -191,7 +191,7 @@ const categories = ["All", "Architecture", "AI/ML", "Systems", "Personal", "Engi
           // Filter posts
           let visibleCount = 0;
           postCards.forEach(card => {
-            const postCategory = card.dataset.postCategory;
+            const postCategory = (card as HTMLElement).dataset.postCategory;
             if (category === 'All' || postCategory === category) {
               card.classList.remove('hidden');
               visibleCount++;

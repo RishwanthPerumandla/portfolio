@@ -2,15 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 // Hook: Animate numbers counting up when scrolled into view
-function useCountUp(end, duration = 2000) {
+function useCountUp(end: number, duration = 2000): [number, React.RefObject<HTMLSpanElement>] {
   const [count, setCount] = useState(0);
-  const ref = useRef(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   
   useEffect(() => {
     if (!isInView) return;
-    let startTime;
-    const animate = (currentTime) => {
+    let startTime: number | undefined;
+    const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
       const progress = Math.min((currentTime - startTime) / duration, 1);
       // Easing function for smooth deceleration
@@ -32,9 +32,10 @@ function Metric({ value, unit, label }) {
   const [count, ref] = useCountUp(Math.floor(numericValue), 1500);
   
   // Preserve original formatting (decimals, suffixes)
+  const numericCount = typeof count === 'number' ? count : 0;
   const formattedCount = value.toString().includes(".") 
-    ? (count / 10).toFixed(1) 
-    : count;
+    ? (numericCount / 10).toFixed(1) 
+    : numericCount;
   
   return (
     <span ref={ref} className="font-mono text-[10px] tabular-nums flex flex-col items-end">
@@ -51,7 +52,7 @@ function StackCard({ title, items, dotColor, index }) {
   const [isHovered, setIsHovered] = useState(false);
   
   // Parse metric strings like "Latency: 12ms" into components
-  const parseMetric = (metricStr) => {
+  const parseMetric = (metricStr: string) => {
     const [label, value] = metricStr.split(": ");
     const unitMatch = value?.match(/[a-zA-Z%/]+/) || [""];
     const unit = unitMatch[0];
