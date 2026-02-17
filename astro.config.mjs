@@ -6,7 +6,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import react from "@astrojs/react"; // This line must be here
 export default defineConfig({
   site: "https://rishwanth.com",
-  integrations: [tailwind(), sitemap(), react()],
+  integrations: [tailwind(), react()],
   markdown: {
     rehypePlugins: [
       [
