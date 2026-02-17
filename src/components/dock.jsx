@@ -1,75 +1,183 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Home, 
-  User,
-  Linkedin, 
-  Github, 
-  Twitter, 
-  Mail, 
+  User, 
   FolderGit2, 
-  Instagram 
+  Github, 
+  Linkedin, 
+  Twitter, 
+  Instagram,
+  Mail,
+  Menu,
+  X,
 } from "lucide-react";
 
-export default function Dock() {
+// Nav items always visible
+const navItems = [
+  { href: "/", icon: Home, label: "Home" },
+  { href: "/about", icon: User, label: "About" },
+  { href: "/projects", icon: FolderGit2, label: "Projects" },
+];
+
+// Desktop social links
+const desktopSocials = [
+  { href: "https://github.com/RishwanthPerumandla", icon: Github, label: "GitHub" },
+  { href: "https://linkedin.com/in/rishwanthperumandla", icon: Linkedin, label: "LinkedIn" },
+  { href: "https://x.com/rishwanth1729", icon: Twitter, label: "Twitter" },
+  { href: "https://instagram.com/rishwanthperumandla", icon: Instagram, label: "Instagram" },
+  { href: "mailto:rishwanthperumandla28@gmail.com", icon: Mail, label: "Email" },
+];
+
+// Mobile social links (shown in expanded menu)
+const mobileSocials = [
+  { href: "https://github.com/RishwanthPerumandla", icon: Github, label: "GitHub" },
+  { href: "https://linkedin.com/in/rishwanthperumandla", icon: Linkedin, label: "LinkedIn" },
+  { href: "https://x.com/rishwanth1729", icon: Twitter, label: "Twitter" },
+  { href: "https://instagram.com/rishwanthperumandla", icon: Instagram, label: "Instagram" },
+  { href: "mailto:rishwanthperumandla28@gmail.com", icon: Mail, label: "Email" },
+];
+
+export default function Dock({ currentPath = "/" }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const isActive = (href) => {
+    if (href === "/") return currentPath === href;
+    return currentPath.startsWith(href);
+  };
+
+  // Desktop Dock
+  if (!isMobile) {
+    return (
+      <div className="flex items-center gap-1 px-2 py-2 bg-white/90 backdrop-blur-xl border border-neutral-200/60 rounded-full shadow-xl">
+        {/* Navigation */}
+        {navItems.map((item) => (
+          <a
+            key={item.label}
+            href={item.href}
+            className={`flex items-center justify-center w-10 h-10 rounded-full transition-all duration-200 ${
+              isActive(item.href) 
+                ? "text-black bg-neutral-100" 
+                : "text-neutral-500 hover:text-black hover:bg-neutral-50"
+            }`}
+            title={item.label}
+          >
+            <item.icon size={18} strokeWidth={isActive(item.href) ? 2.5 : 2} />
+          </a>
+        ))}
+
+        <div className="w-px h-5 bg-neutral-200 mx-1" />
+
+        {/* RIPE */}
+        <a
+          href="/ripe"
+          className={`flex items-center justify-center px-3 h-10 rounded-full transition-colors ${
+            isActive("/ripe") ? "bg-neutral-100" : ""
+          }`}
+        >
+          <span className="ripe ripe-shimmer text-lg font-bold bg-gradient-to-r from-rose-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+            RIPE
+          </span>
+        </a>
+
+        <div className="w-px h-5 bg-neutral-200 mx-1" />
+
+        {/* Social Links */}
+        {desktopSocials.map((item) => (
+          <a
+            key={item.label}
+            href={item.href}
+            target={item.href.startsWith("http") ? "_blank" : undefined}
+            rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+            className="flex items-center justify-center w-10 h-10 text-neutral-500 hover:text-black rounded-full transition-colors"
+            title={item.label}
+          >
+            <item.icon size={18} />
+          </a>
+        ))}
+      </div>
+    );
+  }
+
+  // Mobile Dock
   return (
-    <div className="flex items-center gap-2 px-4 py-3 bg-white/90 backdrop-blur-xl border border-neutral-200/60 rounded-full shadow-2xl shadow-neutral-200/50 hover:scale-[1.01] transition-all duration-300">
-      
-      {/* 1. HOME */}
-      <DockItem href="/" icon={<Home size={18} />} label="Home" />
+    <>
+      {/* Overlay */}
+      {mobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
 
-      <Separator />
+      {/* Expanded Menu */}
+      {mobileMenuOpen && (
+        <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 p-2 bg-white border border-neutral-200 rounded-2xl shadow-2xl">
+          <div className="flex items-center gap-1">
+            {mobileSocials.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="flex items-center justify-center w-11 h-11 text-neutral-500 hover:text-black hover:bg-neutral-50 rounded-full transition-colors"
+                title={item.label}
+              >
+                <item.icon size={20} />
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
-      {/* 2. ABOUT */}
-      <DockItem href="/about" icon={<User size={18} />} label="About" />
+      {/* Main Dock Bar */}
+      <div className="flex items-center gap-1 px-2 py-2 bg-white/95 backdrop-blur-xl border border-neutral-200/60 rounded-full shadow-xl">
+        {/* Nav - First 3 items */}
+        {navItems.slice(0, 3).map((item) => (
+          <a
+            key={item.label}
+            href={item.href}
+            className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
+              isActive(item.href) ? "text-black bg-neutral-100" : "text-neutral-500"
+            }`}
+          >
+            <item.icon size={18} />
+          </a>
+        ))}
 
-      <Separator />
+        <div className="w-px h-4 bg-neutral-200 mx-0.5" />
 
-      {/* 4. PROJECTS */}
-      <DockItem href="/projects" icon={<FolderGit2 size={18} />} label="Projects" />
+        {/* RIPE */}
+        <a
+          href="/ripe"
+          className={`flex items-center justify-center px-2 h-10 rounded-full transition-colors ${
+            isActive("/ripe") ? "bg-neutral-100" : ""
+          }`}
+        >
+          <span className="ripe ripe-shimmer text-sm font-bold bg-gradient-to-r from-rose-500 via-purple-500 to-blue-500 bg-clip-text text-transparent">
+            RIPE
+          </span>
+        </a>
 
-      <Separator />
-      {/* 3. RIPE LOGO LINK (Creative Hub) */}
-      <a 
-        href="/ripe" 
-        className="group relative flex items-center justify-center px-3 py-1 hover:bg-neutral-100 rounded-full transition-all"
-      >
-        <span className="ripe ripe-shimmer text-2xl tracking-tight">RIPE</span>
-        <span className="absolute -top-12 left-1/2 -translate-x-1/2 bg-neutral-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-2 group-hover:translate-y-0 pointer-events-none whitespace-nowrap">
-            Creative & Writing
-        </span>
-      </a>
+        <div className="w-px h-4 bg-neutral-200 mx-0.5" />
 
-      <Separator />
-
-
-      {/* 5. SOCIALS */}
-      <DockItem href="https://github.com/RishwanthPerumandla" icon={<Github size={18} />} label="GitHub" external />
-      <DockItem href="https://linkedin.com/in/rishwanthperumandla" icon={<Linkedin size={18} />} label="LinkedIn" external />
-      <DockItem href="https://x.com/rishwanth1729" icon={<Twitter size={18} />} label="Twitter" external />
-      <DockItem href="https://instagram.com/rishwanthperumandla" icon={<Instagram size={18} />} label="Instagram" external />
-      <DockItem href="mailto:rishwanthperumandla28@gmail.com" icon={<Mail size={18} />} label="Email" external />
-
-    </div>
+        {/* Menu Toggle */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${
+            mobileMenuOpen ? "text-black bg-neutral-100" : "text-neutral-500"
+          }`}
+        >
+          {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+        </button>
+      </div>
+    </>
   );
-}
-
-// Helper Components
-function DockItem({ icon, label, href, external }) {
-  return (
-    <a 
-      href={href}
-      target={external ? "_blank" : "_self"}
-      rel={external ? "noopener noreferrer" : ""}
-      className="p-2.5 text-neutral-500 hover:text-black hover:bg-neutral-100 rounded-full transition-all duration-200 relative group"
-    >
-      {icon}
-      <span className="absolute -top-12 left-1/2 -translate-x-1/2 bg-neutral-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-2 group-hover:translate-y-0 pointer-events-none whitespace-nowrap">
-        {label}
-      </span>
-    </a>
-  );
-}
-
-function Separator() {
-  return <div className="w-px h-6 bg-neutral-200 mx-1"></div>;
 }

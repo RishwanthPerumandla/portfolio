@@ -8,6 +8,7 @@ import Stack from "../components/stack";
 import ProjectList from "../components/micro/ProjectList";
 import HeroSection from "../components/micro/HeroSection";
 import LoadingScreen from "../components/LoadingScreen";
+import BentoPosts from "../components/BentoPosts";
 
 // SEO
 const title = "Rishwanth Perumandla | Senior Backend Engineer";
@@ -128,55 +129,7 @@ const projects = [
             <span class="font-mono text-xs text-neutral-400">BRAIN_DUMP</span>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 grid-rows-2 h-auto md:h-96">
-            
-            {featuredPosts[0] && (
-              <a href={`/post/${featuredPosts[0].slug}`} class="md:col-span-2 md:row-span-2 bg-white border border-neutral-200 text-neutral-900 p-8 rounded-xl flex flex-col justify-between group hover:border-neutral-400 hover:shadow-lg transition-all relative overflow-hidden">
-                  <div class="flex justify-between items-start">
-                      <span class="font-mono text-[10px] tracking-widest text-neutral-500 bg-neutral-100 px-2 py-1 rounded">
-                        {featuredPosts[0].data.category || "ARTICLE"}
-                      </span>
-                      <svg class="w-5 h-5 text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                      </svg>
-                  </div>
-                  <div>
-                      <h3 class="text-3xl font-bold mb-3">{featuredPosts[0].data.title}</h3>
-                      <p class="text-neutral-600 max-w-md leading-relaxed">
-                          {featuredPosts[0].data.description}
-                      </p>
-                  </div>
-              </a>
-            )}
-            
-            {featuredPosts[1] && (
-              <a href={`/post/${featuredPosts[1].slug}`} class="bg-white border border-neutral-200 p-6 rounded-xl flex flex-col justify-between group hover:border-neutral-400 hover:shadow-md transition-all">
-                   <div class="flex justify-between items-start">
-                      <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-tighter">
-                        {featuredPosts[1].data.category || "ARTICLE"}
-                      </span>
-                      <svg class="w-4 h-4 text-neutral-300 group-hover:text-neutral-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17"/>
-                      </svg>
-                   </div>
-                   <h3 class="text-lg font-bold leading-tight text-neutral-900">{featuredPosts[1].data.title}</h3>
-              </a>
-            )}
-
-            {featuredPosts[2] && (
-              <a href={`/post/${featuredPosts[2].slug}`} class="bg-white border border-neutral-200 p-6 rounded-xl flex flex-col justify-between group hover:border-neutral-400 hover:shadow-md transition-all">
-                   <div class="flex justify-between items-start">
-                      <span class="font-mono text-[10px] text-neutral-500 uppercase tracking-tighter">
-                        {featuredPosts[2].data.category || "ARTICLE"}
-                      </span>
-                      <svg class="w-4 h-4 text-neutral-300 group-hover:text-neutral-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17"/>
-                      </svg>
-                   </div>
-                   <h3 class="text-lg font-bold leading-tight text-neutral-900">{featuredPosts[2].data.title}</h3>
-              </a>
-            )}
-        </div>
+        <BentoPosts posts={featuredPosts} client:visible />
         
         <div class="mt-8 flex justify-center">
             <a href="/posts" class="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-mono text-xs hover:bg-neutral-800 transition-colors">
