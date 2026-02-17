@@ -263,7 +263,7 @@ const categories = ["All", "AI Infrastructure", "Distributed Systems", "Cloud En
 
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          const category = btn.dataset.category;
+          const category = (btn as HTMLElement).dataset.category;
           
           // Update active button
           filterBtns.forEach(b => {
@@ -276,7 +276,7 @@ const categories = ["All", "AI Infrastructure", "Distributed Systems", "Cloud En
           // Filter projects
           let visibleCount = 0;
           projectCards.forEach(card => {
-            const projectRole = card.dataset.projectRole;
+            const projectRole = (card as HTMLElement).dataset.projectRole;
             if (category === 'All' || projectRole === category) {
               card.classList.remove('hidden');
               visibleCount++;

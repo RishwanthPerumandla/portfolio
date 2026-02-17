@@ -3,10 +3,13 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import rehypeExternalLinks from "rehype-external-links";
-import react from "@astrojs/react"; // This line must be here
+import react from "@astrojs/react";
+
 export default defineConfig({
   site: "https://rishwanth.com",
-  integrations: [tailwind(), react()],
+  integrations: [tailwind(), 
+    // sitemap(),
+     react()],
   markdown: {
     rehypePlugins: [
       [
@@ -14,7 +17,6 @@ export default defineConfig({
         {
           target: "_blank",
           rel: ["noopener", "noreferrer"],
-          // only affect real external links; leaves internal/relative/mailto intact
           protocols: ["http", "https"],
         },
       ],
