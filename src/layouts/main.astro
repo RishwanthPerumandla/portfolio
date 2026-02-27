@@ -29,18 +29,13 @@ const { title, description } = Astro.props;
     <meta name="twitter:description" content={description} />
     
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K4QSSK6SNE"></script>
-    <script>
-      declare global {
-        interface Window {
-          dataLayer: unknown[];
-        }
-      }
-      window.dataLayer = window.dataLayer || [];
-      function gtag(...args: unknown[]){window.dataLayer.push(args);}
-      gtag('js', new Date());
-      gtag('config', 'G-K4QSSK6SNE');
-    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K4QSSK6SNE"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K4QSSK6SNE');
+</script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
