@@ -12,38 +12,46 @@ const projectsExtended = [
   {
     ...projects[0],
     id: "01",
+    role: "Voice AI Systems",
+    tech: ["LiveKit", "Python", "FastAPI", "Next.js", "OpenAI / Gemini"],
+    metrics: { modes: "3", scenario: "Wingstop", tests: "Deterministic" },
+    status: "Live"
+  },
+  {
+    ...projects[1],
+    id: "02", 
     role: "AI Infrastructure",
     tech: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker"],
     metrics: { latency: "<500ms", uptime: "99.9%" },
     status: "Production"
   },
   {
-    ...projects[1],
-    id: "02", 
+    ...projects[2],
+    id: "03",
     role: "Distributed Systems",
     tech: ["Node.js", "MongoDB", "AWS", "Kubernetes", "Kafka"],
     metrics: { users: "10K+", requests: "1M/day" },
     status: "Production"
   },
   {
-    ...projects[2],
-    id: "03",
+    ...projects[3],
+    id: "04",
     role: "Cloud Engineering",
     tech: ["Terraform", "AWS", "CloudFront", "S3", "Lambda"],
     metrics: { cost: "-40%", load: "<100ms" },
     status: "Deployed"
   },
   {
-    ...projects[3],
-    id: "04",
+    ...projects[4],
+    id: "05",
     role: "AI/ML Platform",
     tech: ["Python", "PyTorch", "Azure", "Kubernetes", "Redis"],
     metrics: { molecules: "1M+", inference: "GPU" },
     status: "Research"
   },
   {
-    ...projects[4],
-    id: "05",
+    ...projects[5],
+    id: "06",
     role: "Full Stack SaaS",
     tech: ["React", "Node.js", "PostgreSQL", "Docker"],
     metrics: { tenants: "50+", uptime: "99.5%" },
@@ -51,7 +59,7 @@ const projectsExtended = [
   },
 ];
 
-const categories = ["All", "AI Infrastructure", "Distributed Systems", "Cloud Engineering", "Full Stack"];
+const categories = ["All", "Voice AI Systems", "AI Infrastructure", "Distributed Systems", "Cloud Engineering", "Full Stack"];
 ---
 
 <Layout title={title} description={description}>

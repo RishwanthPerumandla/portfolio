@@ -1,5 +1,10 @@
 [
-	
+	{
+		"name": "VoixAI",
+		"description": "Reliable voice AI system built for scalable ordering and cost-efficient operations.",
+		"image": "/assets/images/cover.png",
+		"url": "https://github.com/RishwanthPerumandla/VoixAI"
+	},
 	{
 		"name": "Hybrid Recommendations System",
 		"description": "A Social Media posts recommendation system built with Hybrid Filtering algorithms",

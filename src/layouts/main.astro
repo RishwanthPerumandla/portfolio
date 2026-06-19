@@ -1,5 +1,6 @@
 ---
 import Dock from "../components/dock";
+import FloatingSocials from "../components/FloatingSocials";
 import Footer from "../components/footer.astro";
 import SquareLines from "../components/square-lines.astro";
 import LoadingScreen from "../components/LoadingScreen";
@@ -87,6 +88,7 @@ const { title, description } = Astro.props;
   <body class="relative min-h-screen flex flex-col">
     <LoadingScreen client:only="react" />
     <SquareLines />
+    <FloatingSocials client:load />
 
     <main class="flex-1">
       <slot />

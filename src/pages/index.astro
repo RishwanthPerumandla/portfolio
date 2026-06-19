@@ -10,8 +10,8 @@ import HeroSection from "../components/micro/HeroSection";
 import BentoPosts from "../components/BentoPosts";
 
 // SEO
-const title = "Rishwanth Perumandla | Senior Backend Engineer";
-const description = "Rishwanth Perumandla: Senior Backend Engineer & AI Infrastructure Architect.";
+const title = "Rishwanth Perumandla | Backend & AI Engineer";
+const description = "Rishwanth Perumandla: Backend & AI Engineer focused on solutions architecture and forward deployed engineering.";
 
 // Get posts from content collection
 const allPosts = await getCollection("post");
@@ -41,8 +41,8 @@ const projects = [
   {
     id: "01",
     name: "VoixAI",
-    role: "AI Infrastructure",
-    desc: "Voice ordering engine with <500ms latency using OpenAI Whisper.",
+    role: "Voice AI Systems",
+    desc: "Reliable voice AI system built for scalable ordering and cost-efficient operations.",
     link: "https://github.com/RishwanthPerumandla/VoixAI"
   },
   {
@@ -79,10 +79,10 @@ const projects = [
       
       <div class="prose prose-neutral max-w-none">
           <p class="text-lg leading-relaxed text-neutral-700">
-              It is one thing to run a model in a notebook, but making it reliable for the real world is where the <strong>actual engineering</strong> happens.
+              I am a <strong>Backend & AI Engineer</strong> focused on building systems that work reliably in the real world, not just in a notebook demo.
           </p>
           <p class="text-lg leading-relaxed text-neutral-700 mt-4">
-              My work focuses on the intersection of <strong>backend engineering</strong> and <strong>AI</strong>. I take pre-trained models and build the solid infrastructure they need to actually function at scale. I care about how the system handles pressure and how it serves the user. I build the kind of quiet, reliable systems that let teams focus on the future instead of fixing the past.
+              My work sits at the intersection of <strong>backend engineering</strong>, <strong>AI</strong>, <strong>solutions architecture</strong>, and <strong>forward deployed engineering</strong>. I take models and backend systems out of prototypes and turn them into dependable products that can scale, handle pressure, and serve users well. I care about reliability, operational clarity, and building the kind of quiet systems that let teams move faster without constantly fighting the infrastructure underneath them.
           </p>
           
           <div class="mt-8 pt-6 border-t border-dashed border-neutral-200">
@@ -98,14 +98,12 @@ const projects = [
       </div>
     </section>
 
-    <Stack client:visible />
-
     <section id="work" class="mb-32">
         <div class="flex items-end justify-between mb-8">
             <h2 class="text-2xl font-bold text-neutral-900">Featured Projects</h2>
             <span class="font-mono text-xs text-neutral-400">SELECT_WORK_2026</span>
         </div>
-        
+
         <ProjectList projects={projects} client:visible />
 
         <div class="mt-8 flex justify-center">
@@ -145,6 +143,8 @@ const projects = [
             </a>
         </div>
     </section>  
+
+    <Stack client:visible />
 
     <section class="mb-40">
         <Pomodoro client:visible />
