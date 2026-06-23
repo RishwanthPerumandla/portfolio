@@ -6,7 +6,15 @@ import SquareLines from "../components/square-lines.astro";
 import LoadingScreen from "../components/LoadingScreen";
 import "../assets/css/main.css";
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  socialImage = "/social-card.png",
+} = Astro.props;
+
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const socialImageUrl = new URL(socialImage, siteUrl).toString();
 ---
 
 <!doctype html>
@@ -19,15 +27,25 @@ const { title, description } = Astro.props;
     <meta name="theme-color" content="#fafafa" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Rishwanth Perumandla" />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content="Rishwanth Perumandla, Backend and AI Engineer" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rishwanth1729" />
+    <meta name="twitter:creator" content="@rishwanth1729" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content="Rishwanth Perumandla, Backend and AI Engineer" />
     
     <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-K4QSSK6SNE"></script>
