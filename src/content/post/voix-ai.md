@@ -7,6 +7,14 @@ dateFormatted: June 30, 2026
 cover: /assets/images/posts/1.png
 category: AI Engineering
 ---
+
+<!--
+Case-study assets expected in the website's public folder:
+- public/assets/videos/voixai-live-ordering-demo.mp4
+- public/assets/images/posts/voixai-console-overview.png
+- public/assets/images/posts/voixai-console-call-logs.png
+- public/assets/images/posts/voixai-console-orders.png
+-->
 **GitHub Repository →** [VoixAI repository link](https://github.com/RishwanthPerumandla/VoixAI.git)
 
 
@@ -45,6 +53,20 @@ And that is why I built **VoixAI**.
 VoixAI is a real-time voice ordering system built around a Wingstop-style restaurant workflow. I intentionally chose a difficult menu because I did not want to hide behind a simple “burger and fries” demo. The catalog includes wing types, flavors, split flavors, combos, group packs, sides, dips, preparation preferences, quantity rules, and many opportunities for a customer to change their mind.
 
 I wanted to understand what it would actually take to build a voice agent that a business could eventually trust with a real transaction.
+
+## See a messy order resolve in real time
+
+Before getting into the architecture, this is the behavior I wanted to make reliable: a customer can speak naturally, interrupt, correct an order, and change their mind without the system losing the transaction state underneath the conversation.
+
+<video controls playsinline preload="metadata" aria-label="VoixAI live ordering demo">
+  <source src="/assets/videos/voixai-live-ordering-demo.mp4" type="video/mp4" />
+  Your browser does not support embedded video. Open the <a href="/assets/videos/voixai-live-ordering-demo.mp4">VoixAI live ordering demo</a>.
+</video>
+
+*Live demo: a natural ordering conversation moves through transcript capture, intent interpretation, menu and modifier validation, deterministic order updates, repricing, and final confirmation.*
+
+> **Demo environment note:** This recording uses the VoixAI demo restaurant and a Wingstop-style ordering domain. VoixAI is not affiliated with or deployed by Wingstop.
+
 
 ---
 
@@ -470,26 +492,51 @@ For me, that is the difference between building something that works once and bu
 
 ---
 
-## The frontend needed to show what the backend is doing
+## Two interfaces around the same live call
 
-A voice agent is invisible. The customer hears audio and maybe sees a transcript. But there is no natural way for them to see what is happening behind the scenes.
+A voice agent is invisible. The customer hears audio and maybe sees a transcript. There is no natural way for them to see the order validation, pricing, runtime selection, or recovery logic working underneath the conversation.
 
-That matters for two reasons.
+That matters for two different audiences.
 
-First, it matters for debugging. When something goes wrong during a live call, I want to see the current conversation node, the last intent, the confidence score, the order state, and the frustration level. The backend already publishes this as telemetry snapshots on a LiveKit data channel. The frontend just needs to render it.
+During a call, the **customer-facing interface** stays focused on the order. It presents voice state, a live transcript, the evolving order summary, clarification prompts, and confirmation feedback without exposing raw operational details.
 
-Second, it matters for the demo. VoixAI is a case study. The point is not just to show that a voice agent can take an order. The point is to show that the backend is doing real work.
+For demos and technical inspection, the **intelligence view** makes the backend work visible. The runtime publishes telemetry snapshots on a LiveKit data channel, and the frontend can render the current conversation node, last routed intent, structured order state, quote status, guardrail signals, and latency data that is actually available for that voice mode.
 
-So I built a two-panel layout. The left side is the customer experience: voice visualizer, live transcript, order summary. The right side is the intelligence panel: conversation state timeline, backend workflow visualization, runtime details, and live latency stats.
+The agent is named Mia. She greets the customer, takes the order, and handles corrections. As the conversation changes, the interface can show the order forming line by line while the backend validates menu rules, applies deterministic order mutations, and recalculates the quote.
 
-The agent is named Mia. She greets the customer, takes the order, and handles corrections. The frontend renders her transcript in real time, shows the order forming line by line, and displays the backend validation steps as they happen.
+Classic sessions can emit per-stage STT, LLM, and TTS latency metrics. Realtime sessions expose the session-level timing available from their runtime rather than pretending that the same per-stage metrics exist for every provider.
 
-When the system escalates, the frontend shows a "Call Escalated" screen and auto-ends the session. No manual cleanup needed.
-
-The frontend also subscribes to latency metrics from all voice providers. A live indicator shows current response latency and historical percentiles. That gives immediate visibility into whether the customer experience is staying responsive.
+When an escalation is triggered, the customer interface can move to a clear "Call Escalated" state and close the session cleanly, while the operator-facing records preserve the conversation context and reason for handoff.
 
 ---
 
+## After the call: the operator console
+
+A reliable voice agent needs more than a live conversation screen. Once a call ends, an operator needs to understand what happened, whether the order was completed, which voice runtime handled the session, where a handoff occurred, and what business outcome the interaction produced.
+
+VoixAI keeps the customer experience separate from the operator workflow. The customer gets a fast ordering conversation; the business gets structured call records, persisted orders, and operational visibility built from the same session telemetry and backend events.
+
+### Operational overview
+
+![VoixAI operator overview](/assets/images/posts/voixai-console-overview.png)
+
+*Operator overview: representative demo telemetry is aggregated into call volume, containment, placed orders, captured revenue, average handle time, conversation outcomes, conversion, and inferred customer sentiment.*
+
+### Call-level traceability
+
+![VoixAI call logs](/assets/images/posts/voixai-console-call-logs.png)
+
+*Call logs: each session can be inspected by start time, channel, selected voice runtime, outcome, duration, turn count, inferred sentiment signal, and linked order reference. This makes failures and ordering corrections replayable instead of hiding inside an LLM transcript.*
+
+### Persisted order records
+
+![VoixAI orders](/assets/images/posts/voixai-console-orders.png)
+
+*Order system of record: validated voice interactions become persisted order records with identifiers, structured line items, quoted totals, fulfillment metadata, and estimated preparation time.*
+
+> **Demo environment note:** The operator console uses representative VoixAI demo records. Labels and order data shown here are not evidence of a live Wingstop deployment.
+
+---
 ## Reliability is not about never failing
 
 ![VoixAI Reliability Architecture](/assets/images/posts/6.png)
@@ -540,9 +587,11 @@ I want to know whether it completes correct orders.
 
 That is why the system persists calls, transcripts, events, runtime sessions, orders, and dashboard metrics. And that is why I built a reliability regression suite.
 
-The suite currently contains **193+ scenarios** covering happy paths, messy corrections, cancellations, invalid modifiers, ambiguous phrasing, bilingual turns, pricing and repricing, confirmation gates, and stale-state behavior. Both generated seed cases and transcript-derived regressions from real failed ordering calls.
+The suite currently contains **193+ scenarios** covering happy paths, messy corrections, cancellations, invalid modifiers, ambiguous phrasing, bilingual turns, pricing and repricing, confirmation gates, and stale-state behavior. It includes generated seed cases as well as transcript-derived regressions from previously failed ordering flows.
 
 The scenarios run fully offline. No Gemini Live. No LiveKit. No audio. No API keys. Just deterministic turn-by-turn assertions against the conversation FSM and order reducer.
+
+Provider-delay and runtime-fallback cases are deterministic simulations of orchestration behavior. They validate state continuity, recovery decisions, and escalation rules; they do not pretend to measure live provider latency.
 
 The evaluation scenarios are focused on situations that look more like real customer behavior:
 
@@ -551,7 +600,7 @@ The evaluation scenarios are focused on situations that look more like real cust
 * Asking ambiguous questions
 * Repeating a request after a delay
 * Invalid flavors or modifiers
-* Provider latency during a live session
+* Simulated provider delay and recovery decisions
 * Runtime fallback
 * Order-placement failure
 * Customer frustration
@@ -614,7 +663,7 @@ The voice is only the interface. The real engineering work happens behind it:
 * Telemetry, persistence, and replay
 * 193+ scenario reliability testing
 * Cost tracking
-* Load testing
+* A load-testing plan for realistic concurrent ordering sessions
 
 AI coding tools helped me move faster with scaffolding, implementation, and refactoring. But they did not decide where the source of truth should live, how an order correction should be represented, what happens when a provider fails, or when the system should escalate instead of guessing.
 
