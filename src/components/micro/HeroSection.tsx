@@ -89,7 +89,7 @@ export default function HeroSection() {
           </a>
 
           <a
-            href="/projects"
+            href="#work"
             className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-6 py-3 text-sm font-medium text-neutral-700 transition-colors hover:border-neutral-400 hover:text-neutral-900"
           >
             View Projects

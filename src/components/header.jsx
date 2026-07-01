@@ -5,6 +5,8 @@ import { Play, Pause, CheckCircle, GitBranch, Volume2 } from "lucide-react";
 export default function Header() {
   const [time, setTime] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
+  const [needsUnmute, setNeedsUnmute] = useState(false);
   const [gitPulse, setGitPulse] = useState(true);
   const [volume, setVolume] = useState(() => {
     // Load saved volume or default 0.5
@@ -40,23 +42,111 @@ export default function Header() {
     return () => clearInterval(pulse);
   }, []);
 
+  // Autoplay music on load
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    let cancelled = false;
+
+    const tryAutoplay = async () => {
+      try {
+        audio.muted = false;
+        audio.volume = volume;
+        await audio.play();
+        if (!cancelled) {
+          setIsPlaying(true);
+          setAutoplayBlocked(false);
+          setNeedsUnmute(false);
+        }
+      } catch {
+        try {
+          audio.muted = true;
+          await audio.play();
+          if (!cancelled) {
+            setIsPlaying(true);
+            setAutoplayBlocked(false);
+            setNeedsUnmute(true);
+          }
+        } catch {
+          if (!cancelled) {
+            setAutoplayBlocked(true);
+            setNeedsUnmute(false);
+          }
+        }
+      }
+    };
+
+    tryAutoplay();
+
+    const unlockAudio = async () => {
+      try {
+        audio.muted = false;
+        audio.volume = volume;
+        if (audio.paused) {
+          await audio.play();
+        }
+        setIsPlaying(true);
+        setAutoplayBlocked(false);
+        setNeedsUnmute(false);
+      } catch {
+        // Browser still blocked playback.
+      }
+    };
+
+    window.addEventListener("pointerdown", unlockAudio, { once: true });
+    window.addEventListener("keydown", unlockAudio, { once: true });
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("pointerdown", unlockAudio);
+      window.removeEventListener("keydown", unlockAudio);
+    };
+  }, [volume]);
+
   // Sync volume to audio element
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume;
+      localStorage.setItem('lofi-volume', volume.toString());
     }
   }, [volume]);
 
-  const toggleAudio = () => {
+  const toggleAudio = async () => {
     const audio = audioRef.current;
     if (!audio) return;
+
+    if (needsUnmute) {
+      try {
+        audio.muted = false;
+        audio.volume = volume;
+        if (audio.paused) {
+          await audio.play();
+        }
+        setIsPlaying(true);
+        setAutoplayBlocked(false);
+        setNeedsUnmute(false);
+      } catch {
+        setAutoplayBlocked(true);
+      }
+      return;
+    }
 
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
-    } else {
+      return;
+    }
+
+    try {
+      audio.muted = false;
       audio.volume = volume;
-      audio.play().then(() => setIsPlaying(true));
+      await audio.play();
+      setIsPlaying(true);
+      setAutoplayBlocked(false);
+      setNeedsUnmute(false);
+    } catch {
+      setAutoplayBlocked(true);
     }
   };
 
@@ -123,7 +213,7 @@ export default function Header() {
             >
               {isPlaying ? <Pause size={12} /> : <Play size={12} className="ml-0.5" />}
             </motion.div>
-            <span className="whitespace-nowrap">{isPlaying ? "PLAYING" : "PLAY"}</span>
+            <span className="whitespace-nowrap">{needsUnmute ? "TAP TO UNMUTE" : autoplayBlocked && !isPlaying ? "TAP TO START" : isPlaying ? "PLAYING" : "PLAY"}</span>
           </button>
 
           {/* Volume Section - Smooth width transition using layout */}
@@ -162,7 +252,7 @@ export default function Header() {
             </span>
           </motion.div>
 
-          <audio ref={audioRef} loop preload="metadata">
+          <audio ref={audioRef} loop preload="auto" autoPlay playsInline>
             <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg" />
           </audio>
         </div>
@@ -182,7 +272,7 @@ export default function Header() {
             >
               {isPlaying ? <Pause size={14} /> : <Play size={14} className="ml-0.5" />}
             </motion.div>
-            <span className="text-[10px] font-mono uppercase font-medium">{isPlaying ? "ON" : "LOFI"}</span>
+            <span className="text-[10px] font-mono uppercase font-medium">{needsUnmute ? "UNMUTE" : autoplayBlocked && !isPlaying ? "START" : isPlaying ? "ON" : "LOFI"}</span>
           </button>
 
           <AnimatePresence>
@@ -221,7 +311,7 @@ export default function Header() {
             )}
           </AnimatePresence>
 
-          <audio ref={audioRef} loop preload="metadata">
+          <audio ref={audioRef} loop preload="auto" autoPlay playsInline>
             <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg" />
           </audio>
         </div>
