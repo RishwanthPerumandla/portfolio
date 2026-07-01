@@ -1,9 +1,9 @@
 ---
 
 title: "VoixAI: Engineering a Reliable Voice Agent for Complex Orders"
-description: "A backend-first case study on building a real-time voice ordering system with multi-runtime orchestration, deterministic order state, validation, replay, telemetry, and a path toward reliable scale."
+description: "A backend-first case study on building a real-time voice ordering system with multi-runtime orchestration, deterministic order state, a two-layer conversation FSM, frustration-aware escalation, and 193+ scenario reliability testing."
 slug: voixai
-dateFormatted: June 27, 2026
+dateFormatted: June 30, 2026
 cover: /assets/images/posts/1.png
 category: AI Engineering
 ---
@@ -42,7 +42,7 @@ It is a reliability problem.
 
 And that is why I built **VoixAI**.
 
-VoixAI is a real-time voice ordering system built around a Wingstop-style restaurant workflow. I intentionally chose a difficult menu because I did not want to hide behind a simple “burger and fries” demo. The menu has more than 130 items, wing types, flavors, split flavors, combos, group packs, sides, dips, preparation preferences, quantity rules, and many opportunities for a customer to change their mind.
+VoixAI is a real-time voice ordering system built around a Wingstop-style restaurant workflow. I intentionally chose a difficult menu because I did not want to hide behind a simple “burger and fries” demo. The catalog includes wing types, flavors, split flavors, combos, group packs, sides, dips, preparation preferences, quantity rules, and many opportunities for a customer to change their mind.
 
 I wanted to understand what it would actually take to build a voice agent that a business could eventually trust with a real transaction.
 
@@ -217,11 +217,11 @@ But they come with different trade-offs. They can be harder to inspect, harder t
 
 Instead of choosing one forever, I built VoixAI around multiple runtime paths:
 
-| Runtime                 | Why I use it                                          |
-| ----------------------- | ----------------------------------------------------- |
-| Classic STT → LLM → TTS | Better visibility, transcripts, and tool control      |
-| OpenAI Realtime         | Lower-friction real-time conversation                 |
-| Gemini Live             | More audio-native turn-taking and natural interaction |
+| Runtime                 | Stack                                                 | Why I use it                                          |
+| ----------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| Classic STT → LLM → TTS | Deepgram → OpenAI GPT-5.3 → Cartesia                 | Better visibility, transcripts, and tool control      |
+| OpenAI Realtime         | gpt-realtime-2 (speech-to-speech)                     | Lower-friction real-time conversation                 |
+| Gemini Live             | gemini-3.1-flash-live-preview (speech-to-speech)      | More audio-native turn-taking and natural interaction |
 
 The point was not to create three versions of the same product.
 
@@ -274,6 +274,22 @@ It is not the source of truth.
 ![VoixAI Ordering Domain Architecture](/assets/images/posts/3.png)
 
 *Diagram 2: The voice layer sends structured order intents. The ordering engine applies the mutation, validates it against the menu catalog, recalculates pricing, and returns a confirmed result.*
+
+---
+
+## Every call leaves a trail
+
+Early versions of VoixAI were stateless. The conversation happened, the order was placed or it was not, and then it was gone.
+
+That made debugging painful. If a test failed or a live call went wrong, I had to replay the entire scenario from memory. There was no persisted transcript, no record of which intent was routed where, no audit trail for what the frustration monitor decided.
+
+So I added persistence.
+
+The system now records everything through SQLAlchemy. Call records with full transcripts, per-turn persistence, analytics events (latency samples, provider errors), escalation records, orders with idempotency keys, and runtime session configs.
+
+The API exposes endpoints for opening a call record, appending turns, recording events, and finalizing a call with duration, outcome, and sentiment estimate. An analytics overview endpoint aggregates success rate, containment, completion, revenue, average order value, and latency percentiles.
+
+All of it is best-effort. It never blocks the live call path. If the database is unreachable, the agent keeps working. But when it is available, every call leaves enough evidence to debug, evaluate, and improve.
 
 ---
 
@@ -341,6 +357,38 @@ It is represented as state.
 
 ---
 
+## A two-layer conversation architecture
+
+The order reducer solved the data problem. But the conversation still needed structure.
+
+A customer does not just say "add wings" and wait. They greet the agent, maybe ask about store hours, maybe want to track an existing order before placing a new one, maybe escalate to a human mid-conversation.
+
+So I built a second layer on top of the order engine: a conversation core with its own intent router and state machine.
+
+The intent router is deterministic. It uses grammar and keyword rules to classify transcripts into a closed set of intents: `place_order`, `modify_order`, `track_order`, `cancel_order`, `store_info`, `speak_to_human`, and `smalltalk_or_unknown`. No API call needed. No model hallucination risk.
+
+The top-level state machine drives the session flow:
+
+```text
+GREETING → IDENTIFY → ROUTE → [ORDER | TRACK | CANCEL | STORE_INFO | ESCALATE] → WRAPUP
+```
+
+`GREETING` fires on session start with a deterministic greeting. `IDENTIFY` resolves the caller. `ROUTE` sends the conversation to the right destination node.
+
+Inside the `ORDER` node, a sub-FSM drives the ordering conversation itself:
+
+```text
+SELECT_ITEM → CONFIGURE_ITEM → ADD_SIDES → ADD_DRINKS → REVIEW → CONFIRM → PLACE
+```
+
+This sub-FSM checks which slots are filled and which are missing for each line item. It detects mid-order cancellation. It handles corrections, "add another" requests, and affirmative or negative responses.
+
+The important part is that both layers are testable without any audio, any API key, or any LiveKit connection. The intent router and conversation FSM are pure Python with deterministic inputs.
+
+That made them easy to unit test, easy to replay, and easy to reason about.
+
+---
+
 ## A live call is not just another API request
 
 While building the backend, I also had to think differently about latency.
@@ -401,7 +449,7 @@ A real deployment has to deal with:
 * Call failures
 * Store-level isolation
 
-The current architecture already separates the web app, FastAPI API layer, Python agent runtime, shared ordering domain, database, and dashboard.
+The current architecture already separates the web app, FastAPI API layer, Python agent runtime, shared ordering domain, database, and dashboard. A full Docker Compose stack orchestrates all of these: LiveKit, the API, the agent runtime, and the frontend.
 
 That gives the system a clean path toward scaling horizontally.
 
@@ -422,6 +470,26 @@ For me, that is the difference between building something that works once and bu
 
 ---
 
+## The frontend needed to show what the backend is doing
+
+A voice agent is invisible. The customer hears audio and maybe sees a transcript. But there is no natural way for them to see what is happening behind the scenes.
+
+That matters for two reasons.
+
+First, it matters for debugging. When something goes wrong during a live call, I want to see the current conversation node, the last intent, the confidence score, the order state, and the frustration level. The backend already publishes this as telemetry snapshots on a LiveKit data channel. The frontend just needs to render it.
+
+Second, it matters for the demo. VoixAI is a case study. The point is not just to show that a voice agent can take an order. The point is to show that the backend is doing real work.
+
+So I built a two-panel layout. The left side is the customer experience: voice visualizer, live transcript, order summary. The right side is the intelligence panel: conversation state timeline, backend workflow visualization, runtime details, and live latency stats.
+
+The agent is named Mia. She greets the customer, takes the order, and handles corrections. The frontend renders her transcript in real time, shows the order forming line by line, and displays the backend validation steps as they happen.
+
+When the system escalates, the frontend shows a "Call Escalated" screen and auto-ends the session. No manual cleanup needed.
+
+The frontend also subscribes to latency metrics from all voice providers. A live indicator shows current response latency and historical percentiles. That gives immediate visibility into whether the customer experience is staying responsive.
+
+---
+
 ## Reliability is not about never failing
 
 ![VoixAI Reliability Architecture](/assets/images/posts/6.png)
@@ -434,13 +502,13 @@ The important question is what the system does next.
 
 VoixAI already includes building blocks for that direction:
 
-* Realtime-provider probing
-* Circuit-breaker behavior
-* Frustration monitoring
-* Mock and SIP-oriented handoff paths
-* Escalation after repeated placement failures
-* Duplicate confirmation prevention
-* Persisted call events, transcripts, and escalation records
+* **Frustration monitor** — deterministic scoring based on slot corrections, node loops, low-confidence streaks, negative sentiment, duration without progress, and explicit handoff requests. Returns an `EscalationDecision` when thresholds are crossed.
+* **Circuit breaker** — standard CLOSED/OPEN/HALF_OPEN pattern with configurable failure thresholds, recovery timeouts, and exponential backoff with jitter on retries.
+* **SIP handoff** — wraps LiveKit's SIP transfer API for real warm-transfer to a human. Falls back to a mock handler in demo mode.
+* **Realtime-provider probing** — startup probe tests the realtime publisher connection and falls back to the classic pipeline on failure.
+* **Escalation after repeated placement failures**
+* **Duplicate confirmation prevention**
+* **Persisted call events, transcripts, and escalation records**
 
 The fallback path is designed around continuity:
 
@@ -470,9 +538,13 @@ A voice agent sounding natural is not enough.
 
 I want to know whether it completes correct orders.
 
-That is why the system persists calls, transcripts, events, runtime sessions, orders, and dashboard metrics.
+That is why the system persists calls, transcripts, events, runtime sessions, orders, and dashboard metrics. And that is why I built a reliability regression suite.
 
-The next evaluation phase is focused on situations that look more like real customer behavior:
+The suite currently contains **193+ scenarios** covering happy paths, messy corrections, cancellations, invalid modifiers, ambiguous phrasing, bilingual turns, pricing and repricing, confirmation gates, and stale-state behavior. Both generated seed cases and transcript-derived regressions from real failed ordering calls.
+
+The scenarios run fully offline. No Gemini Live. No LiveKit. No audio. No API keys. Just deterministic turn-by-turn assertions against the conversation FSM and order reducer.
+
+The evaluation scenarios are focused on situations that look more like real customer behavior:
 
 * Changing the order multiple times
 * Interrupting confirmation
@@ -507,17 +579,16 @@ Not because one new voice sounds better in a demo.
 
 I want to be honest about where VoixAI is today.
 
-The main architecture is in place: the ordering engine, menu validation, pricing, voice runtimes, telemetry, dashboard, persistence, replay support, and local Docker stack.
+The main architecture is in place: the ordering engine, menu validation, pricing, three voice runtimes, conversation FSM, frustration monitor, circuit breaker, SIP handoff, telemetry, dashboard, persistence, replay support, 193+ scenario reliability suite, and a full Docker Compose stack.
 
 But there are still important things I am hardening:
 
 * Authentication and rate limiting for the LiveKit token endpoint
-* More consistent conversation orchestration across each runtime
-* Browser-level end-to-end tests
-* More unit coverage for the frustration monitor, circuit breaker, and handoff flows
-* Cleanup of a legacy agent test and a few casing-related test assertions
+* Runtime config via local JSON files is not multi-instance safe and never garbage-collected
 * Production configuration for SIP handoff
 * Stronger request idempotency and order-version protection for complex concurrent updates
+* Browser-level end-to-end tests
+* Full ORDER/TRACK/STORE_INFO/CANCEL destination node conversation simulations
 * Load testing with realistic concurrent ordering sessions
 
 I do not see these as things to hide.
@@ -536,9 +607,12 @@ The voice is only the interface. The real engineering work happens behind it:
 * Stateful backend design
 * Menu and pricing validation
 * Deterministic order mutations
+* Two-layer conversation FSM
 * Runtime abstraction
-* Telemetry and replay
-* Failure handling and escalation
+* Frustration-aware escalation
+* Circuit-breaker resilience
+* Telemetry, persistence, and replay
+* 193+ scenario reliability testing
 * Cost tracking
 * Load testing
 
