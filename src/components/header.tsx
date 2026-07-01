@@ -12,8 +12,6 @@ export default function Header() {
   const [time, setTime] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
-  const [needsUnmute, setNeedsUnmute] = useState(false);
   const [volume, setVolume] = useState(0.28);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -46,86 +44,9 @@ export default function Header() {
     window.localStorage.setItem("lofi-volume", volume.toString());
   }, [volume]);
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    let cancelled = false;
-
-    const tryAutoplay = async () => {
-      try {
-        audio.muted = false;
-        audio.volume = volume;
-        await audio.play();
-        if (!cancelled) {
-          setIsPlaying(true);
-          setAutoplayBlocked(false);
-          setNeedsUnmute(false);
-        }
-      } catch {
-        try {
-          audio.muted = true;
-          await audio.play();
-          if (!cancelled) {
-            setIsPlaying(true);
-            setAutoplayBlocked(false);
-            setNeedsUnmute(true);
-          }
-        } catch {
-          if (!cancelled) {
-            setAutoplayBlocked(true);
-            setNeedsUnmute(false);
-          }
-        }
-      }
-    };
-
-    tryAutoplay();
-
-    const unlockAudio = async () => {
-      try {
-        audio.muted = false;
-        audio.volume = volume;
-        if (audio.paused) {
-          await audio.play();
-        }
-        setIsPlaying(true);
-        setAutoplayBlocked(false);
-        setNeedsUnmute(false);
-      } catch {
-        // Browser still blocked playback.
-      }
-    };
-
-    window.addEventListener("pointerdown", unlockAudio, { once: true });
-    window.addEventListener("keydown", unlockAudio, { once: true });
-
-    return () => {
-      cancelled = true;
-      window.removeEventListener("pointerdown", unlockAudio);
-      window.removeEventListener("keydown", unlockAudio);
-    };
-  }, [volume]);
-
   const toggleAudio = async () => {
     const audio = audioRef.current;
     if (!audio) return;
-
-    if (needsUnmute) {
-      try {
-        audio.muted = false;
-        audio.volume = volume;
-        if (audio.paused) {
-          await audio.play();
-        }
-        setIsPlaying(true);
-        setAutoplayBlocked(false);
-        setNeedsUnmute(false);
-      } catch {
-        setAutoplayBlocked(true);
-      }
-      return;
-    }
 
     if (isPlaying) {
       audio.pause();
@@ -138,10 +59,8 @@ export default function Header() {
       audio.volume = volume;
       await audio.play();
       setIsPlaying(true);
-      setAutoplayBlocked(false);
-      setNeedsUnmute(false);
     } catch {
-      setAutoplayBlocked(true);
+      // Browser blocked playback
     }
   };
 
@@ -168,9 +87,9 @@ export default function Header() {
                   className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors ${
                     isPlaying ? "bg-neutral-900 text-white" : "bg-neutral-100 text-neutral-700"
                   }`}
-                  aria-label={needsUnmute ? "Unmute lofi music" : isPlaying ? "Pause lofi music" : "Play lofi music"}
+                  aria-label={isPlaying ? "Pause lofi music" : "Play lofi music"}
                 >
-                  {needsUnmute ? <Volume2 size={14} /> : isPlaying ? <Pause size={14} /> : <Play size={14} className="ml-0.5" />}
+                  {isPlaying ? <Pause size={14} /> : <Play size={14} className="ml-0.5" />}
                 </button>
 
                 <div className="flex items-center gap-2">
@@ -191,7 +110,7 @@ export default function Header() {
                 </div>
 
                 <span className="text-[10px] font-mono uppercase tracking-[0.24em] text-neutral-500">
-                  {needsUnmute ? "Tap to unmute" : autoplayBlocked && !isPlaying ? "Tap to start" : "Lofi"}
+                  Lofi
                 </span>
               </div>
 
@@ -240,10 +159,8 @@ export default function Header() {
                 className="mb-3 flex items-center justify-between rounded-xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-neutral-700"
               >
                 <span className="flex items-center gap-3">
-                  {needsUnmute ? <Volume2 size={18} /> : isPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
-                  <span className="text-sm font-medium">
-                    {needsUnmute ? "Tap to unmute lofi" : autoplayBlocked && !isPlaying ? "Tap to start lofi" : "Lofi music"}
-                  </span>
+                  {isPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
+                  <span className="text-sm font-medium">Lofi music</span>
                 </span>
                 <span className="text-xs font-mono text-neutral-400">{Math.round(volume * 100)}%</span>
               </button>
@@ -262,7 +179,7 @@ export default function Header() {
         </div>
       )}
 
-      <audio ref={audioRef} loop preload="auto" autoPlay playsInline>
+      <audio ref={audioRef} loop preload="metadata">
         <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg" />
       </audio>
     </>
